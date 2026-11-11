@@ -4194,7 +4194,7 @@ function lzStep(dt){LZ.t+=dt;if(LZ.parts&&LZ.parts.length){LZ.parts.forEach(q=>{
   // a lo largo del camino
   const s0=b.s;LZ.pu=LZ.pu||[0,0];{const kp=Math.min(1,dt*4.5);b.vs+=LZ.pu[0]*kp;b.vo+=LZ.pu[1]*kp;LZ.pu[0]*=1-kp;LZ.pu[1]*=1-kp;}LZ.boostT=Math.max(0,(LZ.boostT||0)-dt);const bk=Math.min(1,LZ.boostT/2),vmax=110+30*Math.sin(bk*Math.PI*.5);if(bk>0)b.vs+=45*Math.sin(bk*Math.PI)*dt;
   b.vs+=(LZ.ty*130-b.vs*(LZ.boostT>0?.25:.6))*dt;b.vs=Math.max(-60,Math.min(vmax,b.vs));b.s+=b.vs*dt;
-  if(b.air){b.vz-=380*dt;b.z+=b.vz*dt;if(b.z<=0){b.z=0;if(b.vz<-38){lzThud(Math.min(.35,-b.vz/500));b.vz=-b.vz*.45;b.vs*=.97;}else{b.air=false;b.vz=0;}}}
+  if(b.air){b.vz-=380*dt;b.z+=b.vz*dt;if(b.z<=0){b.z=0;if(b.vz<-38){lzThud(Math.min(.35,-b.vz/500));b.vz=-b.vz*.45;b.vs*=.97;}else{b.air=false;b.vz=0;b.jumps=0;}}}
   if(b.s<2){b.s=2;b.vs=Math.abs(b.vs)*.3;}if(LZ.casc&&b.s>LZ.len-.5){lzPlace();lzToFree(b);LZ.cascFall=true;return;}if(!LZ.casc&&b.s>LZ.len-2){b.s=LZ.len-2;b.vs=-Math.abs(b.vs)*.3;}
   // en las curvas la esfera tiende a salirse hacia fuera; el jugador la mantiene en el centro
   const i=lzIdx(b.s),kap=LZ.K[i];LZ.wind=LZ.mode==='wind'?(Math.sin(LZ.time*.55)*Math.sin(LZ.time*.21+1)*95):0;b.vo+=(-kap*b.vs*b.vs*.4+LZ.tx*-150-b.vo*2.6+LZ.wind)*dt;
@@ -4236,10 +4236,10 @@ function lzStep(dt){LZ.t+=dt;if(LZ.parts&&LZ.parts.length){LZ.parts.forEach(q=>{
 function lzNear(x,y){const P=LZ.path,S=LZ.S;let bi=0,bd=1e18;for(let i=0;i<P.length;i+=2){const dx=x-P[i][0],dy=y-P[i][1],d=dx*dx+dy*dy;if(d<bd){bd=d;bi=i;}}
   let best=null;for(let i=Math.max(0,bi-3);i<Math.min(P.length-1,bi+3);i++){const a=P[i],c=P[i+1],ux=c[0]-a[0],uy=c[1]-a[1],L2=ux*ux+uy*uy||1;let t=((x-a[0])*ux+(y-a[1])*uy)/L2;const raw=t;t=Math.max(0,Math.min(1,t));
     const px=a[0]+ux*t,py=a[1]+uy*t,d=Math.hypot(x-px,y-py);if(!best||d<best.d){const N=LZ.Nm[i],T=LZ.Tg[i];best={i,d,s:S[i]+(S[i+1]-S[i])*raw,o:(x-px)*N[0]+(y-py)*N[1],N,T};}}return best;}
-function lzSupport(x,y,z){let h=-1e9,walk=false;const tol=.9,n=lzNear(x,y);
+function lzSupport(x,y,z,rt){let h=-1e9,walk=false;const tol=.9,n=lzNear(x,y);rt=rt||tol;
   if(n&&n.d<=LZ.hg&&n.s>.3&&n.s<LZ.len-.3&&z+tol>=0){h=0;walk=true;}
   for(const t of LZ.surf.tiers){if(t.z1>h&&t.z1<=z+tol&&Math.hypot(x-t.C[0],y-t.C[1])<=t.R){h=t.z1;walk=false;}}
-  for(const r of LZ.surf.rings){if(r.z>h&&r.z<=z+tol){const d=Math.hypot(x-r.C[0],y-r.C[1]);if(d>=r.ri&&d<=r.ro){h=r.z;walk=false;}}}return{h,walk,n};}
+  for(const r of LZ.surf.rings){if(r.z>h&&r.z<=z+rt){const d=Math.hypot(x-r.C[0],y-r.C[1]);if(d>=r.ri&&d<=r.ro){h=r.z;walk=false;}}}return{h,walk,n};}
 function lzToFree(b){lzPlace();const N=LZ.Nm[b.idx]||[0,1],T=b.dir||[1,0];b.X=b.p[0];b.Y=b.p[1];b.Z=b.z||0;b.vx=T[0]*b.vs+N[0]*b.vo;b.vy=T[1]*b.vs+N[1]*b.vo;b.free=true;b.air=true;b.vz=b.vz||0;}
 function lzDie(){LZ.lives--;LZ.msg={a:lzT('fall'),t:0};lzChime([0,-5],.5);if(LZ.lives<=0){LZ.state='over';LZ.msg={a:lzT('over'),t:0};}else lzRespawn(false);}
 function lzFreeStep(dt,b){const r=4.2,F=LZ.camDir||[0,1],Rt=[F[1],-F[0]],ground=!b.air;
@@ -4254,14 +4254,15 @@ function lzFreeStep(dt,b){const r=4.2,F=LZ.camDir||[0,1],Rt=[F[1],-F[0]],ground=
   // canto de la pasarela (sólido por debajo de su superficie)
   if(b.Z<-.6&&Zp<-.6&&b.Z+2*r>-7){const n=lzNear(b.X,b.Y);if(n&&n.s>0&&n.s<LZ.len&&n.d<LZ.hg+r){const sg=Math.sign(n.o)||1,nx=n.N[0]*sg,ny=n.N[1]*sg,push=LZ.hg+r-n.d;b.X+=nx*push;b.Y+=ny*push;const vn=b.vx*nx+b.vy*ny;if(vn<0){b.vx-=1.45*vn*nx;b.vy-=1.45*vn*ny;if(vn<-15)lzThud(Math.min(.5,-vn/160));}}}
   // apoyo: pasarela, cimas de los cilindros y anillos
-  const S2=lzSupport(b.X,b.Y,Math.max(b.Z,Zp));
-  if(b.vz<=0&&b.Z<=S2.h){b.Z=S2.h;if(b.vz<-38){lzThud(Math.min(.35,-b.vz/500));b.vz=-b.vz*(b.vz<-200?.22:.45);}else{b.vz=0;b.air=false;
+  const S2=lzSupport(b.X,b.Y,Math.max(b.Z,Zp),ground&&b.vz>-60?2.6:.9);
+  if(b.vz<=0&&b.Z<=S2.h){b.Z=S2.h;if(b.vz<-38){lzThud(Math.min(.35,-b.vz/500));b.vz=-b.vz*(b.vz<-200?.22:.45);}else{b.vz=0;b.air=false;b.jumps=0;
       if(S2.walk&&!LZ.cascFall){const n=S2.n;b.s=n.s;b.o=n.o;b.vs=b.vx*n.T[0]+b.vy*n.T[1];b.vo=b.vx*n.N[0]+b.vy*n.N[1];b.free=false;b.z=0;lzPlace();return;}}}
   else if(b.Z>S2.h+.05)b.air=true;
   b.p=[b.X,b.Y];b.z=b.Z;const sp=Math.hypot(b.vx,b.vy);if(sp>8)b.dir=[b.vx/sp,b.vy/sp];b.vs=b.vx*F[0]+b.vy*F[1];
   {const ang=sp*dt/r;if(ang>1e-5)LZ.rot=lzRot(LZ.rot,[-b.vy/sp,b.vx/sp,0],ang);}
   if(LZ.cascFall&&LZ.next){if(b.Z<LZ.next.zTop+28)lzSwap();return;}
-  if(b.Z<-130)lzDie();}
+  if(b.Z<-30&&!b.dieT){b.dieT=.0001;LZ.msg={a:lzT('fall'),t:0};lzChime([0,-5],.5);}
+  if(b.dieT){b.dieT+=dt;if(b.dieT>1.9){b.dieT=0;LZ.lives--;if(LZ.lives<=0){LZ.state='over';LZ.msg={a:lzT('over'),t:0};}else{lzRespawn(false);LZ.msg=null;}}}}
 // ---- modo cascada: el circuito siguiente espera más abajo, girado para continuar la dirección del final ----
 const LZK=['m','own','path','S','Tg','Nm','K','len','hg','BZ','cx','cy','cols','suns','lit','order','tans','items','limit','spin','on8','vbo','nV','obb','ethb','fr','level','surf','mode','nextO'];
 function lzSnap(){const o={};LZK.forEach(k=>o[k]=LZ[k]);return o;}
@@ -4292,7 +4293,10 @@ function lzShatter(it){it.dead=1;const c=LZ.fr(it.s,it.u,LZ.BZ+it.z+it.base),n=i
   LZ.parts.push({p:c,v:[0,0,0],life:1,dur:.45,col:it.col,sz:it.sz*5,flash:1});LZ.kills=(LZ.kills||0)+1;
   if(SFX<=0)return;try{const ac=SND.ac||(SND.ac=new (window.AudioContext||window.webkitAudioContext)()),t=ac.currentTime,N=Math.floor(ac.sampleRate*.7),buf=ac.createBuffer(1,N,ac.sampleRate),d=buf.getChannelData(0);for(let i=0;i<N;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/N,3);
     const src=ac.createBufferSource();src.buffer=buf;const f=ac.createBiquadFilter();f.type='highpass';f.frequency.value=1800;const g=ac.createGain();g.gain.value=.05*SFX;src.connect(f);f.connect(g);g.connect(ac.destination);src.start(t);}catch(e){}lzChime([12,19,24],.45);}
-function lzJump(){const b=LZ.ball;if(LZ.state==='play'&&b&&!b.air&&b.fall===0){b.air=true;b.vz=112;lzHop();}}
+function lzJump(){const b=LZ.ball;if(LZ.state!=='play'||!b||b.dieT)return;
+  if(!b.air){b.air=true;b.vz=112;b.jumps=1;lzHop();}
+  // doble salto: un segundo impulso en el aire, más alto y más largo
+  else if((b.jumps||0)<2&&!LZ.cascFall){b.jumps=2;b.vz=Math.max(b.vz,0)*.35+105;if(b.free){b.vx*=1.18;b.vy*=1.18;}else b.vs*=1.18;lzHop(1.6);}}
 function lzHop(k=1){if(SFX<=0)return;try{const ac=SND.ac||(SND.ac=new (window.AudioContext||window.webkitAudioContext)()),t=ac.currentTime,o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.setValueAtTime(330,t);o.frequency.exponentialRampToValueAtTime(330+260*k,t+.14);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.035*SFX,t+.015);g.gain.exponentialRampToValueAtTime(.0004,t+.25);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+.3);}catch(e){}}
 function lzBoost(){if(SFX<=0)return;try{const ac=SND.ac||(SND.ac=new (window.AudioContext||window.webkitAudioContext)()),t=ac.currentTime,o=ac.createOscillator(),g=ac.createGain(),f=ac.createBiquadFilter();o.type='sawtooth';f.type='lowpass';f.frequency.value=900;o.frequency.setValueAtTime(140,t);o.frequency.exponentialRampToValueAtTime(420,t+.45);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.025*SFX,t+.05);g.gain.exponentialRampToValueAtTime(.0004,t+.6);o.connect(f);f.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+.65);}catch(e){}}
 function lzWhoosh(){if(SFX<=0)return;try{const ac=SND.ac||(SND.ac=new (window.AudioContext||window.webkitAudioContext)()),t=ac.currentTime,N=ac.sampleRate*3,buf=ac.createBuffer(1,N,ac.sampleRate),d=buf.getChannelData(0);for(let i=0;i<N;i++)d[i]=Math.random()*2-1;
@@ -4312,7 +4316,7 @@ function lzDraw(){const cv=$('#lzCanvas'),gl=LZ.gl;if(!cv||!gl||!LZ.ball)return;
   if(!LZ.orbiting&&LZ.state==='play'&&(Math.abs(b.vs)>4||LZ.keys.u||LZ.keys.d)){LZ.yawOff=(LZ.yawOff||0)*.94;LZ.pitch=(LZ.pitch??.55)+(.55-(LZ.pitch??.55))*.06;}
   const yo=LZ.yawOff||0,cy0=Math.cos(yo),sy0=Math.sin(yo),cd=[LZ.camDir[0]*cy0-LZ.camDir[1]*sy0,LZ.camDir[0]*sy0+LZ.camDir[1]*cy0],dist=(LZ.dist||95),pit=LZ.cascFall?1.05:(LZ.pitch??.55);
   let want,tgt;if(LZ.state==='intro'||LZ.state==='emerge'){const L=LZ.m.lay,R=Math.max(L.W,L.H)*.95,a=LZ.t*.05;want=[LZ.cx+Math.sin(a)*R*.5,LZ.cy-Math.cos(a)*R*.9,R*.75];tgt=[LZ.cx,LZ.cy,-30];}
-  else{want=[bw[0]-cd[0]*dist*Math.cos(pit),bw[1]-cd[1]*dist*Math.cos(pit),bw[2]+dist*Math.sin(pit)];tgt=[bw[0]+cd[0]*30,bw[1]+cd[1]*30,b.fall>0?LZ.BZ:bw[2]];}
+  else{want=[bw[0]-cd[0]*dist*Math.cos(pit),bw[1]-cd[1]*dist*Math.cos(pit),bw[2]+dist*Math.sin(pit)];tgt=[bw[0]+cd[0]*30,bw[1]+cd[1]*30,b.dieT?Math.max(bw[2],-40):bw[2]];if(b.dieT){want[2]=Math.max(want[2],10);}}
   if(!LZ.cam)LZ.cam={e:want.slice(),c:tgt.slice()};const k=LZ.state==='play'&&LZ.time<2.5?.035:.08;
   let fov=.85,near=4,uniA=0;
   if(LZ.state==='dive'){if(!LZ.dive0)LZ.dive0={e:LZ.cam.e.slice(),c:LZ.cam.c.slice()};const e=Math.min(1,LZ.dv/2.3),q=e*e*e*(e*(e*6-15)+10),d0=LZ.dive0.e,dir=nrm3([d0[0]-bw[0],d0[1]-bw[1],d0[2]-bw[2]]),end=bw.slice(0,3).map((v,i)=>v+dir[i]*r*1.08);
