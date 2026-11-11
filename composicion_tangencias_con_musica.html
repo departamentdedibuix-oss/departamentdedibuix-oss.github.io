@@ -431,7 +431,7 @@ body.light #vari .vg div{background:#fff}
   <h3 data-i="tabGameH">Luz</h3>
   <div class="note" data-i="lzHelp" style="font-size:13.5px;line-height:1.45">Inclina la mesa para guiar la esfera de luz.</div>
   <div class="pbScore"><div><span data-i="lzSunsL">Soles</span><b id="lzSuns">0</b></div><div><span data-i="lzLivesL">Vidas</span><b id="lzLives">●●●</b></div><div><span data-i="lzTimeL">Tiempo</span><b id="lzTime">0</b></div></div>
-  <h3 id="lzModeH">Modo de juego</h3><div class="seg full" id="lzMode" style="margin-bottom:8px"><button data-m="lvl">Niveles</button><button data-m="casc">Cascada infinita</button></div><h3 id="lzLvH">Niveles</h3><div id="lzLevels" class="lzLv"></div><div class="note" id="lzGoal"></div><div class="note lzLeg" id="lzLeg"></div>
+  <h3 id="lzModeH">Modo de juego</h3><div class="seg full" id="lzMode" style="margin-bottom:8px"><button data-m="casc">Cascada infinita</button><button data-m="lvl">Niveles</button></div><h3 id="lzLvH">Niveles</h3><div id="lzLevels" class="lzLv"></div><div class="note" id="lzGoal"></div><div class="note lzLeg" id="lzLeg"></div>
   <div class="btns" style="margin:10px 0"><button class="ib" id="lzRestart">↺ <span data-i="lzRestartL">Empezar de nuevo</span></button></div>
   <div class="note" data-i="lzCtl">Ratón, teclado o móvil.</div>
 </div>
@@ -3938,9 +3938,9 @@ const lzT=k=>(LZT[LANG]||LZT.es)[k];
 Object.assign(LZT.es,{lvl:'Nivel',next:'Siguiente nivel',tans:'Tangencias',left:'Quedan',timeUp:'¡Se acabó el tiempo!',wrong:'Ese no: sigue el orden',locked:'Bloqueado'});
 Object.assign(LZT.va,{lvl:'Nivell',next:'Següent nivell',tans:'Tangències',left:'Queden',timeUp:'S’ha acabat el temps!',wrong:'Eixe no: segueix l’ordre',locked:'Bloquejat'});
 Object.assign(LZT.es,{pts:'Puntos',clock:'Tiempo',best:'Récord'});Object.assign(LZT.va,{pts:'Punts',clock:'Temps',best:'Rècord'});Object.assign(LZT.en,{pts:'Score',clock:'Time',best:'Best'});
-Object.assign(LZT.es,{modeH:'Modo de juego',mLvl:'Niveles',mCasc:'Cascada infinita',lvlD:'Seis retos distintos; al superar uno, la cámara entra en la canica y sale en el siguiente.',cascD:'Recorre cada composición de principio a fin encendiendo sus soles. Al final de la pasarela la canica cae sobre el comienzo de otra composición, y así sin fin.',circ:'Circuito',allLit:'¡Todos los soles encendidos! Sigue hasta el final de la pasarela'});
-Object.assign(LZT.va,{modeH:'Mode de joc',mLvl:'Nivells',mCasc:'Cascada infinita',lvlD:'Sis reptes diferents; en superar-ne un, la càmera entra en la bala i ix en el següent.',cascD:'Recorre cada composició de principi a fi encenent-ne els sols. Al final de la passarel·la la bala cau sobre el començament d’una altra composició, i així sense fi.',circ:'Circuit',allLit:'Tots els sols encesos! Continua fins al final de la passarel·la'});
-Object.assign(LZT.en,{modeH:'Game mode',mLvl:'Levels',mCasc:'Endless cascade',lvlD:'Six different challenges; when you beat one, the camera dives into the marble and comes out in the next.',cascD:'Roll through each composition from start to finish lighting its suns. At the end of the walkway the marble drops onto the start of another composition, and so on forever.',circ:'Circuit',allLit:'All suns lit! Keep going to the end of the walkway'});
+Object.assign(LZT.es,{modeH:'Modo de juego',mLvl:'Niveles',mCasc:'Cascada infinita',lvlD:'Seis retos distintos; al superar uno, la cámara entra en la canica y sale en el siguiente.',cascD:'Recorre cada composición de principio a fin encendiendo sus soles. Al final de la pasarela, un tobogán transparente lleva la canica, con impulso, al comienzo de otra composición, y así sin fin.',circ:'Circuito',allLit:'¡Todos los soles encendidos! Sigue hasta el final de la pasarela'});
+Object.assign(LZT.va,{modeH:'Mode de joc',mLvl:'Nivells',mCasc:'Cascada infinita',lvlD:'Sis reptes diferents; en superar-ne un, la càmera entra en la bala i ix en el següent.',cascD:'Recorre cada composició de principi a fi encenent-ne els sols. Al final de la passarel·la, un tobogan transparent porta la bala, amb impuls, al començament d’una altra composició, i així sense fi.',circ:'Circuit',allLit:'Tots els sols encesos! Continua fins al final de la passarel·la'});
+Object.assign(LZT.en,{modeH:'Game mode',mLvl:'Levels',mCasc:'Endless cascade',lvlD:'Six different challenges; when you beat one, the camera dives into the marble and comes out in the next.',cascD:'Roll through each composition from start to finish lighting its suns. At the end of the walkway a transparent slide carries the marble, with a push, to the start of another composition, and so on forever.',circ:'Circuit',allLit:'All suns lit! Keep going to the end of the walkway'});
 Object.assign(LZT.es,{startT:'Mueve el joystick para empezar · doble toque o ⤒: saltar',start:'Pulsa ↑ para empezar · Espacio: saltar',leg:'<i style="color:#3dffb0">▲</i> acelera · <i style="color:#ff5a48">▬</i> frena · <i style="color:#a98cff">◢</i> rampa de salto · <b>◆</b> cuerpos geométricos: esquívalos, o salta con <b>Espacio</b> y caerles encima o chocar en el aire los desintegra',lvls:'Niveles'});
 Object.assign(LZT.va,{startT:'Mou el joystick per a començar · doble toc o ⤒: saltar',start:'Prem ↑ per a començar · Espai: saltar',leg:'<i style="color:#3dffb0">▲</i> accelera · <i style="color:#ff5a48">▬</i> frena · <i style="color:#a98cff">◢</i> rampa de salt · <b>◆</b> cossos geomètrics: esquiva’ls, o salta amb <b>Espai</b>: caure’ls damunt o xocar en l’aire els desintegra',lvls:'Nivells'});
 Object.assign(LZT.en,{startT:'Move the joystick to start · double tap or ⤒: jump',start:'Press ↑ to start · Space: jump',leg:'<i style="color:#3dffb0">▲</i> speeds up · <i style="color:#ff5a48">▬</i> brakes · <i style="color:#a98cff">◢</i> jump ramp · <b>◆</b> geometric bodies: dodge them, or jump with <b>Space</b>: landing on them or hitting them in mid-air disintegrates them',lvls:'Levels'});
@@ -3953,7 +3953,7 @@ const LZL=[
  {mode:'tan',n:{es:'Puntos de tangencia',va:'Punts de tangència',en:'Tangency points'},d:{es:'Pasa por el centro de cada punto de tangencia para recoger su luz.',va:'Passa pel centre de cada punt de tangència per a recollir la seua llum.',en:'Roll through the centre of every tangency point to collect its light.'}},
  {mode:'dark',n:{es:'Eclipse',va:'Eclipsi',en:'Eclipse'},d:{es:'Todo está a oscuras: solo ves lo que alumbra la canica.',va:'Tot està a les fosques: només veus el que il·lumina la bala.',en:'Everything is dark: you only see what the marble lights.'}}];
 const lzName=i=>(LZL[i].n[LANG]||LZL[i].n.es),lzDesc=i=>(LZL[i].d[LANG]||LZL[i].d.es);
-LZ.level=0;LZ.maxL=LZL.length-1;LZ.score=0;LZ.gtime=0;try{LZ.best=+localStorage.getItem('tangLzBest')||0;}catch(e){LZ.best=0;}
+LZ.level=0;LZ.casc=true;LZ.maxL=LZL.length-1;LZ.score=0;LZ.gtime=0;try{LZ.best=+localStorage.getItem('tangLzBest')||0;}catch(e){LZ.best=0;}
 
 // un nivel nuevo al azar, parecido a tu composición, sin tocar el boceto ni el plano
 function lzGenLevel(){const N=ST.pal.colors.length;for(let k=0;k<12;k++){const P=Object.assign(JSON.parse(JSON.stringify(ST.P)),{nAA:1+Math.floor(Math.random()*4),nAL:2+Math.floor(Math.random()*5),discs:true,halos:true,split:true,tramos:false,dual:false,tdots:false,w:LZL[LZ._nl||1].mode==='narrow'?13:18+2*Math.floor(Math.random()*5)});P.level=rndLevel();
@@ -4214,7 +4214,7 @@ function lzEnemy(it,t){const w=t*it.sp+it.ph,dt=Math.max(0,Math.min(.05,t-(it._l
   if(it.mv==='hop'&&!wasG&&it.gnd&&it.hopT===undefined)it.hopT=.3;
   it.wob=Math.max(0,(it.wob||0)-dt*2.5);}
 function lzRespawn(full){if(full){LZ.lives=3;LZ.time=0;LZ.lit=LZ.suns.map(()=>0);LZ.ck=8;(LZ.tans||[]).forEach(t=>t.got=0);LZ.nextO=0;}
-  LZ.ball={s:LZ.ck||8,vs:0,o:0,vo:0,p:[0,0],z:0,vz:0,air:false,fall:0,v:[0,0],idx:0,free:false,X:0,Y:0,Z:0,vx:0,vy:0};LZ.cascFall=false;LZ.boostT=0;LZ.pu=[0,0];(LZ.items||[]).forEach(it=>{it.in=0;if(full)it.dead=0;});if(full)LZ.parts=[];lzPlace();if(!full)LZ.cam=null;}
+  LZ.ball={s:LZ.ck||8,vs:0,o:0,vo:0,p:[0,0],z:0,vz:0,air:false,fall:0,v:[0,0],idx:0,free:false,tube:false,X:0,Y:0,Z:0,vx:0,vy:0};LZ.cascFall=false;LZ.boostT=0;LZ.pu=[0,0];(LZ.items||[]).forEach(it=>{it.in=0;if(full)it.dead=0;});if(full)LZ.parts=[];lzPlace();if(!full)LZ.cam=null;}
 function lzIdx(s){const S=LZ.S;let lo=0,hi=S.length-1;while(hi-lo>1){const m=(lo+hi)>>1;if(S[m]<=s)lo=m;else hi=m;}return lo;}
 // posición de la esfera a partir de su recorrido (s) y su desvío lateral (o)
 function lzPlace(){const b=LZ.ball,i=lzIdx(b.s),P=LZ.path,S=LZ.S,j=Math.min(P.length-1,i+1),t=(b.s-S[i])/((S[j]-S[i])||1),N=LZ.Nm[i];
@@ -4231,12 +4231,13 @@ function lzStep(dt){LZ.t+=dt;if(LZ.parts&&LZ.parts.length){LZ.parts.forEach(q=>{
   if(LZ.state!=='play')return;
   LZ.time+=dt;LZ.gtime=(LZ.gtime||0)+dt;
   if(LZ.mode==='time'&&LZ.time>LZ.limit){LZ.lives--;LZ.msg={a:lzT('timeUp'),t:0};if(LZ.lives<=0){LZ.state='over';LZ.msg={a:lzT('over'),t:0};}else{const l=LZ.lives;lzRespawn(true);LZ.lives=l;}return;}
+  if(b.tube){lzTubeStep(dt,b);lzHud();return;}
   if(b.free){lzFreeStep(dt,b);lzHud();return;}
   // a lo largo del camino
-  const s0=b.s;LZ.pu=LZ.pu||[0,0];{const kp=Math.min(1,dt*4.5);b.vs+=LZ.pu[0]*kp;b.vo+=LZ.pu[1]*kp;LZ.pu[0]*=1-kp;LZ.pu[1]*=1-kp;}LZ.boostT=Math.max(0,(LZ.boostT||0)-dt);const bk=Math.min(1,LZ.boostT/2),vmax=110+30*Math.sin(bk*Math.PI*.5);if(bk>0)b.vs+=45*Math.sin(bk*Math.PI)*dt;
+  const s0=b.s;LZ.pu=LZ.pu||[0,0];{const kp=Math.min(1,dt*4.5);b.vs+=LZ.pu[0]*kp;b.vo+=LZ.pu[1]*kp;LZ.pu[0]*=1-kp;LZ.pu[1]*=1-kp;}LZ.boostT=Math.max(0,(LZ.boostT||0)-dt);LZ.tubeBoost=Math.max(0,(LZ.tubeBoost||0)-dt);const bk=Math.min(1,LZ.boostT/2),vmax=110+30*Math.sin(bk*Math.PI*.5)+20*Math.min(1,LZ.tubeBoost/2.2);if(bk>0)b.vs+=45*Math.sin(bk*Math.PI)*dt;
   b.vs+=(LZ.ty*130-b.vs*(LZ.boostT>0?.25:.6))*dt;b.vs=Math.max(-60,Math.min(vmax,b.vs));b.s+=b.vs*dt;
   if(b.air){b.vz-=380*dt;b.z+=b.vz*dt;if(b.z<=0){b.z=0;if(b.vz<-38){lzThud(Math.min(.35,-b.vz/500));b.vz=-b.vz*.45;b.vs*=.97;}else{b.air=false;b.vz=0;b.jumps=0;}}}
-  if(b.s<2){b.s=2;b.vs=Math.abs(b.vs)*.3;}if(LZ.casc&&b.s>LZ.len-.5){lzPlace();lzToFree(b);LZ.cascFall=true;return;}if(!LZ.casc&&b.s>LZ.len-2){b.s=LZ.len-2;b.vs=-Math.abs(b.vs)*.3;}
+  if(b.s<2){b.s=2;b.vs=Math.abs(b.vs)*.3;}if(LZ.casc&&b.s>LZ.len-.6){if(LZ.next&&LZ.next.tube){lzTubeIn(b);return;}b.s=LZ.len-.6;b.vs=-Math.abs(b.vs)*.3;}if(!LZ.casc&&b.s>LZ.len-2){b.s=LZ.len-2;b.vs=-Math.abs(b.vs)*.3;}
   // en las curvas la esfera tiende a salirse hacia fuera; el jugador la mantiene en el centro
   const i=lzIdx(b.s),kap=LZ.K[i];LZ.wind=LZ.mode==='wind'?(Math.sin(LZ.time*.55)*Math.sin(LZ.time*.21+1)*95):0;b.vo+=(-kap*b.vs*b.vs*.4+LZ.tx*-150-b.vo*2.6+LZ.wind)*dt;
   // cerca del borde la canica se frena un poco (si sigues empujando hacia fuera, cae igual)
@@ -4308,13 +4309,47 @@ function lzFreeStep(dt,b){const r=4.2,F=LZ.camDir||[0,1],Rt=[F[1],-F[0]],ground=
 const LZK=['m','own','path','S','Tg','Nm','K','len','hg','BZ','cx','cy','cols','suns','lit','order','tans','items','limit','spin','on8','vbo','nV','obb','ethb','fr','level','surf','mode','nextO'];
 function lzSnap(){const o={};LZK.forEach(k=>o[k]=LZ[k]);return o;}
 function lzApplyL(o){LZK.forEach(k=>LZ[k]=o[k]);}
-function lzFreeL(o){const gl=LZ.gl;if(!o||!gl)return;[o.vbo,o.obb,o.ethb].forEach(x=>{if(x&&x!==LZ.vbo&&x!==LZ.obb&&x!==LZ.ethb)gl.deleteBuffer(x);});}
+function lzFreeL(o){const gl=LZ.gl;if(!o||!gl)return;if(o.tube&&o.tube.vbo){gl.deleteBuffer(o.tube.vbo);o.tube.vbo=null;}[o.vbo,o.obb,o.ethb].forEach(x=>{if(x&&x!==LZ.vbo&&x!==LZ.obb&&x!==LZ.ethb)gl.deleteBuffer(x);});}
 function lzClearCasc(){if(LZ.next){lzFreeL(LZ.next);LZ.next=null;}if(LZ.prevL){lzFreeL(LZ.prevL);LZ.prevL=null;}LZ.cascFall=false;}
 function lzPrepNext(){if(!LZ.casc||LZ.next||!LZ.gl||!LZ.path)return;const cur=lzSnap(),nl=LZ._nl;LZ._prep=true;LZ.vbo=null;LZ.obb=null;LZ.ethb=null;LZ._nl=1;LZ.level=Math.min(5,(LZ.cascN||0)+1);LZ.own=false;LZ.mode='suns';
   try{LZ.m=lzGenLevel();lzBuild();}catch(e){console.error(e);LZ._prep=false;lzApplyL(cur);return;}LZ._prep=false;const nb=lzSnap();lzApplyL(cur);LZ._nl=nl;
-  const P=LZ.path,n=P.length-1,ta=LZ.Tg[n],Ea=[P[n][0],P[n][1]],j=Math.max(0,nb.S.findIndex(v=>v>=25)),Pb=nb.path[j],tb=nb.Tg[j];
-  const th=Math.atan2(ta[1],ta[0])-Math.atan2(tb[1],tb[0]),c=Math.cos(th),sn=Math.sin(th),DZ=150,Q=[Ea[0]+ta[0]*50,Ea[1]+ta[1]*50],T=[Q[0]-(c*Pb[0]-sn*Pb[1]),Q[1]-(sn*Pb[0]+c*Pb[1])];
-  nb.t0=LZ.t;nb.M=[c,sn,0,0,-sn,c,0,0,0,0,1,0,T[0],T[1],-DZ,1];nb.rc=c;nb.rs=sn;nb.T=T;nb.DZ=DZ;nb.Q=Q;nb.zTop=-DZ;LZ.next=nb;}
+  // tobogán transparente entre circuitos: vertical, en pendiente, con cambio de pendiente o en doble curva
+  const P=LZ.path,n=P.length-1,ta=LZ.Tg[n],na=[-ta[1],ta[0]],Ea=[P[n][0],P[n][1]],j=Math.max(0,nb.S.findIndex(v=>v>=3)),Pb=nb.path[j],tb=nb.Tg[j];
+  const kinds=['vert','slope','bend','s'],kd=kinds[Math.floor(Math.random()*kinds.length)],DZ=130+Math.random()*50,sg=Math.random()<.5?-1:1,Lt=30+Math.random()*25;let cp;
+  if(kd==='vert')cp=[[0,0,0],[10,0,0],[20,0,-6],[24,0,-24],[24,0,-DZ+26],[28,0,-DZ+7],[40,0,-DZ],[52,0,-DZ]];
+  else if(kd==='slope'){const ang=(28+Math.random()*28)*D2R,run=DZ/Math.tan(ang);cp=[[0,0,0],[12,0,0],[24,0,-5],[run*.5+18,0,-DZ*.5],[run+12,0,-DZ+5],[run+24,0,-DZ],[run+36,0,-DZ]];}
+  else if(kd==='bend')cp=[[0,0,0],[12,0,0],[22,0,-8],[30,0,-DZ*.55],[70,0,-DZ+22],[105,0,-DZ+3],[120,0,-DZ],[132,0,-DZ]];
+  else cp=[[0,0,0],[12,0,0],[28,0,-10],[52,sg*Lt,-DZ*.33],[80,-sg*Lt,-DZ*.7],[100,0,-DZ+8],[114,0,-DZ],[126,0,-DZ]];
+  const W=cp.map(q=>[Ea[0]+ta[0]*q[0]+na[0]*q[1],Ea[1]+ta[1]*q[0]+na[1]*q[1],q[2]]),tp=[];
+  for(let k=0;k<W.length-1;k++){const p0=W[Math.max(0,k-1)],p1=W[k],p2=W[k+1],p3=W[Math.min(W.length-1,k+2)];for(let q=0;q<16;q++){const t=q/16,t2=t*t,t3=t2*t;tp.push([0,1,2].map(i=>.5*(2*p1[i]+(-p0[i]+p2[i])*t+(2*p0[i]-5*p1[i]+4*p2[i]-p3[i])*t2+(-p0[i]+3*p1[i]-3*p2[i]+p3[i])*t3)));}}
+  tp.push(W[W.length-1].slice());const tS=[0];for(let k=1;k<tp.length;k++)tS.push(tS[k-1]+Math.hypot(tp[k][0]-tp[k-1][0],tp[k][1]-tp[k-1][1],tp[k][2]-tp[k-1][2]));
+  const Qe=tp[tp.length-1],th=Math.atan2(ta[1],ta[0])-Math.atan2(tb[1],tb[0]),c=Math.cos(th),sn=Math.sin(th),T=[Qe[0]-(c*Pb[0]-sn*Pb[1]),Qe[1]-(sn*Pb[0]+c*Pb[1])];
+  nb.t0=LZ.t;nb.M=[c,sn,0,0,-sn,c,0,0,0,0,1,0,T[0],T[1],-DZ,1];nb.rc=c;nb.rs=sn;nb.T=T;nb.DZ=DZ;nb.Q=[Qe[0],Qe[1]];nb.zTop=-DZ;nb.sStart=nb.S[j];
+  nb.tube={pts:tp,S:tS,len:tS[tS.length-1],kind:kd};lzTubeMesh(nb.tube);LZ.next=nb;}
+function lzTubeMesh(tb){const gl=LZ.gl,V=[],R0=7.6,M=18,r=4.2,pts=tb.pts,col=[.62,.82,1],band=[1,.95,.75];
+  const push=(p,n,c)=>V.push(p[0],p[1],p[2],n[0],n[1],n[2],c[0],c[1],c[2],-1);let prevU=null;const fr=[];
+  for(let k=0;k<pts.length;k++){const a=pts[Math.max(0,k-1)],b=pts[Math.min(pts.length-1,k+1)],t=nrm3([b[0]-a[0],b[1]-a[1],b[2]-a[2]]);let u=prevU?nrm3(cr3(cr3(t,prevU),t)):nrm3(cr3(t,[0,0,1]));if(!isFinite(u[0])||Math.hypot(...u)<.5)u=nrm3(cr3(t,[1,0,0]));
+    const w=cr3(t,u);prevU=u;fr.push({c:[pts[k][0],pts[k][1],pts[k][2]+r],u,w});}
+  const ring=(f,i,rad)=>{const a=i/M*2*Math.PI,n=[0,1,2].map(q=>f.u[q]*Math.cos(a)+f.w[q]*Math.sin(a));return[[0,1,2].map(q=>f.c[q]+n[q]*rad),n];};
+  for(let k=1;k<fr.length;k++){const isB=k%12===0;for(let i=0;i<M;i++){const A=ring(fr[k-1],i,R0),B=ring(fr[k-1],i+1,R0),C=ring(fr[k],i+1,R0),D=ring(fr[k],i,R0),cc=isB?band:col;
+      push(A[0],A[1],cc);push(B[0],B[1],cc);push(C[0],C[1],cc);push(A[0],A[1],cc);push(C[0],C[1],cc);push(D[0],D[1],cc);}}
+  tb.vbo=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,tb.vbo);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(V),gl.STATIC_DRAW);tb.n=V.length/10;}
+// la canica recorre el tobogán: la gravedad a lo largo del tubo la acelera; no puede salirse
+function lzTubeIn(b){const tb=LZ.next.tube;b.tube=true;b.tu=0;b.tv=Math.max(30,b.vs);b.free=false;b.air=false;LZ.cascFall=false;lzChime([0,7],.4);}
+function lzTubeStep(dt,b){const tb=LZ.next&&LZ.next.tube;if(!tb){b.tube=false;return;}const S=tb.S,P=tb.pts;let i=0;{let lo=0,hi=S.length-1;while(hi-lo>1){const m=(lo+hi)>>1;if(S[m]<=b.tu)lo=m;else hi=m;}i=lo;}
+  const j=Math.min(P.length-1,i+1),L=(S[j]-S[i])||1,tz=(P[j][2]-P[i][2])/L;b.tv+=(-380*tz-b.tv*.12)*dt;b.tv=Math.max(25,Math.min(210,b.tv));b.tu+=b.tv*dt;
+  (LZ.items||[]).forEach(it=>{if(it.ty==='en'&&!it.dead)lzEnemy(it,LZ.time);});
+  if(b.tu>=tb.len){lzSwapTube(b);return;}
+  const f=(b.tu-S[i])/L,p=[0,1,2].map(q=>P[i][q]+(P[j][q]-P[i][q])*f);b.p=[p[0],p[1]];b.z=p[2];
+  const hx=P[j][0]-P[i][0],hy=P[j][1]-P[i][1],hl=Math.hypot(hx,hy);if(hl>.3*L)b.dir=[hx/hl,hy/hl];b.vs=b.tv;
+  {const ang=b.tv*dt/4.2,ax=nrm3(cr3([hx,hy,P[j][2]-P[i][2]],[0,0,1]));if(ang>1e-5&&isFinite(ax[0]))LZ.rot=lzRot(LZ.rot,[-ax[0],-ax[1],-ax[2]],ang);}
+  LZ.rs&&0;}
+function lzSwapTube(b){const nb=LZ.next,c=nb.rc,s=nb.rs,T=nb.T,DZ=nb.DZ,inv=(x,y)=>{const dx=x-T[0],dy=y-T[1];return[c*dx+s*dy,-s*dx+c*dy];},rv=(x,y)=>[c*x+s*y,-s*x+c*y],v=b.tv;
+  if(LZ.cam){const e=LZ.cam.e,cc=LZ.cam.c,e2=inv(e[0],e[1]),c2=inv(cc[0],cc[1]);LZ.cam={e:[e2[0],e2[1],e[2]+DZ],c:[c2[0],c2[1],cc[2]+DZ]};}if(LZ.camDir)LZ.camDir=rv(LZ.camDir[0],LZ.camDir[1]);
+  const cur=lzSnap(),tq=rv(-T[0],-T[1]);cur.M=[c,-s,0,0,s,c,0,0,0,0,1,0,tq[0],tq[1],DZ,1];cur.t0=LZ.t;cur.tube=nb.tube;if(LZ.prevL)lzFreeL(LZ.prevL);LZ.prevL=cur;
+  lzApplyL(nb);LZ.fadeT0=nb.t0;LZ.next=null;b.tube=false;b.free=false;b.air=false;b.s=nb.sStart+1;b.o=0;b.vo=0;b.z=0;b.vz=0;b.vs=Math.min(125,v*.45+40);LZ.tubeBoost=2.2;LZ.boostT=0;lzPlace();
+  b.dir=LZ.Tg[lzIdx(b.s)].slice();LZ.camDir=b.dir.slice();LZ._allLit=0;LZ.cascN=(LZ.cascN||0)+1;LZ.ck=b.s+5;LZ.lit=LZ.suns.map(()=>0);LZ.spin=LZ.suns.map(()=>0);LZ.nextO=0;LZ._uc=null;
+  LZ.msg={a:`${lzT('circ')} ${LZ.cascN+1}`,t:0};setTimeout(()=>lzPts(250,null),200);lzBoost();lzChime([0,7,12],.6);setTimeout(lzPrepNext,700);lzHud();}
 function lzSwap(){const nb=LZ.next,b=LZ.ball,c=nb.rc,s=nb.rs,T=nb.T,DZ=nb.DZ;const inv=(x,y)=>{const dx=x-T[0],dy=y-T[1];return[c*dx+s*dy,-s*dx+c*dy];},rv=(x,y)=>[c*x+s*y,-s*x+c*y];
   [b.X,b.Y]=inv(b.X,b.Y);b.Z+=DZ;[b.vx,b.vy]=rv(b.vx,b.vy);b.p=[b.X,b.Y];b.z=b.Z;if(b.dir)b.dir=rv(b.dir[0],b.dir[1]);
   if(LZ.cam){const e=LZ.cam.e,cc=LZ.cam.c,e2=inv(e[0],e[1]),c2=inv(cc[0],cc[1]);LZ.cam={e:[e2[0],e2[1],e[2]+DZ],c:[c2[0],c2[1],cc[2]+DZ]};}if(LZ.camDir)LZ.camDir=rv(LZ.camDir[0],LZ.camDir[1]);
@@ -4382,6 +4417,9 @@ function lzDraw(){const cv=$('#lzCanvas'),gl=LZ.gl;if(!cv||!gl||!LZ.ball)return;
   gl.uniformMatrix4fv(P.u.uM,false,Mm);bind(LZ.vbo);gl.drawArrays(gl.TRIANGLES,0,LZ.nV);gl.uniform1f(P.u.uAlpha,1);gl.disable(gl.BLEND);
   {const z16=new Float32Array(16);[LZ.next,LZ.prevL].forEach(L=>{if(!L||!L.vbo)return;const al=L===LZ.next?fa((LZ.t-L.t0)/5):1-fa((LZ.t-L.t0)/4);if(al<=.002)return;
     gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.uniform1f(P.u.uAlpha,al);gl.uniformMatrix4fv(P.u.uM,false,L.M);gl.uniform1fv(P.u.uLit,z16);gl.uniform1fv(P.u.uSpin,z16);bind(L.vbo);gl.drawArrays(gl.TRIANGLES,0,L.nV);gl.disable(gl.BLEND);gl.uniform1f(P.u.uAlpha,1);});
+   [[LZ.next,Mm,L=>fa((LZ.t-L.t0)/5)],[LZ.prevL,LZ.prevL&&LZ.prevL.M,L=>1-fa((LZ.t-L.t0)/4)]].forEach(([L,MM,af])=>{if(!L||!L.tube||!L.tube.vbo)return;const al=af(L);if(al<=.002)return;
+     gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.depthMask(false);gl.uniform1f(P.u.uAlpha,.26*al);gl.uniform1f(P.u.uEmit,.35);gl.uniformMatrix4fv(P.u.uM,false,MM);gl.uniform1fv(P.u.uLit,z16);bind(L.tube.vbo);gl.drawArrays(gl.TRIANGLES,0,L.tube.n);
+     gl.depthMask(true);gl.disable(gl.BLEND);gl.uniform1f(P.u.uAlpha,1);gl.uniform1f(P.u.uEmit,0);gl.uniformMatrix4fv(P.u.uM,false,Mm);gl.uniform1fv(P.u.uLit,lit);});
    if(LZ.prevL&&LZ.t-LZ.prevL.t0>4.2){lzFreeL(LZ.prevL);LZ.prevL=null;}
    gl.uniform1fv(P.u.uLit,lit);gl.uniform1fv(P.u.uSpin,spn);gl.uniformMatrix4fv(P.u.uM,false,Mm);}
   if(LZ.items&&LZ.items.some(it=>it.ty==='en')){gl.uniform1fv(P.u.uLit,new Float32Array(16));bind(LZ.obb);LZ.items.forEach((it,k)=>{if(it.ty!=='en'||it.dead)return;if(LZ.state!=='play')lzEnemy(it,LZ.t);if(it.mv==='eth')return;const p=LZ.fr(it.s,it.u,LZ.BZ+it.z+it.base+.3),a=it.tum?LZ.t*(.6+k%3*.25)+k:Math.sin(LZ.t*18)*.18*(it.wob||0),b2=LZ.t*(it.tum?.4:.5)+k*1.7,sc=it.sz;
@@ -4451,7 +4489,7 @@ function lzRoll(){try{const ac=SND.ac||(SND.ac=new (window.AudioContext||window.
 function lzLoop(ts){if(!LZ.on)return;lzRoll();const dt=Math.min(.033,(ts-(LZ.last||ts))/1000);LZ.last=ts;const n=3;for(let i=0;i<n;i++)lzStep(dt/n);try{lzDraw();}catch(e){console.error(e);LZ.on=false;}LZ.raf=requestAnimationFrame(lzLoop);}
 function lzInit(){if(LZ.gl)return true;const cv=$('#lzCanvas');const gl=cv.getContext('webgl',{antialias:true})||cv.getContext('experimental-webgl');if(!gl){$('#lzMsg').innerHTML='<b>WebGL no disponible</b>';return false;}
   LZ.gl=gl;LZ.pMain=lzProg(gl,LZ_VS,LZ_FS);LZ.pGlow=lzProg(gl,LZ_GVS,LZ_GFS);LZ.pBall=lzProg(gl,LZ_BVS,LZ_MFS);LZ.pUni=lzProg(gl,LZ_SKYV,LZ_UFS);LZ.pEth=lzProg(gl,LZ_EVS,LZ_EFS);LZ.pSky=lzProg(gl,LZ_SKYV,LZ_SKY);LZ.quad=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,LZ.quad);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,1,1,-1,-1,1,1,-1,1]),gl.STATIC_DRAW);return true;}
-function renderGame(){const m=ST.m;if(!m)return;if(!lzInit())return;const key=[m.seed,JSON.stringify(m.P),JSON.stringify(ST.pal),JSON.stringify(ST.ov)].join('|');if(key!==LZ.key){LZ.key=key;if(LZ.casc)lzStartCasc();else if(!LZ.m||LZ.level===0)lzLoadLevel(LZ.level||0);}else lzLevelsUI();
+function renderGame(){const m=ST.m;if(!m)return;if(!lzInit())return;const key=[m.seed,JSON.stringify(m.P),JSON.stringify(ST.pal),JSON.stringify(ST.ov)].join('|');if(key!==LZ.key){LZ.key=key;if(LZ.casc&&(!LZ.m||LZ.own||!LZ.cascN))lzStartCasc();else if(LZ.casc){}else if(!LZ.m||LZ.level===0)lzLoadLevel(LZ.level||0);}else lzLevelsUI();
   if(!LZ.on){LZ.on=true;LZ.last=0;LZ.raf=requestAnimationFrame(lzLoop);}lzHud();}
 function pbStop(){LZ.on=false;cancelAnimationFrame(LZ.raf);if(LZ.rs)try{LZ.rs.g.gain.setTargetAtTime(0,LZ.rs.ac.currentTime,.05);}catch(e){}}
 (()=>{const cv=()=>$('#lzCanvas');let drag=null;
