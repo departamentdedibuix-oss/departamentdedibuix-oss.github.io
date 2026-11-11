@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Coordenadas</title>
-<link rel="manifest" href="coordenadas_geometria_plana.webmanifest">
+<link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#08101e">
-<link rel="apple-touch-icon" href="coordenadas_icono_192.png">
-<link rel="icon" href="coordenadas_icono_192.png">
+<link rel="apple-touch-icon" href="icono_192.png">
+<link rel="icon" href="icono_192.png">
 <style>
 *{box-sizing:border-box}
 html,body{margin:0;height:100%}
@@ -25,7 +25,7 @@ button{margin-top:12px;width:100%;padding:12px;border-radius:12px;border:0;backg
 </head>
 <body>
 <div class="box" id="box">
-  <img src="coordenadas_icono_192.png" alt="">
+  <img src="icono_192.png" alt="">
   <h1>Coordenadas</h1>
   <p id="msg" class="cargando">Cargando…</p>
   <form id="f" style="display:none">
@@ -35,8 +35,8 @@ button{margin-top:12px;width:100%;padding:12px;border-radius:12px;border:0;backg
   </form>
 </div>
 <script>
-const DATOS="coordenadas_geometria_plana.dat";
-if("serviceWorker" in navigator) navigator.serviceWorker.register("coordenadas_sw.js",{scope:"./coordenadas_geometria_plana"}).catch(()=>{});
+const DATOS="coordenadas.dat";
+if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js",{scope:"./"}).catch(()=>{});
 const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 async function abre(clave,paquete){
   const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(clave),"PBKDF2",false,["deriveKey"]);
