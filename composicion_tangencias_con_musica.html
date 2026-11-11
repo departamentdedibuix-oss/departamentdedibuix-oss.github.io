@@ -3973,7 +3973,7 @@ varying vec3 vW,vN,vC;varying float vE;
 void main(){vec3 p=aP;vec3 n=aN;float e=0.0;if(aS>=0.0){int i=int(floor(aS/2.0+.01));float par=mod(aS,2.0)>.5?-1.0:1.0;float a=0.0;vec2 c=vec2(0.0);
  for(int k=0;k<16;k++){if(k==i){a=uSpin[k]*par;c=uSC[k];e=uLit[k];}}float ca=cos(a),sa=sin(a);vec2 d=p.xy-c;p.xy=c+vec2(d.x*ca-d.y*sa,d.x*sa+d.y*ca);n.xy=vec2(n.x*ca-n.y*sa,n.x*sa+n.y*ca);}
  vec4 w=uM*vec4(p,1.0);vW=w.xyz;vN=mat3(uM)*n;vC=aC;vE=e;gl_Position=uVP*w;}`;
-const LZ_FS=`precision highp float;varying vec3 vW,vN,vC;varying float vE;uniform vec3 uEye,uBall,uFog,uSunP[8],uSunC[8];uniform float uBallR,uFogD,uBallOn,uDim,uAlpha,uEmit;uniform vec4 uOcc[12];
+const LZ_FS=`precision highp float;varying vec3 vW,vN,vC;varying float vE;uniform vec3 uEye,uBall,uFog,uSunP[8],uSunC[8];uniform float uBallR,uFogD,uBallOn,uDim,uAlpha,uEmit,uFres;uniform vec4 uOcc[12];
 void main(){vec3 n=normalize(vN);vec3 col=vC;
  vec3 L=normalize(vec3(-.35,.55,.75));float dif=max(dot(n,L),0.0);vec3 amb=(vec3(.1,.11,.17)+vec3(.05,.05,.07)*n.z)*uDim;
  vec3 lit=col*(amb+vec3(.42,.46,.62)*dif*.55*uDim);
@@ -3988,7 +3988,7 @@ void main(){vec3 n=normalize(vN);vec3 col=vC;
  lit+=col*vE*.55;
  vec3 v=normalize(uEye-vW);float rim=pow(1.0-max(dot(n,v),0.0),3.0);lit+=vec3(.25,.3,.5)*rim*.35*uDim;
 lit+=col*uEmit;
- float f=1.0-exp(-pow(length(uEye-vW)/uFogD,1.6));gl_FragColor=vec4(mix(lit,uFog,clamp(f,0.0,1.0)),uAlpha);}`;
+ float f=1.0-exp(-pow(length(uEye-vW)/uFogD,1.6));float fz=pow(1.0-abs(dot(n,normalize(uEye-vW))),2.2);lit+=vec3(.55,.75,1.0)*fz*uFres*.6;gl_FragColor=vec4(mix(lit,uFog,clamp(f,0.0,1.0)),uAlpha*mix(1.0,.1+.95*fz,uFres));}`;
 const LZ_BFS=`precision highp float;varying vec3 vW,vN,vC;varying float vE;uniform vec3 uEye,uSunP[8],uSunC[8];
  vec3 env(vec3 r){float y=r.z;vec3 c=mix(vec3(.02,.025,.05),vec3(.10,.08,.16),smoothstep(-.2,.6,y));c+=vec3(.25,.12,.35)*exp(-pow((y-.25)*4.0,2.0))*.6;c+=vec3(.05,.2,.25)*exp(-pow((y+.1)*5.0,2.0))*.4;
   c+=vec3(.9,.95,1.0)*pow(max(dot(r,normalize(vec3(-.35,.55,.75))),0.0),60.0)*1.4;return c;}
@@ -4027,6 +4027,15 @@ void main(){vec3 rd=normalize(vec3(vQ.x*uAsp,vQ.y,1.5));float a=uT*.07;rd.xy=mat
  float b=dot(ro,rd),cc=dot(ro,ro)-1.0,L=-b+sqrt(max(0.0,b*b-cc));vec3 c=universe(ro,rd,L,uT)+vec3(.004,.006,.015);gl_FragColor=vec4(c,uA);}`;
 const LZ_EVS=`attribute vec3 aP;attribute vec3 aN;uniform mat4 uM,uVP;varying vec3 vW,vN;void main(){vec4 w=uM*vec4(aP,1.0);vW=w.xyz;vN=mat3(uM)*aN;gl_Position=uVP*w;}`;
 const LZ_EFS=`precision mediump float;varying vec3 vW,vN;uniform vec3 uCol,uEye;uniform float uA,uE;void main(){vec3 n=normalize(vN),v=normalize(uEye-vW);float fr=pow(1.0-abs(dot(n,v)),2.0);gl_FragColor=vec4(uCol*(uE*1.6+vec3(.25)*uE)+uCol*uA*(.35+1.6*fr),1.0);}`;
+const LZ_QVS=`attribute vec3 aP;attribute vec2 aU;uniform mat4 uVP,uM;varying vec2 vU;void main(){vU=aU;gl_Position=uVP*(uM*vec4(aP,1.0));}`;
+const LZ_QFS=`precision highp float;varying vec2 vU;uniform float uT,uA;uniform vec4 uH[6];
+void main(){float v=vU.y,s=vU.x;
+ float body=.07*(1.0-v)+.5*smoothstep(.86,1.0,v)*smoothstep(1.0,.94,v)+.35*smoothstep(.12,0.0,v);
+ float flow=.07*(.5+.5*sin(s*.22-uT*4.0))*(1.0-v*.6);
+ vec3 cA=vec3(.35,.85,1.0),cB=vec3(.75,.5,1.0),cH=vec3(1.0,.88,.45);vec3 cb=mix(cA,cB,.5+.5*sin(s*.012+uT*.35));
+ float hit=0.0;for(int k=0;k<6;k++){vec4 h=uH[k];float dt=uT-h.y;if(h.z>0.0&&dt>=0.0&&dt<3.5){float d=abs(s-h.x),r=dt*120.0;hit+=h.z*(exp(-(d-r)*(d-r)/70.0)*exp(-dt*1.1)+1.6*exp(-d*d/50.0)*exp(-dt*3.5));}}
+ hit=min(hit,2.0);vec3 col=cb*(body+flow)+mix(cA,cH,clamp(hit*.6,0.0,1.0))*hit*(.35+.65*(1.0-abs(v-.5)*1.2));
+ gl_FragColor=vec4(col*uA,1.0);}`;
 const LZ_GVS=`attribute vec2 aQ;uniform vec3 uCen;uniform float uSize;uniform mat4 uVP;varying vec2 vQ;void main(){vec4 c=uVP*vec4(uCen,1.0);vQ=aQ;gl_Position=c+vec4(aQ*uSize*vec2(1.0,uSize>0.0?1.0:1.0),0.0,0.0);}`;
 const LZ_GFS=`precision mediump float;varying vec2 vQ;uniform vec3 uCol;uniform float uA;void main(){float r=length(vQ);float a=exp(-r*r*4.0)*uA+exp(-r*r*40.0)*uA*.8;gl_FragColor=vec4(uCol*a,a);}`;
 const LZ_SKY=`precision highp float;varying vec2 vQ;uniform float uT,uAsp,uYaw,uDim;uniform vec3 uTop,uHor;
@@ -4145,6 +4154,13 @@ function lzBuild(){const m=LZ.m;if(!m)return;const colOf=(k,d)=>LZ.own?window.co
       it.loff=EB.length/6;const seen={};F.forEach(f=>f.forEach((a,q)=>{const b=f[(q+1)%f.length],kk=a<b?a+'_'+b:b+'_'+a;if(seen[kk])return;seen[kk]=1;EB.push(...V[a],0,0,1,...V[b],0,0,1);}));it.lcnt=EB.length/6-it.loff;LZ.items.push(it);}
     const gl=LZ.gl;if(!LZ.ethb)LZ.ethb=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,LZ.ethb);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(EB.length?EB:[0,0,0,0,0,1]),gl.STATIC_DRAW);}
    const gl=LZ.gl;if(!LZ.obb)LZ.obb=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,LZ.obb);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(OB.length?OB:[0,0,0,0,0,1,0,0,0,-1]),gl.STATIC_DRAW);LZ.fr=fr;}
+  // quitamiedos de luz: por fuera de las curvas cerradas, donde la canica tiende a salirse
+  {const n=pts.length,G=new Int8Array(n),thr=1/78;for(let i=0;i<n;i++)if(Math.abs(LZ.K[i])>thr)G[i]=-Math.sign(LZ.K[i]);
+   const G2=G.slice();for(let i=0;i<n;i++)if(G[i])for(let d=-7;d<=7;d++){const j=i+d;if(j>=0&&j<n&&!G2[j])G2[j]=G[i];}LZ.guard=G2;
+   const GV=[],P=(i,g,z)=>[pts[i][0]+LZ.Nm[i][0]*g*(hg+.25),pts[i][1]+LZ.Nm[i][1]*g*(hg+.25),BZ+z],H=5.6,z0=.25;
+   for(let i=1;i<n;i++){const g=G2[i];if(!g||G2[i-1]!==g)continue;const a0=P(i-1,g,z0),a1=P(i-1,g,H),b0=P(i,g,z0),b1=P(i,g,H),sa=LZ.S[i-1],sb=LZ.S[i];
+     GV.push(...a0,sa,0,...b0,sb,0,...b1,sb,1,...a0,sa,0,...b1,sb,1,...a1,sa,1);}
+   const gl=LZ.gl;if(LZ.grb&&!LZ._prep)gl.deleteBuffer(LZ.grb);LZ.grb=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,LZ.grb);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(GV.length?GV:[0,0,0,0,0]),gl.STATIC_DRAW);LZ.grn=GV.length/5;LZ.ghits=[];}
   LZ.limit=Math.round(LZ.len/38+LZ.suns.length*5+10);LZ.spin=LZ.suns.map(()=>0);LZ.on8=LZ.suns.slice(0,8);
   const gl=LZ.gl;if(LZ.vbo)gl.deleteBuffer(LZ.vbo);LZ.vbo=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,LZ.vbo);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(V),gl.STATIC_DRAW);LZ.nV=V.length/10;
   // esfera
@@ -4241,8 +4257,10 @@ function lzStep(dt){LZ.t+=dt;if(LZ.parts&&LZ.parts.length){LZ.parts.forEach(q=>{
   // en las curvas la esfera tiende a salirse hacia fuera; el jugador la mantiene en el centro
   const i=lzIdx(b.s),kap=LZ.K[i];LZ.wind=LZ.mode==='wind'?(Math.sin(LZ.time*.55)*Math.sin(LZ.time*.21+1)*95):0;b.vo+=(-kap*b.vs*b.vs*.4+LZ.tx*-150-b.vo*2.6+LZ.wind)*dt;
   // cerca del borde la canica se frena un poco (si sigues empujando hacia fuera, cae igual)
-  {const e=Math.max(0,(Math.abs(b.o)-LZ.hg*.55)/(LZ.hg*.45));if(e>0&&!b.air){if(b.vo*b.o>0)b.vo*=Math.exp(-dt*7*e);b.vs*=Math.exp(-dt*1.1*e);}}
+  const gi=LZ.guard?LZ.guard[i]:0,gSide=gi&&Math.sign(b.o)===gi;
+  {const e=Math.max(0,(Math.abs(b.o)-LZ.hg*.55)/(LZ.hg*.45));if(e>0&&!b.air&&!gSide){if(b.vo*b.o>0)b.vo*=Math.exp(-dt*7*e);b.vs*=Math.exp(-dt*1.1*e);}}
   b.o+=b.vo*dt;
+  if(gi&&b.z<5.4){const lim=LZ.hg-4.5;if(b.o*gi>lim){b.o=gi*lim;if(b.vo*gi>0){const imp=Math.abs(b.vo);b.vo=-b.vo*.35;if(imp>5)lzGuardHit(b.s,imp,gi);}}}
   lzPlace();
   let onRamp=false;
   for(const it of LZ.items||[]){
@@ -4308,10 +4326,10 @@ function lzFreeStep(dt,b){const r=4.2,F=LZ.camDir||[0,1],Rt=[F[1],-F[0]],ground=
   if(b.Z<-30&&!b.dieT){b.dieT=.0001;LZ.msg={a:lzT('fall'),t:0};lzChime([0,-5],.5);}
   if(b.dieT){b.dieT+=dt;if(b.dieT>1.9){b.dieT=0;LZ.lives--;if(LZ.lives<=0){LZ.state='over';LZ.msg={a:lzT('over'),t:0};}else{lzRespawn(false);LZ.msg=null;}}}}
 // ---- modo cascada: el circuito siguiente espera más abajo, girado para continuar la dirección del final ----
-const LZK=['m','own','path','S','Tg','Nm','K','len','hg','BZ','cx','cy','cols','suns','lit','order','tans','items','limit','spin','on8','vbo','nV','obb','ethb','fr','level','surf','mode','nextO'];
+const LZK=['guard','grb','grn','ghits','m','own','path','S','Tg','Nm','K','len','hg','BZ','cx','cy','cols','suns','lit','order','tans','items','limit','spin','on8','vbo','nV','obb','ethb','fr','level','surf','mode','nextO'];
 function lzSnap(){const o={};LZK.forEach(k=>o[k]=LZ[k]);return o;}
 function lzApplyL(o){LZK.forEach(k=>LZ[k]=o[k]);}
-function lzFreeL(o){const gl=LZ.gl;if(!o||!gl)return;if(o.tube&&o.tube.vbo){gl.deleteBuffer(o.tube.vbo);o.tube.vbo=null;}[o.vbo,o.obb,o.ethb].forEach(x=>{if(x&&x!==LZ.vbo&&x!==LZ.obb&&x!==LZ.ethb)gl.deleteBuffer(x);});}
+function lzFreeL(o){const gl=LZ.gl;if(!o||!gl)return;if(o.grb&&o.grb!==LZ.grb){gl.deleteBuffer(o.grb);o.grb=null;}if(o.tube&&o.tube.vb2){gl.deleteBuffer(o.tube.vb2);o.tube.vb2=null;}if(o.tube&&o.tube.vbo){gl.deleteBuffer(o.tube.vbo);o.tube.vbo=null;}[o.vbo,o.obb,o.ethb].forEach(x=>{if(x&&x!==LZ.vbo&&x!==LZ.obb&&x!==LZ.ethb)gl.deleteBuffer(x);});}
 function lzClearCasc(){if(LZ.next){lzFreeL(LZ.next);LZ.next=null;}if(LZ.prevL){lzFreeL(LZ.prevL);LZ.prevL=null;}LZ.cascFall=false;}
 function lzPrepNext(){if(!LZ.casc||LZ.next||!LZ.gl||!LZ.path)return;const cur=lzSnap(),nl=LZ._nl;LZ._prep=true;LZ.vbo=null;LZ.obb=null;LZ.ethb=null;LZ._nl=1;LZ.level=Math.min(5,(LZ.cascN||0)+1);LZ.own=false;LZ.mode='suns';
   try{LZ.m=lzGenLevel();lzBuild();}catch(e){console.error(e);LZ._prep=false;lzApplyL(cur);return;}LZ._prep=false;const nb=lzSnap();lzApplyL(cur);LZ._nl=nl;
@@ -4328,14 +4346,21 @@ function lzPrepNext(){if(!LZ.casc||LZ.next||!LZ.gl||!LZ.path)return;const cur=lz
   const Qe=tp[tp.length-1],th=Math.atan2(ta[1],ta[0])-Math.atan2(tb[1],tb[0]),c=Math.cos(th),sn=Math.sin(th),T=[Qe[0]-(c*Pb[0]-sn*Pb[1]),Qe[1]-(sn*Pb[0]+c*Pb[1])];
   nb.t0=LZ.t;nb.M=[c,sn,0,0,-sn,c,0,0,0,0,1,0,T[0],T[1],-DZ,1];nb.rc=c;nb.rs=sn;nb.T=T;nb.DZ=DZ;nb.Q=[Qe[0],Qe[1]];nb.zTop=-DZ;nb.sStart=nb.S[j];
   nb.tube={pts:tp,S:tS,len:tS[tS.length-1],kind:kd};lzTubeMesh(nb.tube);LZ.next=nb;}
-function lzTubeMesh(tb){const gl=LZ.gl,V=[],R0=7.6,M=18,r=4.2,pts=tb.pts,col=[.62,.82,1],band=[1,.95,.75];
-  const push=(p,n,c)=>V.push(p[0],p[1],p[2],n[0],n[1],n[2],c[0],c[1],c[2],-1);let prevU=null;const fr=[];
+function lzTubeMesh(tb){const gl=LZ.gl,V=[],V2=[],R0=7.6,M=30,r=4.2,pts=tb.pts,glass=[.7,.86,1],metal=[.78,.84,.95],light=[.75,.95,1];
+  const push=(A,p,n,c)=>A.push(p[0],p[1],p[2],n[0],n[1],n[2],c[0],c[1],c[2],-1);let prevU=null;const fr=[];
   for(let k=0;k<pts.length;k++){const a=pts[Math.max(0,k-1)],b=pts[Math.min(pts.length-1,k+1)],t=nrm3([b[0]-a[0],b[1]-a[1],b[2]-a[2]]);let u=prevU?nrm3(cr3(cr3(t,prevU),t)):nrm3(cr3(t,[0,0,1]));if(!isFinite(u[0])||Math.hypot(...u)<.5)u=nrm3(cr3(t,[1,0,0]));
-    const w=cr3(t,u);prevU=u;fr.push({c:[pts[k][0],pts[k][1],pts[k][2]+r],u,w});}
+    const w=cr3(t,u);prevU=u;fr.push({c:[pts[k][0],pts[k][1],pts[k][2]+r],u,w,t});}
   const ring=(f,i,rad)=>{const a=i/M*2*Math.PI,n=[0,1,2].map(q=>f.u[q]*Math.cos(a)+f.w[q]*Math.sin(a));return[[0,1,2].map(q=>f.c[q]+n[q]*rad),n];};
-  for(let k=1;k<fr.length;k++){const isB=k%12===0;for(let i=0;i<M;i++){const A=ring(fr[k-1],i,R0),B=ring(fr[k-1],i+1,R0),C=ring(fr[k],i+1,R0),D=ring(fr[k],i,R0),cc=isB?band:col;
-      push(A[0],A[1],cc);push(B[0],B[1],cc);push(C[0],C[1],cc);push(A[0],A[1],cc);push(C[0],C[1],cc);push(D[0],D[1],cc);}}
-  tb.vbo=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,tb.vbo);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(V),gl.STATIC_DRAW);tb.n=V.length/10;}
+  for(let k=1;k<fr.length;k++)for(let i=0;i<M;i++){const A=ring(fr[k-1],i,R0),B=ring(fr[k-1],i+1,R0),C=ring(fr[k],i+1,R0),D=ring(fr[k],i,R0);push(V,A[0],A[1],glass);push(V,B[0],B[1],glass);push(V,C[0],C[1],glass);push(V,A[0],A[1],glass);push(V,C[0],C[1],glass);push(V,D[0],D[1],glass);}
+  // aro (toro) alrededor de una sección del tubo
+  const torus=(f,Rm,rm,col,m)=>{for(let i=0;i<M;i++)for(let j=0;j<m;j++){const P=(ii,jj)=>{const a=ii/M*2*Math.PI,v=jj/m*2*Math.PI,nr=[0,1,2].map(q=>f.u[q]*Math.cos(a)+f.w[q]*Math.sin(a)),n=[0,1,2].map(q=>nr[q]*Math.cos(v)+f.t[q]*Math.sin(v));return[[0,1,2].map(q=>f.c[q]+nr[q]*Rm+n[q]*rm),n];};
+      const A=P(i,j),B=P(i+1,j),C=P(i+1,j+1),D=P(i,j+1);push(V2,A[0],A[1],col);push(V2,B[0],B[1],col);push(V2,C[0],C[1],col);push(V2,A[0],A[1],col);push(V2,C[0],C[1],col);push(V2,D[0],D[1],col);}};
+  // boquillas: dos aros en la entrada y en la salida; aros finos de luz a lo largo del tubo
+  const at=d=>{let k=0;while(k<fr.length-1&&tb.S[k]<d)k++;return fr[k];};
+  [1.2,4.2].forEach(d=>torus(at(d),R0+.4,d<2?1.15:.6,metal,12));[tb.len-1.2,tb.len-4.2].forEach(d=>torus(at(d),R0+.4,d>tb.len-2?1.15:.6,metal,12));
+  for(let d=24;d<tb.len-18;d+=24)torus(at(d),R0+.15,.28,light,6);
+  tb.vbo=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,tb.vbo);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(V),gl.STATIC_DRAW);tb.n=V.length/10;
+  tb.vb2=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,tb.vb2);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(V2),gl.STATIC_DRAW);tb.n2=V2.length/10;}
 // la canica recorre el tobogán: la gravedad a lo largo del tubo la acelera; no puede salirse
 function lzTubeIn(b){const tb=LZ.next.tube;b.tube=true;b.tu=0;b.tv=Math.max(30,b.vs);b.free=false;b.air=false;LZ.cascFall=false;lzChime([0,7],.4);}
 function lzTubeStep(dt,b){const tb=LZ.next&&LZ.next.tube;if(!tb){b.tube=false;return;}const S=tb.S,P=tb.pts;let i=0;{let lo=0,hi=S.length-1;while(hi-lo>1){const m=(lo+hi)>>1;if(S[m]<=b.tu)lo=m;else hi=m;}i=lo;}
@@ -4365,6 +4390,12 @@ function lzThud(v){if(SFX<=0)return;const n=performance.now();if(n-(LZ._th||0)<1
 function lzChime(notes,vol){if(SFX<=0)return;try{const ac=SND.ac||(SND.ac=new (window.AudioContext||window.webkitAudioContext)()),t=ac.currentTime;
   notes.forEach((n,i)=>{const o=ac.createOscillator(),o2=ac.createOscillator(),g=ac.createGain(),g2=ac.createGain(),f=262*Math.pow(2,n/12),t0=t+i*.11;o.type='sine';o2.type='sine';o.frequency.value=f;o2.frequency.value=f*2.01;g2.gain.value=.18;
    g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime(.032*vol*SFX,t0+.04);g.gain.exponentialRampToValueAtTime(.0003,t0+2.2);o.connect(g);o2.connect(g2);g2.connect(g);g.connect(ac.destination);o.start(t0);o2.start(t0);o.stop(t0+2.3);o2.stop(t0+2.3);});}catch(e){}}
+function lzGuardHit(s,imp,g){const now=LZ.t;LZ.ghits=LZ.ghits||[];const last=LZ.ghits[LZ.ghits.length-1];if(last&&now-last.t<.18&&Math.abs(last.s-s)<12)return;
+  LZ.ghits.push({s,t:now,k:Math.min(1.6,.5+imp/60)});if(LZ.ghits.length>6)LZ.ghits.shift();
+  const i=lzIdx(s),p=[LZ.path[i][0]+LZ.Nm[i][0]*g*(LZ.hg+.25),LZ.path[i][1]+LZ.Nm[i][1]*g*(LZ.hg+.25),LZ.BZ+3];LZ.parts=LZ.parts||[];
+  for(let q=0;q<14;q++){const a=Math.random()*6.283,sp=15+Math.random()*35;LZ.parts.push({p:p.slice(),v:[Math.cos(a)*sp*.5-LZ.Nm[i][0]*g*sp*.6,Math.sin(a)*sp*.5-LZ.Nm[i][1]*g*sp*.6,10+Math.random()*25],life:1,dur:.4+Math.random()*.4,col:Math.random()<.5?[.5,.9,1]:[1,.9,.55],sz:1+Math.random()});}
+  LZ.parts.push({p,v:[0,0,0],life:1,dur:.5,col:[.6,.9,1],sz:18,flash:1});
+  if(SFX>0)try{const ac=SND.ac||(SND.ac=new (window.AudioContext||window.webkitAudioContext)()),t=ac.currentTime;[0,7,12].forEach((n,j)=>{const o=ac.createOscillator(),gg=ac.createGain();o.type='sine';o.frequency.value=523*Math.pow(2,(n+(Math.random()*4|0))/12);gg.gain.setValueAtTime(0,t+j*.04);gg.gain.linearRampToValueAtTime(.018*SFX*Math.min(1.4,imp/40+.4),t+j*.04+.02);gg.gain.exponentialRampToValueAtTime(.0004,t+j*.04+.7);o.connect(gg);gg.connect(ac.destination);o.start(t+j*.04);o.stop(t+j*.04+.8);});}catch(e){}}
 function lzNewGame(){LZ.score=0;LZ.gtime=0;lzHud();}
 function lzPts(n,wp){LZ.score=(LZ.score||0)+n;if(LZ.score>(LZ.best||0)){LZ.best=LZ.score;try{localStorage.setItem('tangLzBest',LZ.best);}catch(e){}}
   const box=$('#lzPops');if(box&&LZ.VP){let x=LZ.W/2,y=LZ.H*.4;if(wp){const q=M4.xf(LZ.VP,[wp[0],wp[1],wp[2],1]);if(q[3]>0){x=(q[0]/q[3]*.5+.5)*LZ.W;y=(1-(q[1]/q[3]*.5+.5))*LZ.H;}}
@@ -4407,7 +4438,7 @@ function lzDraw(){const cv=$('#lzCanvas'),gl=LZ.gl;if(!cv||!gl||!LZ.ball)return;
   else{const kk=LZ.state==='emerge'?.045:k;for(let i=0;i<3;i++){LZ.cam.e[i]+=(want[i]-LZ.cam.e[i])*kk;LZ.cam.c[i]+=(tgt[i]-LZ.cam.c[i])*kk*1.4;}
     if(LZ.state==='emerge'){const e=Math.min(1,LZ.em/1.4);uniA=1-e*e*(3-2*e);near=.25;fov=.85+.5*(1-e)*(1-e);}}
   const VP=LZ.VP=M4.mul(M4.persp(fov,W/H,near,3000),M4.look(LZ.cam.e,LZ.cam.c,[0,0,1]));
-  const P=LZ.pMain;gl.useProgram(P.p);gl.uniformMatrix4fv(P.u.uVP,false,VP);gl.uniform3fv(P.u.uEye,LZ.cam.e);gl.uniform3fv(P.u.uBall,bw.slice(0,3));gl.uniform1f(P.u.uBallR,r);gl.uniform3fv(P.u.uFog,fog);gl.uniform1f(P.u.uFogD,1300);gl.uniform1f(P.u.uBallOn,1);gl.uniform1f(P.u.uDim,dim);gl.uniform1f(P.u.uAlpha,1);gl.uniform1f(P.u.uEmit,0);
+  const P=LZ.pMain;gl.useProgram(P.p);gl.uniformMatrix4fv(P.u.uVP,false,VP);gl.uniform3fv(P.u.uEye,LZ.cam.e);gl.uniform3fv(P.u.uBall,bw.slice(0,3));gl.uniform1f(P.u.uBallR,r);gl.uniform3fv(P.u.uFog,fog);gl.uniform1f(P.u.uFogD,1300);gl.uniform1f(P.u.uBallOn,1);gl.uniform1f(P.u.uDim,dim);gl.uniform1f(P.u.uAlpha,1);gl.uniform1f(P.u.uEmit,0);gl.uniform1f(P.u.uFres,0);
   {const oc=new Float32Array(48);let n=0;const en=(LZ.items||[]).filter(it=>it.ty==='en'&&it.base&&it.mv!=='eth'&&!it.dead).map(it=>({it,p:LZ.fr(it.s,it.u,LZ.BZ+it.z+it.base+.3)})).sort((a,c)=>Math.hypot(a.p[0]-bw[0],a.p[1]-bw[1])-Math.hypot(c.p[0]-bw[0],c.p[1]-bw[1]));
    for(const e of en){if(n>=12)break;oc.set([e.p[0],e.p[1],e.p[2],e.it.sz*.95],n*4);n++;}gl.uniform4fv(P.u.uOcc,oc);}
   const n=16,lit=new Float32Array(n),spn=new Float32Array(n),sc=new Float32Array(n*2),sp=new Float32Array(24),scol=new Float32Array(24);
@@ -4420,8 +4451,10 @@ function lzDraw(){const cv=$('#lzCanvas'),gl=LZ.gl;if(!cv||!gl||!LZ.ball)return;
   {const z16=new Float32Array(16);[LZ.next,LZ.prevL].forEach(L=>{if(!L||!L.vbo)return;const al=L===LZ.next?fa((LZ.t-L.t0)/5):1-fa((LZ.t-L.t0)/4);if(al<=.002)return;
     gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.uniform1f(P.u.uAlpha,al);gl.uniformMatrix4fv(P.u.uM,false,L.M);gl.uniform1fv(P.u.uLit,z16);gl.uniform1fv(P.u.uSpin,z16);bind(L.vbo);gl.drawArrays(gl.TRIANGLES,0,L.nV);gl.disable(gl.BLEND);gl.uniform1f(P.u.uAlpha,1);});
    [[LZ.next,Mm,L=>fa((LZ.t-L.t0)/5)],[LZ.prevL,LZ.prevL&&LZ.prevL.M,L=>1-fa((LZ.t-L.t0)/4)]].forEach(([L,MM,af])=>{if(!L||!L.tube||!L.tube.vbo)return;const al=af(L);if(al<=.002)return;
-     gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.depthMask(false);gl.uniform1f(P.u.uAlpha,.26*al);gl.uniform1f(P.u.uEmit,.35);gl.uniformMatrix4fv(P.u.uM,false,MM);gl.uniform1fv(P.u.uLit,z16);bind(L.tube.vbo);gl.drawArrays(gl.TRIANGLES,0,L.tube.n);
-     gl.depthMask(true);gl.disable(gl.BLEND);gl.uniform1f(P.u.uAlpha,1);gl.uniform1f(P.u.uEmit,0);gl.uniformMatrix4fv(P.u.uM,false,Mm);gl.uniform1fv(P.u.uLit,lit);});
+     gl.uniformMatrix4fv(P.u.uM,false,MM);gl.uniform1fv(P.u.uLit,z16);
+     if(L.tube.vb2){if(al<.999){gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);}gl.uniform1f(P.u.uAlpha,al);gl.uniform1f(P.u.uEmit,.32+.12*Math.sin(LZ.t*2));bind(L.tube.vb2);gl.drawArrays(gl.TRIANGLES,0,L.tube.n2);gl.disable(gl.BLEND);}
+     gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.depthMask(false);gl.uniform1f(P.u.uAlpha,.55*al);gl.uniform1f(P.u.uFres,1);gl.uniform1f(P.u.uEmit,.08);bind(L.tube.vbo);gl.drawArrays(gl.TRIANGLES,0,L.tube.n);
+     gl.depthMask(true);gl.disable(gl.BLEND);gl.uniform1f(P.u.uAlpha,1);gl.uniform1f(P.u.uEmit,0);gl.uniform1f(P.u.uFres,0);gl.uniformMatrix4fv(P.u.uM,false,Mm);gl.uniform1fv(P.u.uLit,lit);});
    if(LZ.prevL&&LZ.t-LZ.prevL.t0>4.2){lzFreeL(LZ.prevL);LZ.prevL=null;}
    gl.uniform1fv(P.u.uLit,lit);gl.uniform1fv(P.u.uSpin,spn);gl.uniformMatrix4fv(P.u.uM,false,Mm);}
   if(LZ.items&&LZ.items.some(it=>it.ty==='en')){gl.uniform1fv(P.u.uLit,new Float32Array(16));bind(LZ.obb);LZ.items.forEach((it,k)=>{if(it.ty!=='en'||it.dead)return;if(LZ.state!=='play')lzEnemy(it,LZ.t);if(it.mv==='eth')return;const p=LZ.fr(it.s,it.u,LZ.BZ+it.z+it.base+.3),a=it.tum?LZ.t*(.6+k%3*.25)+k:Math.sin(LZ.t*18)*.18*(it.wob||0),b2=LZ.t*(it.tum?.4:.5)+k*1.7,sc=it.sz;
@@ -4439,6 +4472,13 @@ function lzDraw(){const cv=$('#lzCanvas'),gl=LZ.gl;if(!cv||!gl||!LZ.ball)return;
    const UC=lzUniCols();gl.uniform3fv(Q.u.uC1,UC[0]);gl.uniform3fv(Q.u.uC2,UC[1]);gl.uniform3fv(Q.u.uC3,UC[2]);gl.uniform3fv(Q.u.uSunP,sp);gl.uniform3fv(Q.u.uSunC,scol);
    gl.bindBuffer(gl.ARRAY_BUFFER,LZ.sph);[['aP',3,0],['aN',3,12],['aC',3,24],['aS',1,36]].forEach(([nm,sz,of])=>{const l=Q.at[nm];if(l===undefined||l<0)return;gl.enableVertexAttribArray(l);gl.vertexAttribPointer(l,sz,gl.FLOAT,false,40,of);});
    gl.drawArrays(gl.TRIANGLES,0,LZ.nS);
+   // quitamiedos de luz (suma de luz)
+   {const Q=LZ.pGuard;gl.useProgram(Q.p);gl.uniformMatrix4fv(Q.u.uVP,false,VP);gl.uniform1f(Q.u.uT,LZ.t);gl.enable(gl.BLEND);gl.blendFunc(gl.ONE,gl.ONE);gl.depthMask(false);
+    const fa2=u=>{u=Math.max(0,Math.min(1,u));return u*u*(3-2*u);};
+    [[LZ,Mm,LZ.fadeT0!=null?fa2((LZ.t-LZ.fadeT0)/5):1],[LZ.next,Mm,LZ.next?fa2((LZ.t-LZ.next.t0)/5):0],[LZ.prevL,LZ.prevL&&LZ.prevL.M,LZ.prevL?1-fa2((LZ.t-LZ.prevL.t0)/4):0]].forEach(([L,MM,al])=>{if(!L||!L.grb||!L.grn||al<=.002)return;
+      const H=new Float32Array(24);(L===LZ?LZ.ghits||[]:[]).slice(-6).forEach((h,q)=>{H[q*4]=h.s;H[q*4+1]=h.t;H[q*4+2]=h.k;});gl.uniform4fv(Q.u.uH,H);gl.uniform1f(Q.u.uA,al*(LZ.mode==='dark'?1.3:1));gl.uniformMatrix4fv(Q.u.uM,false,MM);
+      gl.bindBuffer(gl.ARRAY_BUFFER,L.grb);gl.enableVertexAttribArray(Q.at.aP);gl.vertexAttribPointer(Q.at.aP,3,gl.FLOAT,false,20,0);gl.enableVertexAttribArray(Q.at.aU);gl.vertexAttribPointer(Q.at.aU,2,gl.FLOAT,false,20,12);gl.drawArrays(gl.TRIANGLES,0,L.grn);});
+    gl.disableVertexAttribArray(Q.at.aP);gl.disableVertexAttribArray(Q.at.aU);gl.depthMask(true);gl.disable(gl.BLEND);}
    if(LZ.items&&LZ.items.some(it=>it.mv==='eth')){const E=LZ.pEth;gl.useProgram(E.p);gl.uniformMatrix4fv(E.u.uVP,false,VP);gl.uniform3fv(E.u.uEye,LZ.cam.e);gl.bindBuffer(gl.ARRAY_BUFFER,LZ.ethb);
      gl.enableVertexAttribArray(E.at.aP);gl.vertexAttribPointer(E.at.aP,3,gl.FLOAT,false,24,0);if(E.at.aN>=0){gl.enableVertexAttribArray(E.at.aN);gl.vertexAttribPointer(E.at.aN,3,gl.FLOAT,false,24,12);}
      gl.enable(gl.BLEND);gl.blendFunc(gl.ONE,gl.ONE);gl.depthMask(false);
@@ -4490,7 +4530,7 @@ function lzRoll(){try{const ac=SND.ac||(SND.ac=new (window.AudioContext||window.
   LZ.rs.g.gain.setTargetAtTime(v*.05*SFX*1.6,t,.08);LZ.rs.f.frequency.setTargetAtTime(420+v*900,t,.1);LZ.rs.lfo.frequency.setTargetAtTime(3+v*14,t,.1);LZ.rs.lg.gain.setTargetAtTime(v*.015,t,.1);}catch(e){}}
 function lzLoop(ts){if(!LZ.on)return;lzRoll();const dt=Math.min(.033,(ts-(LZ.last||ts))/1000);LZ.last=ts;const n=3;for(let i=0;i<n;i++)lzStep(dt/n);try{lzDraw();}catch(e){console.error(e);LZ.on=false;}LZ.raf=requestAnimationFrame(lzLoop);}
 function lzInit(){if(LZ.gl)return true;const cv=$('#lzCanvas');const gl=cv.getContext('webgl',{antialias:true})||cv.getContext('experimental-webgl');if(!gl){$('#lzMsg').innerHTML='<b>WebGL no disponible</b>';return false;}
-  LZ.gl=gl;LZ.pMain=lzProg(gl,LZ_VS,LZ_FS);LZ.pGlow=lzProg(gl,LZ_GVS,LZ_GFS);LZ.pBall=lzProg(gl,LZ_BVS,LZ_MFS);LZ.pUni=lzProg(gl,LZ_SKYV,LZ_UFS);LZ.pEth=lzProg(gl,LZ_EVS,LZ_EFS);LZ.pSky=lzProg(gl,LZ_SKYV,LZ_SKY);LZ.quad=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,LZ.quad);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,1,1,-1,-1,1,1,-1,1]),gl.STATIC_DRAW);return true;}
+  LZ.gl=gl;LZ.pMain=lzProg(gl,LZ_VS,LZ_FS);LZ.pGlow=lzProg(gl,LZ_GVS,LZ_GFS);LZ.pBall=lzProg(gl,LZ_BVS,LZ_MFS);LZ.pUni=lzProg(gl,LZ_SKYV,LZ_UFS);LZ.pEth=lzProg(gl,LZ_EVS,LZ_EFS);LZ.pGuard=lzProg(gl,LZ_QVS,LZ_QFS);LZ.pSky=lzProg(gl,LZ_SKYV,LZ_SKY);LZ.quad=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,LZ.quad);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,1,1,-1,-1,1,1,-1,1]),gl.STATIC_DRAW);return true;}
 function renderGame(){const m=ST.m;if(!m)return;if(!lzInit())return;const key=[m.seed,JSON.stringify(m.P),JSON.stringify(ST.pal),JSON.stringify(ST.ov)].join('|');if(key!==LZ.key){LZ.key=key;if(LZ.casc&&(!LZ.m||LZ.own||!LZ.cascN))lzStartCasc();else if(LZ.casc){}else if(!LZ.m||LZ.level===0)lzLoadLevel(LZ.level||0);}else lzLevelsUI();
   if(!LZ.on){LZ.on=true;LZ.last=0;LZ.raf=requestAnimationFrame(lzLoop);}lzHud();}
 function pbStop(){LZ.on=false;cancelAnimationFrame(LZ.raf);if(LZ.rs)try{LZ.rs.g.gain.setTargetAtTime(0,LZ.rs.ac.currentTime,.05);}catch(e){}}
