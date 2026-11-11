@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>ROBO.TECH</title>
+<script>/* modo oscuro por defecto la primera vez */try{if(!localStorage.getItem("robotgeo.theme"))document.documentElement.dataset.theme="dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -531,7 +532,7 @@ body[data-view="color"] main.wrap{overflow:hidden;padding-block:12px}
 
   <section id="v-cuadernillo" class="view" hidden>
     <div class="vhead">
-    <div class="viewbar"><button type="button" class="btn pri" id="b-print-bk">Imprimir tutorial</button><button type="button" class="btn" id="b-svg-bk">Descargar PDF</button><span class="lwctl" title="Grosores de línea (profesor)"><label>Línea gruesa <input type="number" id="lw-piece" min="0.1" max="2" step="0.05"> mm</label><label>Línea fina <input type="number" id="lw-thin" min="0.05" max="0.5" step="0.05"> mm</label></span><span class="sp"></span><span id="bk-info"></span></div>
+    <div class="viewbar"><button type="button" class="btn pri" id="b-svg-bk">Descargar PDF</button><span class="lwctl" title="Grosores de línea (profesor)"><label>Línea gruesa <input type="number" id="lw-piece" min="0.1" max="2" step="0.05"> mm</label><label>Línea fina <input type="number" id="lw-thin" min="0.05" max="0.5" step="0.05"> mm</label></span><span class="sp"></span><span id="bk-info"></span></div>
     <p class="note">Cada robot genera su propio tutorial de pasos: coordenadas de cada punto y piezas acotadas, como en la lámina de la locomotora. El nombre del alumno, el curso y demás datos se rellenan en la pestaña DATOS.</p></div>
     <div class="sheets" id="pages"></div>
   </section>
@@ -7354,7 +7355,7 @@ function printSheets(kind) {
   const st = document.getElementById('pagestyle'); st.textContent = kind === 'a3' ? '@page{size:A3 portrait;margin:0}' : '@page{size:A4 portrait;margin:0}';
   document.body.dataset.print = kind; setTimeout(() => { window.print(); }, 60);
 }
-$('#b-print-bk').onclick = () => printSheets('a4');
+
 $('#b-print-a3').onclick = () => printSheets('a3');
 $('#b-svg-a3').onclick = () => download(fname(S.meta.titulo) + '_A3.svg', a3SVG(R, S.meta, Object.assign({ embedFont: true, pal: PALETTES[palIdx], colors: colorsOf(), primCol: primColFn() }, A3opt)), 'image/svg+xml');
 $('#b-svg-bk').onclick = () => exportPdf('a4');
@@ -7404,11 +7405,11 @@ function go(v, force) {
 window.addEventListener('afterprint', () => { document.body.dataset.print = ''; });
 window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (['datos', 'disena', 'cuadernillo', 'paso', 'color', 'lamina', 'modelo', 'arena'].includes(h) && h !== view) go(h); });
 
-if (IN_ARTIFACT) document.querySelectorAll('#b-print-bk,#b-print-a3').forEach(b => b.hidden = true);
+if (IN_ARTIFACT) document.querySelectorAll('#b-print-a3').forEach(b => b.hidden = true);
 const thBtn = $('#b-theme');
 const curTheme = () => document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 const setTheme = t => { document.documentElement.dataset.theme = t; if (view === 'paso') setTimeout(() => PS.redraw(), 30); thBtn.setAttribute('aria-pressed', t === 'dark'); thBtn.title = t === 'dark' ? T('Modo claro') : T('Modo oscuro (plano azul)'); LS.set('robotgeo.theme', t); };
-{ const t0 = LS.get('robotgeo.theme'); if (t0) setTheme(t0); else thBtn.setAttribute('aria-pressed', curTheme() === 'dark'); }
+{ const t0 = LS.get('robotgeo.theme'); if (t0) setTheme(t0); else { document.documentElement.dataset.theme = 'dark'; thBtn.setAttribute('aria-pressed', 'true'); } } // primera vez: modo oscuro
 thBtn.onclick = () => setTheme(curTheme() === 'dark' ? 'light' : 'dark');
 const fsBtn = $('#b-fs');
 if (!document.documentElement.requestFullscreen && !document.documentElement.webkitRequestFullscreen) fsBtn.hidden = true;
