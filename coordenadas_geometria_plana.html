@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coordenadas</title>
+<link rel="manifest" href="coordenadas_geometria_plana.webmanifest">
+<meta name="theme-color" content="#08101e">
+<link rel="apple-touch-icon" href="coordenadas_icono_192.png">
+<link rel="icon" href="coordenadas_icono_192.png">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:#08101e;background-image:linear-gradient(rgba(120,170,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(120,170,255,.055) 1px,transparent 1px);background-size:22px 22px;color:#e9eff9;font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;display:grid;place-items:center;padding:24px}
+.box{width:100%;max-width:360px;background:#0e192c;border:1px solid #21334f;border-radius:18px;padding:28px 22px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+img{width:76px;height:76px;border-radius:18px}
+h1{font-size:1.35rem;margin:14px 0 4px}
+p{color:#8a9ab6;font-size:.9rem;margin:0 0 18px}
+input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #2d4468;background:#091323;color:#e9eff9;font:inherit;outline:none;text-align:center}
+input:focus{border-color:#7cc0ff}
+button{margin-top:12px;width:100%;padding:12px;border-radius:12px;border:0;background:#7cc0ff;color:#04101f;font:inherit;font-weight:700;cursor:pointer}
+.err{color:#ffb36b;font-size:.85rem;min-height:1.3em;margin-top:10px}
+.cargando{color:#8a9ab6;font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="box" id="box">
+  <img src="coordenadas_icono_192.png" alt="">
+  <h1>Coordenadas</h1>
+  <p id="msg" class="cargando">Cargando…</p>
+  <form id="f" style="display:none">
+    <input id="k" type="password" placeholder="Clave" autocomplete="current-password" autofocus>
+    <button>Entrar</button>
+    <div class="err" id="err"></div>
+  </form>
+</div>
+<script>
+const DATOS="coordenadas_geometria_plana.dat";
+if("serviceWorker" in navigator) navigator.serviceWorker.register("coordenadas_sw.js",{scope:"./coordenadas_geometria_plana"}).catch(()=>{});
+const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function abre(clave,paquete){
+  const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(clave),"PBKDF2",false,["deriveKey"]);
+  const key=await crypto.subtle.deriveKey({name:"PBKDF2",salt:b64(paquete.s),iterations:200000,hash:"SHA-256"},base,{name:"AES-GCM",length:256},false,["decrypt"]);
+  const pt=await crypto.subtle.decrypt({name:"AES-GCM",iv:b64(paquete.i)},key,b64(paquete.d));
+  return new TextDecoder().decode(pt);
+}
+function lanza(html){ document.open(); document.write(html); document.close(); }
+(async()=>{
+  let paquete;
+  try{ const r=await fetch(DATOS+"?v="+Date.now(),{cache:"no-store"}); paquete=await r.json(); }
+  catch(e){ try{ const r=await caches.match(DATOS); paquete=await r.json(); }catch(e2){ document.getElementById("msg").textContent="Sin conexión y sin copia guardada. Ábrela con internet una vez."; return; } }
+  let k=null; try{ k=localStorage.getItem("cgp-k"); }catch(e){}
+  if(k){ try{ lanza(await abre(k,paquete)); return; }catch(e){} }
+  document.getElementById("msg").textContent="Escribe la clave la primera vez. Luego se recordará.";
+  document.getElementById("f").style.display="";
+  document.getElementById("f").onsubmit=async ev=>{
+    ev.preventDefault(); const c=document.getElementById("k").value.trim(); document.getElementById("err").textContent="Comprobando…";
+    try{ const html=await abre(c,paquete); try{ localStorage.setItem("cgp-k",c); }catch(e){} lanza(html); }
+    catch(e){ document.getElementById("err").textContent="Clave incorrecta"; }
+  };
+})();
+</script>
+</body>
+</html>
