@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Avisos</title>
+<link rel="manifest" href="app.webmanifest">
+<meta name="theme-color" content="#08101e">
+<link rel="icon" href="icono_192.png">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{background:#08101e;background-image:linear-gradient(rgba(120,170,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(120,170,255,.055) 1px,transparent 1px);background-size:22px 22px;color:#e9eff9;font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;display:grid;place-items:center;padding:24px}
+.box{width:100%;max-width:380px;background:#0e192c;border:1px solid #21334f;border-radius:18px;padding:26px 22px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+img{width:64px;height:64px;border-radius:16px}
+h1{font-size:1.25rem;margin:12px 0 4px}
+p{color:#8a9ab6;font-size:.9rem;margin:0 0 14px}
+button{margin-top:10px;width:100%;padding:12px;border-radius:12px;border:0;background:#7cc0ff;color:#04101f;font:inherit;font-weight:700;cursor:pointer;transition:transform .08s}
+button:active{transform:scale(.96)}
+button.sec{background:#1b2c47;color:#cfe2ff;border:1px solid #2d4468}
+textarea{width:100%;height:120px;margin-top:12px;border-radius:12px;border:1px solid #2d4468;background:#091323;color:#9fd0ff;font:12px/1.4 ui-monospace,monospace;padding:10px;resize:none;display:none}
+.est{font-size:.9rem;min-height:1.4em;margin-top:12px;color:#ffd27c}
+</style>
+</head>
+<body>
+<div class="box">
+  <img src="icono_192.png" alt="">
+  <h1>Avisos en este móvil</h1>
+  <p>Actívalo una vez. Luego copia el código y pásaselo a Claude.</p>
+  <button id="act" title="Pide permiso y prepara los avisos en este móvil">🔔 Activar avisos</button>
+  <textarea id="cod" readonly></textarea>
+  <button id="cop" class="sec" style="display:none" title="Copia el código para pegarlo en el chat">📋 Copiar código</button>
+  <button id="pru" class="sec" style="display:none" title="Muestra un aviso de prueba en el móvil">Probar un aviso aquí</button>
+  <div class="est" id="est"></div>
+</div>
+<script>
+const VAPID="BLzsN-Sg_VnUl3d39738YJRsl6FeQvk1_uGKZ8R8TrJWnkghJ6WjMmLMQws2UH_PaWZ0qQxFp1_zBYc3PdqN6SU";
+const est=t=>document.getElementById("est").textContent=t;
+const k=s=>{const p="=".repeat((4-s.length%4)%4);const b=atob((s+p).replace(/-/g,"+").replace(/_/g,"/"));return Uint8Array.from(b,c=>c.charCodeAt(0));};
+async function reg(){ return navigator.serviceWorker.register("sw.js",{scope:"./"}).then(()=>navigator.serviceWorker.ready); }
+async function activa(){
+  if(!("serviceWorker" in navigator)||!("PushManager" in window)){ est("Este navegador no admite avisos. Ábrelo en Chrome."); return; }
+  est("Pidiendo permiso…");
+  const p=await Notification.requestPermission();
+  if(p!=="granted"){ est("Sin permiso. Actívalo en Ajustes > Notificaciones de la app y vuelve a probar."); return; }
+  const r=await reg();
+  let s=await r.pushManager.getSubscription();
+  if(!s) s=await r.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:k(VAPID)});
+  const c=document.getElementById("cod"); c.value=JSON.stringify(s); c.style.display="block";
+  document.getElementById("cop").style.display=""; document.getElementById("pru").style.display="";
+  est("✔ Avisos activados. Copia el código y pégalo en el chat.");
+}
+document.getElementById("act").onclick=()=>activa().catch(e=>est("Error: "+e.message));
+document.getElementById("cop").onclick=async()=>{ const c=document.getElementById("cod"); try{ await navigator.clipboard.writeText(c.value); est("Copiado ✔"); }catch(e){ c.select(); document.execCommand("copy"); est("Copiado ✔"); } };
+document.getElementById("pru").onclick=async()=>{ const r=await reg(); r.showNotification("Coordenadas",{body:"Aviso de prueba ✔",icon:"icono_192.png"}); };
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+name: datos
+on:
+  push:
+    branches: [main]
+    paths: ['coordenadas/aviso.json']
+  workflow_dispatch:
+jobs:
+  enviar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install --no-save web-push@3
+      - name: enviar
+        env:
+          VPRIV: ${{ secrets.COORD_KEY }}
+          VPUB: BLzsN-Sg_VnUl3d39738YJRsl6FeQvk1_uGKZ8R8TrJWnkghJ6WjMmLMQws2UH_PaWZ0qQxFp1_zBYc3PdqN6SU
+        run: node .github/enviar.js
