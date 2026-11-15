@@ -1,1 +1,1 @@
-[]
+[{"endpoint": "https://fcm.googleapis.com/fcm/send/dSWldiO17F4:APA91bGFpA9cLlcw9DlMMinvwCv_-WCI74EnWY81PCdIJIu3-Ns8CrhFOD89A6TsLntUaOR5XXR_H0nM75j4cb0ImHuS2xZ8GRp4bUTmaM7wwxhK_8eF37Qz80j1ktjbDc7OQ5svlwhU", "expirationTime": null, "keys": {"p256dh": "BJmYcGhP53tCt3hC_vVl2eUgFOfgoAkXnyeWOCU-ikxPbBUNyogvxWq-TTW8KF2IspfvbdAK7WOWsHVX9m2akfE", "auth": "S92rY8938jcPuJFsqlUh1g"}}]
