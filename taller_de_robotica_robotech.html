@@ -1845,6 +1845,64 @@ const FRAG_PATTERNS = [
   ['un televisor: rectángulo de {0} × {1} y una pantalla interior a {2} de los bordes', 'un televisor: rectangle de {0} × {1} i una pantalla interior a {2} de les vores', 'a television: a {0} × {1} rectangle and an inner screen {2} from the edges'],
 ];
 const CONN_SENT = ['Remátalo por arriba con un rectángulo de unión de {0} (centrado en el eje) que enlaza con el torso.', "Remata-ho per dalt amb un rectangle d'unió de {0} (centrat en l'eix) que enllaça amb el tors.", 'Finish it at the top with a {0} connecting rectangle (centred on the axis) that joins it to the torso.'];
+/* ---- textos nuevos de la revisión de acotación ---- */
+STEP_PATTERNS.push(
+  ['Encuentra los puntos {0} y {1}, centros de las ruedas (separados {2}), y traza en cada uno circunferencias concéntricas de radios {3} y {4}. Dibuja el chasis: un rectángulo de {5} × {6} centrado en el eje del robot, con su lado de abajo sobre la línea de centros (lo que tapan las ruedas va con línea de trazos).',
+    "Troba els punts {0} i {1}, centres de les rodes (separats {2}), i traça en cadascun circumferències concèntriques de radis {3} i {4}. Dibuixa el xassís: un rectangle de {5} × {6} centrat en l'eix del robot, amb el costat de baix sobre la línia de centres (el que tapen les rodes va amb línia de traços).",
+    'Find points {0} and {1}, the wheel centres ({2} apart), and on each draw concentric circles of radius {3} and {4}. Draw the chassis: a {5} × {6} rectangle centred on the robot axis, with its bottom side on the line of centres (the part hidden by the wheels is drawn with a dashed line).'],
+  ['Encuentra los puntos {0} y {1}. Dibuja los pies, semicírculos de radio {2} con centro en esos puntos. Sobre cada pie levanta {3} segmentos de {4} de altura alternando anchos de {5} y {6}, centrados en el eje de la pierna; el primero arranca a {7} de la línea de tierra.',
+    "Troba els punts {0} i {1}. Dibuixa els peus, semicercles de radi {2} amb centre en eixos punts. Sobre cada peu alça {3} segments de {4} d'alçària alternant amples de {5} i {6}, centrats en l'eix de la cama; el primer arranca a {7} de la línia de terra.",
+    'Find points {0} and {1}. Draw the feet, semicircles of radius {2} centred on those points. On each foot stack {3} segments {4} high, alternating widths of {5} and {6}, centred on the leg axis; the first one starts {7} above the ground line.'],
+  ['Encuentra los puntos {0} y {1}. Dibuja los pies, semicírculos de radio {2} con centro en esos puntos. Sobre cada pie levanta {3} segmentos de {4} de altura alternando anchos de {5} y {6}, centrados en el eje de la pierna; el primero arranca a {7} de la línea de tierra. Encima, un último tramo de {8} × {9} llega hasta el torso.',
+    "Troba els punts {0} i {1}. Dibuixa els peus, semicercles de radi {2} amb centre en eixos punts. Sobre cada peu alça {3} segments de {4} d'alçària alternant amples de {5} i {6}, centrats en l'eix de la cama; el primer arranca a {7} de la línia de terra. Damunt, un últim tram de {8} × {9} arriba fins al tors.",
+    'Find points {0} and {1}. Draw the feet, semicircles of radius {2} centred on those points. On each foot stack {3} segments {4} high, alternating widths of {5} and {6}, centred on the leg axis; the first one starts {7} above the ground line. On top, a last section of {8} × {9} reaches the torso.'],
+  ['Encuentra el punto {0}, centro de la baliza, y traza una circunferencia de radio {1}. Debajo, el soporte: un rectángulo de {2} × {3} centrado en el eje, cuyo lado de arriba queda {4} por debajo del centro (la circunferencia tapa esa parte: línea de trazos).',
+    "Troba el punt {0}, centre de la balisa, i traça una circumferència de radi {1}. Davall, el suport: un rectangle de {2} × {3} centrat en l'eix, amb el costat de dalt {4} per davall del centre (la circumferència tapa eixa part: línia de traços).",
+    'Find point {0}, the centre of the beacon, and draw a circle of radius {1}. Below it, the support: a {2} × {3} rectangle centred on the axis, whose top side is {4} below the centre (the circle hides that part: dashed line).'],
+  ['Encuentra los puntos {0} y {1}, {2}, y traza el eje de cada brazo. Dibuja cada brazo {3} con {4} circunferencias de radio {5} tangentes entre sí, con los centros sobre el eje separados {6} (en total {7} de largo); la primera pasa por el punto.',
+    "Troba els punts {0} i {1}, {2}, i traça l'eix de cada braç. Dibuixa cada braç {3} amb {4} circumferències de radi {5} tangents entre si, amb els centres sobre l'eix separats {6} (en total {7} de llarg); la primera passa pel punt.",
+    'Find points {0} and {1}, {2}, and draw the axis of each arm. Draw each arm {3} with {4} circles of radius {5} tangent to each other, with their centres on the axis {6} apart ({7} long in total); the first one passes through the point.'],
+  ['Encuentra los puntos {0} y {1}, {2}, y traza el eje de cada brazo. Dibuja cada brazo {3}: rectángulo de {4} × {5} con {6} anillas de 5 × {7}, la primera empieza a {8} del arranque del brazo y cada una de las demás empieza {9} después de donde empieza la anterior.',
+    "Troba els punts {0} i {1}, {2}, i traça l'eix de cada braç. Dibuixa cada braç {3}: rectangle de {4} × {5} amb {6} anelles de 5 × {7}, la primera comença a {8} de l'arrencada del braç i cadascuna de les altres comença {9} després d'on comença l'anterior.",
+    'Find points {0} and {1}, {2}, and draw the axis of each arm. Draw each arm {3}: a {4} × {5} rectangle with {6} rings of 5 × {7}; the first starts {8} from where the arm starts and each of the others starts {9} after the start of the previous one.'],
+  ['En el extremo de cada brazo (puntos {0} y {1}) dibuja la ventosa: trapecio isósceles centrado en el eje del brazo, de bases {2} (junto al brazo) y {3}, y altura {4}.',
+    "En l'extrem de cada braç (punts {0} i {1}) dibuixa la ventosa: trapezi isòsceles centrat en l'eix del braç, de bases {2} (al costat del braç) i {3}, i alçària {4}.",
+    'At the end of each arm (points {0} and {1}) draw the suction cup: an isosceles trapezium centred on the arm axis, with bases {2} (next to the arm) and {3}, and height {4}.'],
+  ['Con centro en {0} y {1}, dibuja hombreras: semicírculos de radio {2} con el diámetro perpendicular al brazo.',
+    'Amb centre en {0} i {1}, dibuixa espatlleres: semicercles de radi {2} amb el diàmetre perpendicular al braç.',
+    'Centred on {0} and {1}, draw shoulder pads: semicircles of radius {2} with the diameter perpendicular to the arm.'],
+  ['Con centro en {0} y {1}, dibuja hombreras: rectángulos de {2} × {3} centrados en el punto.',
+    'Amb centre en {0} i {1}, dibuixa espatlleres: rectangles de {2} × {3} centrats en el punt.',
+    'Centred on {0} and {1}, draw shoulder pads: {2} × {3} rectangles centred on the point.'],
+  ['Con centro en {0} y {1}, dibuja hombreras: trapecios isósceles de bases {2} y {3} y altura {4}, con el punto en el centro (a media altura, sobre el eje).',
+    "Amb centre en {0} i {1}, dibuixa espatlleres: trapezis isòsceles de bases {2} i {3} i alçària {4}, amb el punt en el centre (a mitja alçària, sobre l'eix).",
+    'Centred on {0} and {1}, draw shoulder pads: isosceles trapeziums with bases {2} and {3} and height {4}, with the point at the centre (at mid-height, on the axis).'],
+  ['Con centro en los hombros (puntos {0} y {1}) dibuja tornillos: circunferencias de radio {2} con una ranura en cruz: dos segmentos de {3}, uno horizontal y otro vertical, centrados en el punto.',
+    'Amb centre en les espatles (punts {0} i {1}) dibuixa cargols: circumferències de radi {2} amb una ranura en creu: dos segments de {3}, un horitzontal i un altre vertical, centrats en el punt.',
+    'Centred on the shoulders (points {0} and {1}) draw screws: circles of radius {2} with a cross slot: two segments of {3}, one horizontal and one vertical, centred on the point.'],
+  ['Encuentra los puntos {0} y {1}, a {2} hacia dentro del lado de la cabeza. Dibuja tornillos: circunferencias de radio {3} con una ranura en cruz: dos segmentos de {4}, uno horizontal y otro vertical, centrados en el punto.',
+    'Troba els punts {0} i {1}, a {2} cap a dins del costat del cap. Dibuixa cargols: circumferències de radi {3} amb una ranura en creu: dos segments de {4}, un horitzontal i un altre vertical, centrats en el punt.',
+    'Find points {0} and {1}, {2} in from the side of the head. Draw screws: circles of radius {3} with a cross slot: two segments of {4}, one horizontal and one vertical, centred on the point.'],
+  ['Encuentra los puntos {0} y {1}, centros de los ojos, y traza circunferencias de radio {2}. Encima, la ceja: un paralelogramo de {3} de grosor y tan ancho como el ojo ({4}), que va de {5} por encima del centro, en el lado de la nariz, a {6} en el lado exterior.',
+    "Troba els punts {0} i {1}, centres dels ulls, i traça circumferències de radi {2}. Damunt, la cella: un paral·lelogram de {3} de gruix i tan ample com l'ull ({4}), que va de {5} per damunt del centre, al costat del nas, a {6} al costat exterior.",
+    'Find points {0} and {1}, the centres of the eyes, and draw circles of radius {2}. Above, the eyebrow: a parallelogram {3} thick and as wide as the eye ({4}), running from {5} above the centre, on the nose side, to {6} on the outer side.'],
+  ['Encuentra los puntos {0} y {1}, centros de los ojos (a media anchura y a media altura del lado exterior). Dibuja en cada uno un trapecio rectángulo de base {2}, la de abajo: el lado exterior mide {3} y el interior {4}, de modo que el ceño baja hacia el centro de la cara.',
+    "Troba els punts {0} i {1}, centres dels ulls (a mitja amplària i a mitja alçària del costat exterior). Dibuixa en cadascun un trapezi rectangle de base {2}, la de baix: el costat exterior fa {3} i l'interior {4}, de manera que les celles arrufades baixen cap al centre de la cara.",
+    'Find points {0} and {1}, the centres of the eyes (at mid-width and at mid-height of the outer side). On each draw a right trapezium with base {2}, the bottom one: the outer side measures {3} and the inner one {4}, so that the frown slopes down towards the centre of the face.']
+);
+/* las frases de los brazos llevan ahora la posición del punto como fragmento {2} */
+for (const p of STEP_PATTERNS.slice()) if (p[0].includes(', en el arranque de cada brazo (el dibujo indica qué esquina), y traza el eje')) STEP_PATTERNS.push([
+  p[0].replace(', en el arranque de cada brazo (el dibujo indica qué esquina), y traza el eje', ', {90}, y traza el eje'), p[1].replace(", a l'arrencada de cada braç (el dibuix indica quina cantonada), i traça l'eix", ", {90}, i traça l'eix"), p[2].replace(', where each arm starts (the drawing shows which corner), and draw the axis', ', {90}, and draw the axis')]
+  .map(t => { const n = (t.match(/\{(\d+)\}/g) || []).map(x => +x.slice(1, -1)).filter(x => x !== 90); return t.replace(/\{(\d+)\}/g, (m, i) => +i === 90 ? '{2}' : +i >= 2 ? '{' + (+i + 1) + '}' : m); }));
+I18N.add({
+  'la esquina superior izquierda de cada brazo': ['la cantonada superior esquerra de cada braç', 'the top left corner of each arm'],
+  'la esquina inferior izquierda de cada brazo': ['la cantonada inferior esquerra de cada braç', 'the bottom left corner of each arm'],
+  'el extremo de arriba del eje de cada brazo': ["l'extrem de dalt de l'eix de cada braç", 'the top end of the axis of each arm'],
+  'el extremo de abajo del eje de cada brazo': ["l'extrem de baix de l'eix de cada braç", 'the bottom end of the axis of each arm'],
+  'el extremo del eje de cada brazo que toca el torso': ["l'extrem de l'eix de cada braç que toca el tors", 'the end of the axis of each arm that touches the torso'],
+  'El punto {0} está en el eje, dentro de la base: la base sube 5 por encima de él y baja {1} por debajo.': ["El punt {0} està en l'eix, dins de la base: la base puja 5 per damunt d'ell i baixa {1} per davall.", 'Point {0} is on the axis, inside the base: the base rises 5 above it and goes {1} below it.'],
+  'El punto {0} es el centro del lado de abajo de la base, que sube 5 por encima de él.': ["El punt {0} és el centre del costat de baix de la base, que puja 5 per damunt d'ell.", 'Point {0} is the centre of the bottom side of the base, which rises 5 above it.']
+});
 /* compila un patrón: regex anclada; los patrones con más texto fijo se prueban antes */
 function i18nCompile(list) {
   return list.map(([es, va, en]) => {
@@ -1874,6 +1932,7 @@ function trStep(st) {
   if (st.title) { const P = st.title.toUpperCase() + '. '; if (t.startsWith(P)) { t = t.slice(P.length); pre = String(T(st.title)).toUpperCase() + '. '; } }
   const cr = new RegExp(' ' + CONN_SENT[0].replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace('\\{0\\}', '(.+?)') + '$'), mc = t.match(cr);
   if (mc) { t = t.slice(0, mc.index); suf = ' ' + i18nFill(I18N.lang === 'va' ? CONN_SENT[1] : CONN_SENT[2], [mc[1]]); }
+  for (const [k, a] of (st.noteList || []).slice().reverse()) { const f = ' ' + k.replace(/\{(\d+)\}/g, (m, i) => a[+i]); if (t.endsWith(f)) { t = t.slice(0, -f.length); suf = ' ' + T(k, ...a) + suf; } }
   const r = trPattern(t, STEP_RX);
   return pre + (r == null ? t : r) + suf;
 }
@@ -1937,6 +1996,7 @@ FRAG_PATTERNS.push(
 /* ===== Motor geométrico: piezas, coordenadas y cotas ===== */
 let CX = 144, MARGIN = 5, AW = 287, AH = 410, ROUND = true; const G = 70, K = 1.5, D2R = Math.PI / 180;
 const fmtNum = v => String(Math.round(v * 100) / 100).replace(".", ",");
+const SLOT = r => ROUND ? Math.max(5, Math.floor((r - 2) / 5) * 5) : r - 2; // media ranura de los tornillos
 const Q5 = (v, m = 5) => ROUND ? Math.max(m, Math.round(v / 5) * 5) : v; // medida de detalle: de 5 en 5 en medidas simplificadas
 const FLR = v => ROUND ? Math.floor(v / 5) * 5 : Math.floor(v), CEL = v => ROUND ? Math.ceil(v / 5) * 5 : Math.ceil(v);
 function setMargin(m) { MARGIN = m; AW = 297 - 2 * m; AH = 420 - 2 * m; CX = ROUND ? Math.round(AW / 2 / 5) * 5 : Math.round(AW / 2 / 2) * 2; FC = Fr(CX, 0, 1, 0, 0, 1); }
@@ -1980,7 +2040,7 @@ class PB {
 
 class Step {
   constructor(part, title) { this.part = part; this.title = title; this.prims = []; this.cotas = []; this.pts = []; this.side = 0; this.showAll = false; this.axes = []; this.sym = true; this.txt = () => ''; }
-  add(pb, o = {}) { this.prims.push({ d: pb.d.join(''), pts: pb.pts, verts: pb.v, cmds: pb.cmds, arcs: pb.arcs(), closed: pb.closed, role: o.role || 'c', tone: o.tone, part: this.part, side: this.side, fr: pb.F && [pb.F.dx, pb.F.dy, pb.F.nx, pb.F.ny] }); return pb; }
+  add(pb, o = {}) { this.prims.push({ d: pb.d.join(''), pts: pb.pts, verts: pb.v, cmds: pb.cmds, arcs: pb.arcs(), closed: pb.closed, role: o.role || 'c', tone: o.tone, div: !!o.div, part: this.part, side: this.side, fr: pb.F && [pb.F.dx, pb.F.dy, pb.F.nx, pb.F.ny] }); return pb; }
   rect(F, u0, v0, u1, v1, o) { return this.add(new PB(F).M(u0, v0).L(u1, v0).L(u1, v1).L(u0, v1).Z(), o); }
   tab(F, u0, v0, u1, v1) { const pb = this.rect(F, u0, v0, u1, v1); this.prims[this.prims.length - 1].tab = true; return pb; }
   rr(F, u0, v0, u1, v1, r, o) {
@@ -1991,14 +2051,15 @@ class Step {
     return this.add(p, o);
   }
   circ(F, u, v, r, o) { const pb = this.add(new PB(F).M(u + r, v).A(u, v, r, 0, 180).A(u, v, r, 180, 360).Z(), o); const [x, y] = F.w(u, v); this.prims[this.prims.length - 1].circle = [x, y, r]; return pb; }
-  cc(F, u, v, r) { if (!(this.side <= 0 || this.showAll)) return; (this.aux = this.aux || []).push({ c: F.w(u, v), r }); } // circunferencia auxiliar de construcción
-  axis(F, u0, v0, u1, v1) { if (!(this.side <= 0 || this.showAll)) return; this.axes.push({ a: F.w(u0, v0), b: F.w(u1, v1) }); }
-  ang(F, c, r, a0, a1, txt) { if (!this.cotOK()) return; const C = F.w(c[0], c[1]); const aw = a => { const t = a * D2R; return Math.atan2(Math.cos(t) * F.dy + Math.sin(t) * F.ny, Math.cos(t) * F.dx + Math.sin(t) * F.nx); }; this.cotas.push({ k: 'ang', c: C, r, a0: aw(a0), a1: aw(a1), txt }); }
+  cc(F, u, v, r) { (this.aux = this.aux || []).push({ c: F.w(u, v), r, side: this.side }); } // circunferencia auxiliar de construcción
+  axis(F, u0, v0, u1, v1) { this.axes.push({ a: F.w(u0, v0), b: F.w(u1, v1), side: this.side }); }
+  ang(F, c, r, a0, a1, txt) { if (!this.cotOK()) return; const C = F.w(c[0], c[1]); const aw = a => { const t = a * D2R; return Math.atan2(Math.cos(t) * F.dy + Math.sin(t) * F.ny, Math.cos(t) * F.dx + Math.sin(t) * F.nx); }; this.cotas.push({ k: 'ang', c: C, r, a0: aw(a0), a1: aw(a1), txt, side: this.side }); }
+  div(F, u0, v0, u1, v1) { (this.divs = this.divs || []).push({ a: F.w(u0, v0), b: F.w(u1, v1), side: this.side }); } // línea fina que separa dos formas de la misma pieza (solo en el plano acotado)
   poly(F, P, o) { const p = new PB(F); P.forEach((q, i) => i ? p.L(q[0], q[1]) : p.M(q[0], q[1])); p.Z(); return this.add(p, o); }
   pline(F, P, o) { const p = new PB(F); P.forEach((q, i) => i ? p.L(q[0], q[1]) : p.M(q[0], q[1])); return this.add(p, Object.assign({ role: 'l' }, o)); }
   line(F, u1, v1, u2, v2, o) { return this.pline(F, [[u1, v1], [u2, v2]], o); }
   path(F) { return new PB(F); }
-  cotOK() { return this.side <= 0 || (this.showAll && !this.cotOnce); }
+  cotOK() { return true; }
   dh(F, a, b, off) { this._lin(F, a, b, off, 'u'); }
   dv(F, a, b, off) { this._lin(F, a, b, off, 'v'); }
   _lin(F, a, b, off, ax) {
@@ -2007,18 +2068,18 @@ class Step {
     const aligned = Math.abs(F.dx) < 1e-6 || Math.abs(F.dy) < 1e-6;
     if (!aligned) { const U = ax === 'u' ? [F.dx, F.dy] : [F.nx, F.ny], N = ax === 'u' ? [F.nx, F.ny] : [F.dx, F.dy], sg = off >= 0 ? 1 : -1;
       const val = Math.abs((B[0] - A[0]) * U[0] + (B[1] - A[1]) * U[1]); if (val < .5) return;
-      this.cotas.push({ k: 'al', a: A, b: B, u: U, o: [N[0] * sg, N[1] * sg], val }); return; }
+      this.cotas.push({ k: 'al', a: A, b: B, u: U, o: [N[0] * sg, N[1] * sg], val, side: this.side }); return; }
     if (ax === 'u') { dir = Math.abs(F.dx) > .5 ? 'h' : 'v'; offW = dir === 'h' ? off * F.ny : off * F.nx; }
     else { dir = Math.abs(F.nx) > .5 ? 'h' : 'v'; offW = dir === 'h' ? off * F.dy : off * F.dx; }
     const val = dir === 'h' ? Math.abs(B[0] - A[0]) : Math.abs(B[1] - A[1]);
     if (val < .5) return;
-    this.cotas.push({ k: 'lin', a: A, b: B, dir, off: offW, val });
+    this.cotas.push({ k: 'lin', a: A, b: B, dir, off: offW, val, side: this.side });
   }
   rad(F, c, r, ang, kind) {
     if (!this.cotOK()) return;
     const C = F.w(c[0], c[1]); const a = ang * D2R;
     const x = Math.cos(a) * F.dx + Math.sin(a) * F.nx, y = Math.cos(a) * F.dy + Math.sin(a) * F.ny;
-    this.cotas.push({ k: 'rad', c: C, r, ang: Math.atan2(y, x), kind: kind || 'R' });
+    this.cotas.push({ k: 'rad', c: C, r, ang: Math.atan2(y, x), kind: kind || 'R', side: this.side });
   }
   pt(F, u, v) { const [x, y] = F.w(u, v); this.pts.push({ x, y, side: this.side }); }
   ptW(x, y) { this.pts.push({ x, y, side: this.side }); }
@@ -2076,22 +2137,26 @@ function shapeDraw(st, kind, yb, p) {
     case 'cupula': {
       const R = W / 2;
       pb = st.add(st.path(F).M(-W / 2, yb).L(W / 2, yb).L(W / 2, yb + H).A(0, yb + H, R, 0, 180).Z()); ref = [-W / 2, yb];
+      st.div(F, -W / 2, yb + H, W / 2, yb + H);
       st.dh(F, [-W / 2, yb], [W / 2, yb], -8); st.dv(F, [W / 2, yb], [W / 2, yb + H], 8); st.rad(F, [0, yb + H], R, 60, 'R');
       desc = `un rectángulo de ${W} × ${H} rematado arriba con una semicircunferencia de radio ${R} (cúpula): su centro está en el eje, a ${H} de la base`; break; }
     case 'barril': {
       const R = W / 2;
       pb = st.add(st.path(F).M(-W / 2, yb + R + H).L(-W / 2, yb + R).A(0, yb + R, R, 180, 360).L(W / 2, yb + R + H).Z()); ref = [0, yb + R];
+      st.div(F, -W / 2, yb + R, W / 2, yb + R);
       st.dh(F, [-W / 2, yb + R + H], [W / 2, yb + R + H], 8); st.dv(F, [-W / 2, yb + R], [-W / 2, yb + R + H], -8); st.rad(F, [0, yb + R], R, -60, 'R');
       desc = `una forma de U: semicircunferencia inferior de radio ${R} con centro en ese punto y, encima, un rectángulo de ${W} × ${H}`; break; }
     case 'capsulaV': {
       const R = W / 2;
       pb = st.add(st.path(F).M(-W / 2, yb + R).A(0, yb + R, R, 180, 360).L(W / 2, yb + R + H).A(0, yb + R + H, R, 0, 180).Z()); ref = [0, yb + R];
+      st.div(F, -W / 2, yb + R, W / 2, yb + R); st.div(F, -W / 2, yb + R + H, W / 2, yb + R + H);
       st.dv(F, [W / 2, yb + R], [W / 2, yb + R + H], 8); st.rad(F, [0, yb + R + H], R, 60, 'R');
       desc = `una cápsula vertical: dos semicircunferencias de radio ${R} (centros en el eje, separados ${H}) unidas por dos rectas verticales`; break; }
     case 'capsulaH': {
       const R = H / 2;
       pb = st.add(st.path(F).M(-W / 2, yb).L(W / 2, yb).A(W / 2, yb + R, R, -90, 90).L(-W / 2, yb + H).A(-W / 2, yb + R, R, 90, 270).Z()); ref = [-W / 2, yb];
-      st.dh(F, [-W / 2, yb + H], [W / 2, yb + H], 8); st.rad(F, [W / 2, yb + R], R, -30, 'R');
+      st.div(F, -W / 2, yb, -W / 2, yb + H); st.div(F, W / 2, yb, W / 2, yb + H);
+      st.dh(F, [-W / 2, yb + H], [W / 2, yb + H], 8); st.dv(F, [-W / 2, yb], [-W / 2, yb + H], -8 - R); st.rad(F, [W / 2, yb + R], R, -30, 'R');
       desc = `una cápsula horizontal: rectángulo de ${W} × ${H} con dos semicircunferencias de radio ${R} en los lados (centros a ${R} de la base)`; break; }
     case 'hexagono': {
       const pp = Math.min(p.p, W / 2 - 5);
@@ -2107,23 +2172,24 @@ function shapeDraw(st, kind, yb, p) {
       const Wb = p.Wb, Wm = p.Wm, Wt = p.Wt, H1 = p.H1, H2 = p.H2, ys = yb + H2, yt = ys + H1; let c = p.c < 5 ? 0 : Math.min(p.c, H1 / 2 - 5, FLR(Wt / 4)); if (c < 5) c = 0;
       const P = c ? [[-Wb / 2, yb], [Wb / 2, yb], [Wm / 2, ys], [Wt / 2, yt - c], [Wt / 2 - c, yt], [-Wt / 2 + c, yt], [-Wt / 2, yt - c], [-Wm / 2, ys]] : [[-Wb / 2, yb], [Wb / 2, yb], [Wm / 2, ys], [Wt / 2, yt], [-Wt / 2, yt], [-Wm / 2, ys]];
       pb = st.poly(F, P); ref = [-Wb / 2, yb];
-      st.line(F, -Wm / 2, ys, Wm / 2, ys);
+      st.line(F, -Wm / 2, ys, Wm / 2, ys, { div: true });
       st.dh(F, [-Wb / 2, yb], [Wb / 2, yb], -8); st.dh(F, [-Wm / 2, ys], [Wm / 2, ys], -8); st.dh(F, [-Wt / 2, yt - c], [Wt / 2, yt - c], 8);
       st.dv(F, [-Wb / 2, yb], [-Wm / 2, ys], -8); st.dv(F, [-Wm / 2, ys], [-Wt / 2, yt - c], -8);
       if (c) { st.dv(F, [Wt / 2, yt - c], [Wt / 2 - c, yt], 8); st.dh(F, [Wt / 2 - c, yt], [Wt / 2, yt - c], 8); }
-      desc = `un torso de dos trapecios encajados: la cadera mide ${Wb} abajo y ${Wm} en la cintura, con ${H2} de altura; el pecho pasa de ${Wm} a ${Wt} en ${H1} de altura${c ? ` y tiene chaflanes de ${c} × ${c} en los hombros` : ''}`; break; }
+      desc = `un torso de dos trapecios encajados: la cadera mide ${Wb} abajo y ${Wm} en la cintura, con ${H2} de altura; el pecho pasa de ${Wm} a ${Wt} en ${H1 - c} de altura${c ? ` y tiene encima chaflanes de ${c} × ${c} en los hombros` : ''}`; break; }
     case 'trapecios3': {
       const Wb = p.Wb, Wm = p.Wm, Wa = p.Wa, Wt = p.Wt, H1 = p.H1, H2 = p.H2, H3 = p.H3, y1 = yb + H3, y2 = y1 + H2, yt = y2 + H1; let c = p.c < 5 ? 0 : Math.min(p.c, H1 / 2 - 5, FLR(Wt / 4)); if (c < 5) c = 0;
       const top = c ? [[Wt / 2, yt - c], [Wt / 2 - c, yt], [-Wt / 2 + c, yt], [-Wt / 2, yt - c]] : [[Wt / 2, yt], [-Wt / 2, yt]];
       pb = st.poly(F, [[-Wb / 2, yb], [Wb / 2, yb], [Wm / 2, y1], [Wa / 2, y2], ...top, [-Wa / 2, y2], [-Wm / 2, y1]]); ref = [-Wb / 2, yb];
-      st.line(F, -Wm / 2, y1, Wm / 2, y1); st.line(F, -Wa / 2, y2, Wa / 2, y2);
+      st.line(F, -Wm / 2, y1, Wm / 2, y1, { div: true }); st.line(F, -Wa / 2, y2, Wa / 2, y2, { div: true });
       st.dh(F, [-Wb / 2, yb], [Wb / 2, yb], -8); st.dh(F, [-Wm / 2, y1], [Wm / 2, y1], -8); st.dh(F, [-Wa / 2, y2], [Wa / 2, y2], 8); st.dh(F, [-Wt / 2, yt - c], [Wt / 2, yt - c], 8);
       st.dv(F, [-Wb / 2, yb], [-Wm / 2, y1], -8); st.dv(F, [-Wm / 2, y1], [-Wa / 2, y2], -8); st.dv(F, [-Wa / 2, y2], [-Wt / 2, yt - c], -8);
       if (c) { st.dv(F, [Wt / 2, yt - c], [Wt / 2 - c, yt], 8); st.dh(F, [Wt / 2 - c, yt], [Wt / 2, yt - c], 8); }
-      desc = `un torso de tres trapecios encajados: la cadera pasa de ${Wb} a ${Wm} en ${H3} de altura; el abdomen, de ${Wm} a ${Wa} en ${H2}; y el pecho, de ${Wa} a ${Wt} en ${H1}${c ? `, con chaflanes de ${c} × ${c} en los hombros` : ''}`; break; }
+      desc = `un torso de tres trapecios encajados: la cadera pasa de ${Wb} a ${Wm} en ${H3} de altura; el abdomen, de ${Wm} a ${Wa} en ${H2}; y el pecho, de ${Wa} a ${Wt} en ${H1 - c}${c ? `, con chaflanes de ${c} × ${c} encima, en los hombros` : ''}`; break; }
     case 'casa': {
       const t = p.t;
       pb = st.poly(F, [[-W / 2, yb], [W / 2, yb], [W / 2, yb + H], [0, yb + H + t], [-W / 2, yb + H]]); ref = [-W / 2, yb];
+      st.div(F, -W / 2, yb + H, W / 2, yb + H);
       st.dh(F, [-W / 2, yb], [W / 2, yb], -8); st.dv(F, [-W / 2, yb], [-W / 2, yb + H], -8); st.dv(F, [W / 2, yb + H], [0, yb + H + t], 8);
       desc = `un pentágono en forma de casa: rectángulo de ${W} × ${H} con un tejado triangular de ${t} de altura`; break; }
     case 'bombilla': { // (id interno; en pantalla se llama «Globo»)
@@ -2134,7 +2200,7 @@ function shapeDraw(st, kind, yb, p) {
     case 'casco': {
       const e_ = p.e, vb = p.vb, R_ = W / 2;
       pb = st.add(st.path(F).M(-W / 2, yb).L(W / 2, yb).L(W / 2, yb + H - vb).L(W / 2 + e_, yb + H - vb).L(W / 2 + e_, yb + H).L(W / 2, yb + H).A(0, yb + H, R_, 0, 180).L(-W / 2 - e_, yb + H).L(-W / 2 - e_, yb + H - vb).L(-W / 2, yb + H - vb).Z()); ref = [-W / 2, yb];
-      st.line(F, -W / 2, yb + H - vb, W / 2, yb + H - vb); st.line(F, -W / 2, yb + H, W / 2, yb + H);
+      st.line(F, -W / 2, yb + H - vb, W / 2, yb + H - vb, { div: true }); st.line(F, -W / 2, yb + H, W / 2, yb + H, { div: true });
       st.dh(F, [-W / 2, yb], [W / 2, yb], -8); st.dv(F, [-W / 2, yb], [-W / 2 - e_, yb + H - vb], -8); st.dv(F, [-W / 2 - e_, yb + H - vb], [-W / 2 - e_, yb + H], -8);
       st.dh(F, [W / 2, yb + H], [W / 2 + e_, yb + H], 8); st.rad(F, [0, yb + H], R_, 60, 'R');
       desc = `un casco: rectángulo de ${W} × ${H} rematado con una semicircunferencia de radio ${R_}, y una visera de ${vb} de alto que sobresale ${e_} a cada lado`; break; }
@@ -2163,16 +2229,19 @@ function shapeDraw(st, kind, yb, p) {
       const r = p.r, h = r * Math.sqrt(3) / 2, cy = yb + 2 * r - h, W3 = 3 * r;
       pb = st.add(st.path(F).M(-r / 2 + r * Math.cos(240 * D2R), cy + r * Math.sin(240 * D2R)).A(0, cy + h, 2 * r, 240, 300).A(r / 2, cy, r, -60, 60).A(0, cy - h, 2 * r, 60, 120).A(-r / 2, cy, r, 120, 240).Z());
       ref = [0, yb]; cyOverride = cy;
-      st.axis(F, -W3 / 2 - 3, cy, W3 / 2 + 3, cy); st.dh(F, [-W3 / 2, cy], [W3 / 2, cy], -8 - (2 * r - h)); st.rad(F, [r / 2, cy], r, 0, 'R'); st.rad(F, [0, cy - h], 2 * r, 100, 'R');
-      desc = `un óvalo de cuatro centros con eje mayor horizontal de ${W3}: el punto es el extremo de abajo del eje menor. Divide el eje mayor en tres partes de ${r}; con centro en los dos puntos interiores traza circunferencias de radio ${r}: se cortan arriba y abajo en los centros de los arcos grandes, de radio ${2 * r}`; break; }
+      st.axis(F, -W3 / 2 - 3, cy, W3 / 2 + 3, cy); st.dh(F, [-W3 / 2, cy], [W3 / 2, cy], -8 - (2 * r - h)); st.rad(F, [r / 2, cy], r, 0, 'R'); st.rad(F, [0, cy + h], 2 * r, -80, 'R');
+      st.dv(F, [0, yb], [0, cy + h], 8 + W3 / 2); st.div(F, 0, cy + h, -r / 2, cy); st.div(F, 0, cy + h, r / 2, cy); st.div(F, -r / 2, cy, r / 2, cy);
+      desc = `un óvalo de cuatro centros con eje mayor horizontal de ${W3}: el punto es el extremo de abajo del eje menor. Desde el punto sube ${2 * r} por el eje: es el centro C del arco de abajo, de radio ${2 * r}. Con vértice en C dibuja hacia abajo un triángulo equilátero de lado ${r} con el lado opuesto horizontal (cartabón: 30° a cada lado del eje): sus otros dos vértices son los centros de los arcos pequeños, de radio ${r}. Las dos circunferencias pequeñas se cortan también por debajo, en el eje: ese punto es el centro del arco de arriba, de radio ${2 * r}`; break; }
     case 'ojiva': { // rectángulo con arco apuntado equilátero
       const yt = yb + H;
       pb = st.add(st.path(F).M(-W / 2, yb).L(W / 2, yb).L(W / 2, yt).A(-W / 2, yt, W, 0, 60).A(W / 2, yt, W, 120, 180).Z()); ref = [-W / 2, yb];
+      st.div(F, -W / 2, yt, W / 2, yt);
       st.dh(F, [-W / 2, yb], [W / 2, yb], -8); st.dv(F, [-W / 2, yb], [-W / 2, yt], -8); st.rad(F, [-W / 2, yt], W, 30, 'R');
       desc = `un rectángulo de ${W} × ${H} rematado con un arco apuntado (ojiva): dos arcos de radio ${W} con centros en los extremos de la línea de arriba, que se cortan en el eje`; break; }
     case 'escalon': { // dos rectángulos escalonados
       const Wt = Math.min(p.Wt, W - 10), H1 = p.H1, H2 = p.H2, y1 = yb + H1;
       pb = st.poly(F, [[-W / 2, yb], [W / 2, yb], [W / 2, y1], [Wt / 2, y1], [Wt / 2, y1 + H2], [-Wt / 2, y1 + H2], [-Wt / 2, y1], [-W / 2, y1]]); ref = [-W / 2, yb];
+      st.div(F, -Wt / 2, y1, Wt / 2, y1);
       st.dh(F, [-W / 2, yb], [W / 2, yb], -8); st.dh(F, [-Wt / 2, y1 + H2], [Wt / 2, y1 + H2], 8); st.dv(F, [-W / 2, yb], [-W / 2, y1], -8); st.dv(F, [Wt / 2, y1], [Wt / 2, y1 + H2], 8);
       desc = `una cabeza escalonada: un rectángulo de ${W} × ${H1} y, encima y centrado, otro de ${Wt} × ${H2}`; break; }
     case 'trinv': { // triángulo invertido con la punta truncada
@@ -2253,29 +2322,30 @@ def({ id: 'loco', n: 'Locomoción', grp: 'Base', z: 3, def: 'piernas', common: [
         for (let i = 0; i < p.n; i++) {
           const wi = i % 2 ? p.w + 10 : p.w; let y0 = G + R + i * p.s, y1 = y0 + p.s;
           if (i === 0) y0 = G + R - CEL(R - Math.sqrt(Math.max(0, R * R - (p.w / 2) ** 2)));
-          if (i === p.n - 1) y1 += c.reach([a - wi / 2, a + wi / 2], c.top);
           st.rect(F, a - wi / 2, y0, a + wi / 2, y1);
+          st.dv(F, [a + wi / 2, G + R + i * p.s], [a + wi / 2, y1], 8); // la altura de cada segmento, en cadena
         }
+        { const yT = G + R + p.n * p.s, ex = c.reach([a - p.w / 2, a + p.w / 2], c.top); st.ext = ex; if (ex > 0) { st.rect(F, a - p.w / 2, yT, a + p.w / 2, yT + ex); st.dv(F, [a + p.w / 2, yT], [a + p.w / 2, yT + ex], 8); } }
         st.add(st.path(F).M(a + R, G).A(a, G, R, 0, 180).Z());
         st.pt(F, a, G); st.axis(F, a, G - 3, a, c.top + 3);
-        st.rad(F, [a, G], R, 60, 'R'); st.dh(F, [a - p.w / 2, G + R], [a + p.w / 2, G + R], -8);
-        st.dv(F, [a + p.w / 2 + 5, G + R + p.s], [a + p.w / 2 + 5, G + R + 2 * p.s], 8); st.dh(F, [a - p.w / 2 - 5, G + R + 2 * p.s], [a + p.w / 2 + 5, G + R + 2 * p.s], 8);
+        st.rad(F, [a, G], R, 60, 'R'); { const yT = G + R + p.n * p.s + (st.ext || 0); st.dh(F, [a - p.w / 2, yT], [a + p.w / 2, yT], 8); }
+        st.div(F, a - p.w / 2, G + R, a + p.w / 2, G + R); if (p.n > 1) st.dh(F, [a - p.w / 2 - 5, G + R + 2 * p.s], [a + p.w / 2 + 5, G + R + 2 * p.s], 8);
       }
-      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}. Dibuja los pies, semicírculos de radio ${R} con centro en esos puntos. Sobre cada pie levanta ${p.n} segmentos de ${p.s} de altura alternando anchos de ${p.w} y ${p.w + 10}, centrados en el eje de la pierna.`;
+      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}. Dibuja los pies, semicírculos de radio ${R} con centro en esos puntos. Sobre cada pie levanta ${p.n} segmentos de ${p.s} de altura alternando anchos de ${p.w} y ${p.w + 10}, centrados en el eje de la pierna; el primero arranca a ${R} de la línea de tierra.${st.ext > 0 ? ` Encima, un último tramo de ${p.w} × ${st.ext} llega hasta el torso.` : ''}`;
     } },
   { id: 'ruedas', n: 'Dos ruedas', ps: [DIAM('D', 'Diámetro rueda', 24, 70, 40), num('sep', 'Separación entre ejes', 30, 130, 64), num('cw', 'Ancho chasis', 40, 150, 90), num('ch', 'Alto chasis', 6, 30, 14), DIAM('hub', 'Diámetro buje', 7, 24, 12)],
     top: p => G + p.D / 2 + p.ch,
     draw(st, p, c) {
       const R = p.D / 2, F = FC, y = G + R; const inner = R - 5 >= p.hub / 2 + 5 ? R - 5 : 0;
       st.side = 0; st.rect(F, -p.cw / 2, y, p.cw / 2, y + p.ch); c.connector(st, p.cw / 4);
-      st.pt(F, -p.cw / 2, y);
       st.dh(F, [-p.cw / 2, y + p.ch], [p.cw / 2, y + p.ch], 8); st.dv(F, [p.cw / 2, y], [p.cw / 2, y + p.ch], 8);
+      st.dh(F, [-p.sep / 2, y], [p.sep / 2, y], -8 - R); // siempre de centro a centro
       for (const s of [-1, 1]) {
         st.side = s; const Fs = FS(s), a = p.sep / 2;
         st.circ(Fs, a, y, R); if (inner) st.circ(Fs, a, y, inner); st.circ(Fs, a, y, p.hub / 2);
         st.pt(Fs, a, y); st.rad(Fs, [a, y], R, 135, 'Ø'); if (inner) st.rad(Fs, [a, y], inner, 45, 'Ø'); st.rad(Fs, [a, y], p.hub / 2, -45, 'Ø');
       }
-      st.txt = P => `Encuentra el punto ${P[0]} y dibuja el chasis, un rectángulo de ${p.cw} × ${p.ch}. Encuentra los puntos ${P[1]} y ${P[2]}, centros de las ruedas, y traza en cada uno circunferencias concéntricas de radios ${R}${inner ? ', ' + inner : ''} y ${p.hub / 2}.`;
+      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, centros de las ruedas (separados ${p.sep}), y traza en cada uno circunferencias concéntricas de radios ${R}${inner ? ', ' + inner : ''} y ${p.hub / 2}. Dibuja el chasis: un rectángulo de ${p.cw} × ${p.ch} centrado en el eje del robot, con su lado de abajo sobre la línea de centros (lo que tapan las ruedas va con línea de trazos).`;
     } },
   { id: 'oruga', n: 'Oruga', ps: [num('T', 'Alto oruga', 20, 44, 28), num('n', 'Nº rodillos', 2, 5, 3, 1), num('esp', 'Distancia rodillos', 16, 40, 24), DIAM('ro', 'Diámetro rodillo', 8, 36, 16), num('pw', 'Ancho soporte', 20, 110, 50), num('ph', 'Alto soporte', 4, 30, 10)],
     top: p => G + p.T + p.ph,
@@ -2322,13 +2392,15 @@ def({ id: 'loco', n: 'Locomoción', grp: 'Base', z: 3, def: 'piernas', common: [
       const dz = CEL(R - Math.sqrt(Math.max(0, R * R - (w0 / 2) ** 2)));
       for (let i = 0; i < p.n; i++) {
         const wi = p.w + (p.n - 1 - i) * p.dw; let y0 = G + R + i * p.s, y1 = y0 + p.s;
-        if (i === 0) y0 -= dz; if (i === p.n - 1) y1 += c.reach([wi / 2], c.top);
+        if (i === 0) y0 -= dz;
         st.rect(F, -wi / 2, y0, wi / 2, y1);
+        st.dv(F, [wi / 2, G + R + i * p.s], [wi / 2, y1], 8); if (i > 0 && i < p.n - 1) st.dh(F, [-wi / 2, y1], [wi / 2, y1], 8);
       }
+      c.connector(st, p.w / 2);
       st.add(st.path(F).M(R, G).A(0, G, R, 0, 180).Z());
       st.pt(F, 0, G);
-      st.rad(F, [0, G], R, 135, 'R'); st.dh(F, [-w0 / 2, G + R], [w0 / 2, G + R], -8);
-      st.dh(F, [-p.w / 2, c.top], [p.w / 2, c.top], 8); st.dv(F, [w0 / 2, G + R], [w0 / 2, G + R + p.s], 8);
+      st.rad(F, [0, G], R, 135, 'R'); st.dh(F, [-w0 / 2, G + R + p.s], [w0 / 2, G + R + p.s], 8);
+      st.dh(F, [-p.w / 2, G + R + p.n * p.s], [p.w / 2, G + R + p.n * p.s], 8); st.div(F, -w0 / 2, G + R, w0 / 2, G + R);
       st.txt = P => `Encuentra el punto ${P[0]} y dibuja la base: semicírculo de radio ${R}. Sobre ella monta ${p.n} tubos telescópicos de ${p.s} de altura; el inferior mide ${w0} de ancho y cada tubo es ${p.dw} más estrecho que el anterior.`;
     } },
 ] });
@@ -2357,7 +2429,7 @@ def({ id: 'panel', n: 'Panel del pecho', grp: 'Tronco', z: 9, def: 'pantalla', c
     draw(st, p, c) { const F = FC, y = c.y, w = p.w, h = p.h, m = Math.min(p.m, h / 2 - 5);
       st.rect(F, -w / 2, y - h / 2, w / 2, y + h / 2); st.rect(F, -w / 2 + m, y - h / 2 + m, w / 2 - m, y + h / 2 - m);
       st.pt(F, -w / 2, y - h / 2);
-      st.dh(F, [-w / 2, y + h / 2], [w / 2, y + h / 2], 8); st.dv(F, [-w / 2, y - h / 2], [-w / 2, y + h / 2], -8); st.dh(F, [w / 2 - m, y - h / 2], [w / 2, y - h / 2], -8);
+      st.dh(F, [-w / 2, y + h / 2], [w / 2, y + h / 2], 8); st.dv(F, [-w / 2, y - h / 2], [-w / 2, y + h / 2], -8); st.dh(F, [w / 2 - m, y - h / 2], [w / 2, y - h / 2], -8); st.dh(F, [-w / 2, y - h / 2], [-w / 2 + m, y - h / 2], -8); st.dv(F, [w / 2, y - h / 2], [w / 2, y - h / 2 + m], 8); st.dv(F, [w / 2, y + h / 2 - m], [w / 2, y + h / 2], 8);
       st.txt = P => `Encuentra el punto ${P[0]}. Dibuja la pantalla del pecho: un rectángulo de ${w} × ${h} y otro interior a ${m} de distancia de sus cuatro lados.`; } },
   { id: 'altavoz', n: 'Altavoz', ps: [DIAM('d', 'Diámetro', 10, 60, 30)],
     draw(st, p, c) { const F = FC, y = c.y, R = p.d / 2; const rs = [R, R - 5, R - 10].filter(r => r >= 5);
@@ -2367,12 +2439,12 @@ def({ id: 'panel', n: 'Panel del pecho', grp: 'Tronco', z: 9, def: 'pantalla', c
     draw(st, p, c) { const F = FC, y = c.y, e = Math.max(p.e, p.b + 10), u0 = -(p.n - 1) * e / 2;
       for (let i = 0; i < p.n; i++) st.circ(F, u0 + i * e, y, p.b / 2);
       st.axis(F, u0 - p.b / 2 - 3, y, -u0 + p.b / 2 + 3, y);
-      st.pt(F, u0, y); st.rad(F, [u0, y], p.b / 2, 135, 'Ø'); if (p.n > 1) st.dh(F, [u0, y], [u0 + e, y], -8);
+      st.pt(F, u0, y); st.rad(F, [u0, y], p.b / 2, 135, 'Ø'); for (let i = 0; i + 1 < p.n; i++) st.dh(F, [u0 + i * e, y], [u0 + (i + 1) * e, y], -8 - p.b / 2);
       st.txt = P => `Encuentra el punto ${P[0]}, centro del primer botón, y traza la línea de centros. Dibuja ${p.n} botones de radio ${p.b / 2} con los centros separados ${e}.`; } },
   { id: 'rejilla', n: 'Rejilla', ps: [num('w', 'Anchura', 10, 80, 40), num('n', 'Nº ranuras', 2, 8, 4, 1), num('s', 'Separación', 3, 10, 6)],
     draw(st, p, c) { const F = FC, s = p.s + (p.s % 2), h = (p.n + 1) * s, y0 = c.y - FLR(h / 2), w = p.w;
       st.rect(F, -w / 2, y0, w / 2, y0 + h); for (let i = 1; i <= p.n; i++) st.line(F, -w / 2 + 5, y0 + i * s, w / 2 - 5, y0 + i * s);
-      st.pt(F, -w / 2, y0); st.dh(F, [-w / 2, y0 + h], [w / 2, y0 + h], 8); st.dv(F, [-w / 2, y0], [-w / 2, y0 + h], -8); st.dv(F, [w / 2, y0], [w / 2, y0 + s], 8); st.dh(F, [w / 2 - 5, y0 + s], [w / 2, y0 + s], -8);
+      st.pt(F, -w / 2, y0); st.dh(F, [-w / 2, y0 + h], [w / 2, y0 + h], 8); st.dv(F, [-w / 2, y0], [-w / 2, y0 + h], -8); for (let i = 0; i <= p.n; i++) st.dv(F, [w / 2, y0 + i * s], [w / 2, y0 + (i + 1) * s], 8); st.dh(F, [w / 2 - 5, y0 + s], [w / 2, y0 + s], -8); st.dh(F, [-w / 2, y0 + s], [-w / 2 + 5, y0 + s], -8);
       st.txt = P => `Encuentra el punto ${P[0]}. Dibuja un rectángulo de ${w} × ${h} y divídelo con ${p.n} ranuras horizontales separadas ${s}, que terminan a 5 de los lados.`; } },
   { id: 'rombo', n: 'Rombo', ps: [num('w', 'Diagonal horizontal', 10, 60, 24), num('h', 'Diagonal vertical', 10, 60, 30)],
     draw(st, p, c) { const F = FC, y = c.y; st.poly(F, [[0, y - p.h / 2], [p.w / 2, y], [0, y + p.h / 2], [-p.w / 2, y]]); st.pt(F, 0, y); st.axis(F, -p.w / 2 - 3, y, p.w / 2 + 3, y);
@@ -2382,11 +2454,12 @@ def({ id: 'panel', n: 'Panel del pecho', grp: 'Tronco', z: 9, def: 'pantalla', c
     draw(st, p, c) { const F = FC, R = p.d / 2, y = c.y - FLR(R / 2), nl = R - 5;
       st.sym = false; st.add(st.path(F).M(R, y).A(0, y, R, 0, 180).Z()); st.line(F, 0, y, nl * 0.5, y + nl * 0.866);
       st.pt(F, 0, y); st.rad(F, [0, y], R, 135, 'R'); st.ang(F, [0, y], Math.min(R * 0.5, 12), 0, 60, '60°'); st.axis(F, -R - 3, y, R + 3, y);
+      { const F6 = Fr(CX, y, 0.5, Math.sqrt(3) / 2, -Math.sqrt(3) / 2, 0.5); st.dh(F6, [0, 0], [nl, 0], 6); }
       st.txt = P => `Encuentra el punto ${P[0]}. Dibuja un semicírculo de radio ${R} (medidor) y su aguja: un segmento de ${nl} desde el centro que forma 60° con la base (usa el transportador).`; } },
   { id: 'placa', n: 'Placa con remaches', ps: [num('w', 'Anchura', 20, 80, 40), num('h', 'Altura', 16, 60, 26), { k: 'r', l: 'Radio esquinas', min: 0, max: 10, d: 5, st: 1, s5: 1, ext: 1 }],
     draw(st, p, c) { const F = FC, y = c.y, w = p.w, h = p.h, rq = Math.max(0, p.r == null ? 5 : p.r); st.rr(F, -w / 2, y - h / 2, w / 2, y + h / 2, rq);
       for (const a of [-1, 1]) for (const b of [-1, 1]) st.rect(F, a * (w / 2 - 5) - 2.5 * a - 2.5, y + b * (h / 2 - 5) - 2.5 * b - 2.5, a * (w / 2 - 5) - 2.5 * a + 2.5, y + b * (h / 2 - 5) - 2.5 * b + 2.5);
-      st.pt(F, -w / 2, y - h / 2); st.dh(F, [-w / 2, y + h / 2], [w / 2, y + h / 2], 8); st.dv(F, [-w / 2, y - h / 2], [-w / 2, y + h / 2], -8); if (rq > 0) st.rad(F, [-w / 2 + rq, y + h / 2 - rq], rq, 135, 'R');
+      st.axis(F, -w / 2 - 3, y, w / 2 + 3, y); st.pt(F, -w / 2, y - h / 2); st.dh(F, [-w / 2, y + h / 2], [w / 2, y + h / 2], 8); st.dv(F, [-w / 2, y - h / 2], [-w / 2, y + h / 2], -8); if (rq > 0) st.rad(F, [-w / 2 + rq, y + h / 2 - rq], rq, 135, 'R');
       st.dh(F, [w / 2 - 10, y - h / 2 + 5], [w / 2 - 5, y - h / 2 + 5], -8); st.dh(F, [w / 2 - 5, y - h / 2 + 5], [w / 2, y - h / 2 + 5], -8); st.dv(F, [w / 2 - 5, y - h / 2], [w / 2 - 5, y - h / 2 + 5], 8); st.dv(F, [w / 2 - 5, y - h / 2 + 5], [w / 2 - 5, y - h / 2 + 10], 8);
       st.txt = P => `Encuentra el punto ${P[0]}. Dibuja una placa de ${w} × ${h} ${rq > 0 ? `con esquinas de radio ${rq}` : 'rectangular'} y cuatro remaches cuadrados de 5 × 5 situados a 5 de los lados.`; } },
   { id: 'reactor', n: 'Núcleo de energía', ps: [DIAM('d', 'Diámetro', 24, 60, 36)],
@@ -2403,7 +2476,7 @@ def({ id: 'panel', n: 'Panel del pecho', grp: 'Tronco', z: 9, def: 'pantalla', c
     draw(st, p, c) { const F = FC, y = c.y, w = p.w, h = p.h, bot = y - h / 2, top = y + h / 2, tw = ROUND ? Q5(w / 2) : Math.max(6, Math.round(w / 4) * 2), bt = ROUND ? 5 : 4, m = ROUND ? 5 : 4, gp = ROUND ? 5 : 3; const BH = n => ROUND ? Math.floor((h - 2 * m - (n - 1) * gp) / n / 5) * 5 : Math.floor((h - 2 * m - (n - 1) * gp) / n); let n = p.n, bh = BH(n); while (bh < (ROUND ? 5 : 3) && n > 1) { n--; bh = BH(n); }
       st.rect(F, -w / 2, bot, w / 2, top); st.rect(F, -tw / 2, top, tw / 2, top + bt); for (let i = 0; i < n; i++) { const y0 = bot + m + i * (bh + gp); st.rect(F, -w / 2 + m, y0, w / 2 - m, y0 + bh); }
       st.pt(F, -w / 2, bot); st.dh(F, [-w / 2, bot], [w / 2, bot], -8); st.dv(F, [-w / 2, bot], [-w / 2, top], -8); st.dh(F, [-tw / 2, top + bt], [tw / 2, top + bt], 8); st.dv(F, [tw / 2, top], [tw / 2, top + bt], 8);
-      st.dv(F, [w / 2 - m, bot + m], [w / 2 - m, bot + m + bh], 12); st.dv(F, [w / 2, bot], [w / 2, bot + m], 12);
+      st.dv(F, [w / 2, bot], [w / 2, bot + m], 12); for (let i = 0; i < n; i++) { const y0 = bot + m + i * (bh + gp); st.dv(F, [w / 2 - m, y0], [w / 2 - m, y0 + bh], 12); if (i + 1 < n) st.dv(F, [w / 2 - m, y0 + bh], [w / 2 - m, y0 + bh + gp], 12); } st.dh(F, [-w / 2, bot + m], [-w / 2 + m, bot + m], -8);
       st.txt = P => `Encuentra el punto ${P[0]}. Dibuja la batería: un rectángulo de ${w} × ${h} con el borne arriba, centrado, de ${tw} × ${bt}. Dentro, a ${m} de los lados, dibuja ${n} niveles de ${bh} de alto separados ${gp}, empezando desde abajo.`; } },
   { id: 'estrella', n: 'Estrella', ps: [DIAM('d', 'Diámetro', 24, 60, 40)],
     draw(st, p, c) { const F = FC, y = c.y, R = p.d / 2, ri = R * 0.382, S = [];
@@ -2424,7 +2497,7 @@ def({ id: 'cuello', n: 'Cuello', grp: 'Tronco', z: 4, def: 'rect', common: [], o
     draw(st, p, c) { const F = FC;
       let yTop = 0, wTop = 0; for (let i = 0; i < p.n; i++) { const wi = i % 2 ? p.w : p.w + 10; let y0 = c.y0 + i * p.s, y1 = y0 + p.s; if (i === 0) y0 -= c.down(wi / 2); if (i === p.n - 1) { y1 += c.up(wi / 2); yTop = y1; wTop = wi; } st.rect(F, -wi / 2, y0, wi / 2, y1); }
       st.pt(F, 0, c.y0); st.dh(F, [-(p.w + 10) / 2, c.y0], [(p.w + 10) / 2, c.y0], -8); st.dh(F, [-p.w / 2, c.y0 + (p.n - 1) * p.s], [p.w / 2, c.y0 + (p.n - 1) * p.s], 8);
-      st.dv(F, [(p.w + 10) / 2, c.y0], [(p.w + 10) / 2, c.y0 + p.s], 8); if (p.n > 1) st.dv(F, [(p.w + 10) / 2, c.y0], [wTop / 2, yTop], 8);
+      for (let i = 0; i < p.n; i++) st.dv(F, [(p.w + 10) / 2, c.y0 + i * p.s], [(p.w + 10) / 2, i === p.n - 1 ? yTop : c.y0 + (i + 1) * p.s], 8); { const dn = c.down((p.w + 10) / 2); if (dn > 0) st.dv(F, [(p.w + 10) / 2, c.y0 - dn], [(p.w + 10) / 2, c.y0], 8); }
       st.txt = P => `A partir del punto ${P[0]}, en el eje, dibuja ${p.n} segmentos de ${p.s} de altura alternando anchos de ${p.w + 10} y ${p.w}.`; } },
   { id: 'trapecio', n: 'Trapecio', ps: [num('wb', 'Base inferior', 6, 50, 24), num('wt', 'Base superior', 6, 50, 14), num('h', 'Altura', 4, 30, 10)], h: p => p.h,
     draw(st, p, c) { const F = FC; st.poly(F, [[-p.wb / 2, c.y0], [p.wb / 2, c.y0], [p.wt / 2, c.y1], [-p.wt / 2, c.y1]]);
@@ -2489,12 +2562,12 @@ def({ id: 'ojos', n: 'Ojos', grp: 'Cabeza', z: 11, def: 'circulos', common: [num
       st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, centros de los ojos. Traza en cada uno una circunferencia de radio ${p.d / 2}${pd ? ` y la pupila, de radio ${pd / 2}` : ''}.`; } },
   { id: 'cuadrados', n: 'Cuadrados', ps: [num('l', 'Lado', 6, 30, 14), num('pl', 'Pupila', 4, 16, 6)],
     draw(st, p, c) { const pl = p.l - p.pl >= 4 ? p.pl : 0; eyePair(st, c, p, (F, a, y) => { st.rect(F, a - p.l / 2, y - p.l / 2, a + p.l / 2, y + p.l / 2); if (pl) st.rect(F, a - pl / 2, y - pl / 2, a + pl / 2, y + pl / 2, { tone: 'dark' }); st.pt(F, a, y);
-        st.dh(F, [a - p.l / 2, y + p.l / 2], [a + p.l / 2, y + p.l / 2], 8); if (pl) st.dh(F, [a - pl / 2, y - pl / 2], [a + pl / 2, y - pl / 2], -8); st.dv(F, [a + p.l / 2, y - p.l / 2], [a + p.l / 2, y + p.l / 2], 8); });
+        st.axis(F, a - p.l / 2 - 3, y, a + p.l / 2 + 3, y); st.axis(F, a, y - p.l / 2 - 3, a, y + p.l / 2 + 3); st.dh(F, [a - p.l / 2, y + p.l / 2], [a + p.l / 2, y + p.l / 2], 8); if (pl) { st.dh(F, [a - pl / 2, y - pl / 2], [a + pl / 2, y - pl / 2], -8); st.dv(F, [a - pl / 2, y - pl / 2], [a - pl / 2, y + pl / 2], -8); } st.dv(F, [a + p.l / 2, y - p.l / 2], [a + p.l / 2, y + p.l / 2], 8); });
       st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}. Dibuja en cada uno un cuadrado de ${p.l} de lado${pl ? ` y otro de ${pl} (pupila), los dos` : ''} centrado${pl ? 's' : ''} en el punto.`; } },
   { id: 'visor', n: 'Visor', ps: [num('w', 'Ancho visor', 20, 100, 56), num('h', 'Alto visor', 8, 30, 16), DIAM('d', 'Diámetro ojo', 7, 26, 10)],
     draw(st, p, c) { const F = FC, y = c.y, d = p.h - p.d >= 2 ? p.d : 0;
       st.side = 0; st.rr(F, -p.w / 2, y - p.h / 2, p.w / 2, y + p.h / 2, p.h / 2); st.pt(F, 0, y); st.axis(F, -p.w / 2 - 3, y, p.w / 2 + 3, y);
-      st.dh(F, [-p.w / 2, y + p.h / 2], [p.w / 2, y + p.h / 2], 8); st.rad(F, [p.w / 2 - p.h / 2, y], p.h / 2, -30, 'R');
+      st.dh(F, [-p.w / 2, y + p.h / 2], [p.w / 2, y + p.h / 2], 8); st.dv(F, [-p.w / 2, y - p.h / 2], [-p.w / 2, y + p.h / 2], -8); st.rad(F, [p.w / 2 - p.h / 2, y], p.h / 2, -30, 'R');
       if (d) eyePair(st, c, p, (Fs, a, yy) => { st.circ(Fs, a, yy, d / 2, { tone: 'dark' }); st.pt(Fs, a, yy); st.rad(Fs, [a, yy], d / 2, -45, 'Ø'); });
       st.txt = P => `Encuentra el punto ${P[0]} y traza por él la línea de centros del visor. Dibuja el visor: rectángulo de ${p.w} × ${p.h} con los extremos redondeados (semicircunferencias de radio ${p.h / 2})${d ? `. Dentro, en ${P[1]} y ${P[2]}, los ojos de radio ${d / 2}` : ''}.`; } },
   { id: 'ciclope', n: 'Cíclope', ps: [DIAM('d', 'Diámetro', 14, 50, 28), DIAM('d2', 'Iris', 7, 40, 16), DIAM('pd', 'Pupila', 7, 20, 7)],
@@ -2515,20 +2588,20 @@ def({ id: 'ojos', n: 'Ojos', grp: 'Cabeza', z: 11, def: 'circulos', common: [num
   { id: 'enfadados', n: 'Enfadados', ps: [num('w', 'Ancho', 8, 24, 14), num('h', 'Alto exterior', 6, 20, 10), num('k', 'Caída del ceño', 2, 10, 4)],
     draw(st, p, c) { const k = ROUND ? Math.max(0, Math.min(Q5(p.k), p.h - 5)) : Math.min(p.k, p.h - 4); eyePair(st, c, p, (F, a, y) => { const x0 = a - p.w / 2, x1 = a + p.w / 2, y0 = y - p.h / 2, y1 = y + p.h / 2;
         st.poly(F, [[x0, y0], [x1, y0], [x1, y1], [x0, y1 - k]]); st.pt(F, a, y);
-        st.dh(F, [x0, y0], [x1, y0], -8); st.dv(F, [x1, y0], [x1, y1], 8); st.dv(F, [x0, y0], [x0, y1 - k], -8); });
-      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, centros de los ojos. Dibuja en cada uno un trapecio rectángulo de base ${p.w}: el lado exterior mide ${p.h} y el interior ${p.h - k}, de modo que el ceño baja hacia el centro de la cara.`; } },
+        st.dh(F, [x0, y0], [x1, y0], -8); st.dv(F, [x1, y0], [x1, y1], 8); st.dv(F, [x0, y0], [x0, y1 - k], -8); st.axis(F, x0 - 3, y, x1 + 3, y); st.axis(F, a, y0 - 3, a, y1 + 3); });
+      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, centros de los ojos (a media anchura y a media altura del lado exterior). Dibuja en cada uno un trapecio rectángulo de base ${p.w}, la de abajo: el lado exterior mide ${p.h} y el interior ${p.h - k}, de modo que el ceño baja hacia el centro de la cara.`; } },
   { id: 'cejas', n: 'Ceño fruncido', ps: [DIAM('d', 'Diámetro', 10, 24, 14), num('k', 'Inclinación ceja', 2, 10, 6)],
-    draw(st, p, c) { const CJ = ROUND ? 5 : 3; eyePair(st, c, p, (F, a, y) => { const r = p.d / 2, xi = Math.max(a - r - 1, 0), xo = a + r + 1, yi = y + r + (ROUND ? 0 : 1), yo = yi + Q5(p.k);
+    draw(st, p, c) { const CJ = ROUND ? 5 : 3; eyePair(st, c, p, (F, a, y) => { const r = p.d / 2, e1 = ROUND ? 0 : 1, xi = Math.max(a - r - e1, 0), xo = a + r + e1, yi = y + r + (ROUND ? 0 : 1), yo = yi + Q5(p.k);
         st.circ(F, a, y, r); st.poly(F, [[xi, yi], [xo, yo], [xo, yo + CJ], [xi, yi + CJ]]); st.pt(F, a, y); st.rad(F, [a, y], r, -45, 'Ø');
-        st.dv(F, [xi, y], [xi, yi], -8); st.dv(F, [xo, y], [xo, yo], 8); st.dv(F, [xo, yo], [xo, yo + CJ], 8); });
-      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, centros de los ojos, y traza circunferencias de radio ${p.d / 2}. Encima, la ceja: un paralelogramo de ${CJ} de grosor que va de ${p.d / 2 + (ROUND ? 0 : 1)} por encima del centro, en el lado de la nariz, a ${p.d / 2 + (ROUND ? 0 : 1) + Q5(p.k)} en el lado exterior.`; } },
+        st.dv(F, [xi, y], [xi, yi], -8); st.dv(F, [xo, y], [xo, yo], 8); st.dv(F, [xo, yo], [xo, yo + CJ], 8); st.dh(F, [xi, yo + CJ], [xo, yo + CJ], 8); });
+      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, centros de los ojos, y traza circunferencias de radio ${p.d / 2}. Encima, la ceja: un paralelogramo de ${CJ} de grosor y tan ancho como el ojo (${p.d + (ROUND ? 0 : 2)}), que va de ${p.d / 2 + (ROUND ? 0 : 1)} por encima del centro, en el lado de la nariz, a ${p.d / 2 + (ROUND ? 0 : 1) + Q5(p.k)} en el lado exterior.`; } },
   { id: 'hexagonos', n: 'Hexagonales', ps: [DIAM('d', 'Diámetro circunscrito', 12, 30, 16)],
     draw(st, p, c) { const R = p.d / 2; eyePair(st, c, p, (F, a, y) => { const P = []; for (let k = 0; k < 6; k++) P.push([a + R * Math.cos(k * Math.PI / 3), y + R * Math.sin(k * Math.PI / 3)]); st.poly(F, P); st.pt(F, a, y);
         st.dh(F, [a - R, y], [a + R, y], -8); st.dh(F, [a - R / 2, y + R * Math.sin(Math.PI / 3)], [a + R / 2, y + R * Math.sin(Math.PI / 3)], 8); });
       st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}. En cada uno traza una circunferencia auxiliar de radio ${R} e inscribe en ella un hexágono regular: lleva el radio ${R} seis veces sobre la circunferencia, con dos vértices sobre la horizontal.`; } },
   { id: 'capsulas', n: 'Cápsulas', ps: [num('w', 'Anchura', 14, 30, 20), DIAM('h', 'Altura', 10, 16, 10)],
     draw(st, p, c) { const w = Math.max(p.w, p.h + (ROUND ? 5 : 2)), PU = ROUND ? 5 : 2.5; eyePair(st, c, p, (F, a, y) => { st.rr(F, a - w / 2, y - p.h / 2, a + w / 2, y + p.h / 2, p.h / 2); st.circ(F, a, y, PU, { tone: 'dark' }); st.pt(F, a, y);
-        st.dh(F, [a - w / 2, y - p.h / 2], [a + w / 2, y - p.h / 2], -8); st.rad(F, [a + w / 2 - p.h / 2, y], p.h / 2, 45, 'R'); st.rad(F, [a, y], PU, 135, 'Ø'); });
+        st.dh(F, [a - w / 2, y - p.h / 2], [a + w / 2, y - p.h / 2], -8); st.dv(F, [a - w / 2, y - p.h / 2], [a - w / 2, y + p.h / 2], -8); st.rad(F, [a + w / 2 - p.h / 2, y], p.h / 2, 45, 'R'); st.rad(F, [a, y], PU, 135, 'Ø'); });
       st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}. Dibuja en cada uno una cápsula horizontal de ${w} × ${p.h} (extremos en semicircunferencia de radio ${p.h / 2}) y en el centro una pupila de radio ${PU === 2.5 ? '2,5' : PU}.`; } },
   { id: 'pantallas', n: 'Pantallas', ps: [num('l', 'Lado', 10, 24, 14)],
     draw(st, p, c) { const q = (ROUND ? Q5(p.l / 2) : Math.max(4, Math.round(p.l / 4) * 2)) / 2, rq = ROUND ? 5 : 3; eyePair(st, c, p, (F, a, y) => { st.rr(F, a - p.l / 2, y - p.l / 2, a + p.l / 2, y + p.l / 2, rq); st.rect(F, a - q, y - q, a + q, y + q, { tone: 'dark' }); st.pt(F, a, y);
@@ -2546,7 +2619,7 @@ def({ id: 'boca', n: 'Boca', grp: 'Cabeza', z: 11, def: 'rejilla', common: [num(
   { id: 'rejilla', n: 'Rejilla', ps: [num('n', 'Nº huecos', 2, 8, 5, 1), num('s', 'Ancho hueco', 3, 10, 6), num('h', 'Altura', 4, 20, 10)],
     draw(st, p, c) { const F = FC, y = c.y, s = p.s + (p.s % 2) * (p.n % 2 ? 1 : 0), w = p.n * s, u0 = -w / 2;
       st.rect(F, u0, y - p.h / 2, -u0, y + p.h / 2); for (let i = 1; i < p.n; i++) st.line(F, u0 + i * s, y - p.h / 2, u0 + i * s, y + p.h / 2);
-      st.pt(F, u0, y - p.h / 2); st.dh(F, [u0, y - p.h / 2], [-u0, y - p.h / 2], -8); st.dh(F, [u0, y + p.h / 2], [u0 + s, y + p.h / 2], 8); st.dv(F, [-u0, y - p.h / 2], [-u0, y + p.h / 2], 8);
+      st.pt(F, u0, y - p.h / 2); st.dh(F, [u0, y - p.h / 2], [-u0, y - p.h / 2], -8); for (let i = 0; i < p.n; i++) st.dh(F, [u0 + i * s, y + p.h / 2], [u0 + (i + 1) * s, y + p.h / 2], 8); st.dv(F, [-u0, y - p.h / 2], [-u0, y + p.h / 2], 8);
       st.txt = P => `Encuentra el punto ${P[0]}. Dibuja un rectángulo de ${w} × ${p.h} dividido en ${p.n} partes iguales de ${s}.`; } },
   { id: 'sonrisa', n: 'Sonrisa', ps: [num('w', 'Anchura', 10, 60, 26)],
     draw(st, p, c) { const F = FC, R = p.w / 2, y = c.y + FLR(R / 2); st.add(st.path(F).M(R, y).A(0, y, R, 360, 180).Z()); st.pt(F, 0, y); st.rad(F, [0, y], R, -45, 'R'); st.axis(F, -R - 3, y, R + 3, y);
@@ -2555,7 +2628,7 @@ def({ id: 'boca', n: 'Boca', grp: 'Cabeza', z: 11, def: 'rejilla', common: [num(
     draw(st, p, c) { const F = FC, y = c.y, w = p.n * p.t, ua = -w / 2;
       const Q = [[ua, y - p.h / 2]]; for (let i = 0; i < p.n; i++) { Q.push([ua + i * p.t + p.t / 2, y + p.h / 2]); Q.push([ua + (i + 1) * p.t, y - p.h / 2]); }
       st.rect(F, ua, y - p.h / 2, -ua, y + p.h / 2); st.pline(F, Q); st.pt(F, ua, y - p.h / 2);
-      st.dh(F, [ua, y - p.h / 2], [-ua, y - p.h / 2], -8); st.dh(F, [ua, y + p.h / 2], [ua + p.t, y + p.h / 2], 8); st.dv(F, [-ua, y - p.h / 2], [-ua, y + p.h / 2], 8);
+      for (let i = 0; i < p.n; i++) st.dh(F, [ua + i * p.t, y - p.h / 2], [ua + (i + 1) * p.t, y - p.h / 2], -8); st.dh(F, [ua, y - p.h / 2], [-ua, y - p.h / 2], -14); st.dv(F, [-ua, y - p.h / 2], [-ua, y + p.h / 2], 8);
       st.txt = P => `Encuentra el punto ${P[0]}. Dibuja un rectángulo de ${w} × ${p.h} y, dentro, una línea en zigzag que forma ${p.n} dientes de ${p.t} de ancho.`; } },
   { id: 'circulo', n: 'Boca en O', ps: [DIAM('d', 'Diámetro', 7, 30, 10)],
     draw(st, p, c) { const F = FC, y = c.y; st.circ(F, 0, y, p.d / 2, { tone: 'dark' }); st.pt(F, 0, y); st.rad(F, [0, y], p.d / 2, -45, 'Ø');
@@ -2566,7 +2639,7 @@ def({ id: 'boca', n: 'Boca', grp: 'Cabeza', z: 11, def: 'rejilla', common: [num(
       st.txt = P => `Encuentra el punto ${P[0]}, centro de la boca. Dibuja un trapecio isósceles de bases ${p.wt} (arriba) y ${p.wb} (abajo) y altura ${p.h}.`; } },
   { id: 'rayas', n: 'Rayas', ps: [num('w', 'Longitud', 8, 60, 28), num('n', 'Nº rayas', 2, 5, 3, 1), num('s', 'Separación', 2, 8, 4)],
     draw(st, p, c) { const F = FC, y0 = c.y - FLR((p.n - 1) * p.s / 2); for (let i = 0; i < p.n; i++) st.line(F, -p.w / 2, y0 + i * p.s, p.w / 2, y0 + i * p.s);
-      st.pt(F, -p.w / 2, y0); st.dh(F, [-p.w / 2, y0], [p.w / 2, y0], -8); st.dv(F, [p.w / 2, y0], [p.w / 2, y0 + p.s], 8);
+      st.pt(F, -p.w / 2, y0); st.dh(F, [-p.w / 2, y0], [p.w / 2, y0], -8); for (let i = 0; i + 1 < p.n; i++) st.dv(F, [p.w / 2, y0 + i * p.s], [p.w / 2, y0 + (i + 1) * p.s], 8);
       st.txt = P => `Encuentra el punto ${P[0]}. Dibuja ${p.n} segmentos horizontales de ${p.w} separados ${p.s}.`; } },
 ] });
 
@@ -2589,15 +2662,15 @@ def({ id: 'orejas', n: 'Orejas', grp: 'Cabeza', z: 2, def: 'circulos', common: [
     draw(st, p, c) { earPair(st, c, (F, hx, y) => { st.add(st.path(F).M(hx, y - p.d / 2).A(hx, y, p.d / 2, -90, 90).Z()); st.pt(F, hx, y); st.rad(F, [hx, y], p.d / 2, 30, 'R'); });
       st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]} sobre los lados de la cabeza. Dibuja semicírculos de radio ${p.d / 2} hacia fuera.`; } },
   { id: 'tornillos', n: 'Tornillos', ps: [DIAM('d', 'Diámetro', 10, 24, 14)],
-    draw(st, p, c) { earPair(st, c, (F, hx, y) => { const u = hx + p.d / 2 - 5, r = p.d / 2; st.circ(F, u, y, r); st.line(F, u - r + 2, y, u + r - 2, y); st.line(F, u, y - r + 2, u, y + r - 2); st.pt(F, u, y); st.rad(F, [u, y], r, 45, 'Ø'); });
-      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, a ${p.d / 2 - 5} hacia dentro del lado de la cabeza. Dibuja tornillos: circunferencias de radio ${p.d / 2} con una ranura en cruz.`; } },
+    draw(st, p, c) { earPair(st, c, (F, hx, y) => { const u = hx + p.d / 2 - 5, r = p.d / 2, q = SLOT(r); st.circ(F, u, y, r); st.line(F, u - q, y, u + q, y); st.line(F, u, y - q, u, y + q); st.pt(F, u, y); st.rad(F, [u, y], r, 45, 'Ø'); st.dh(F, [u - q, y], [u + q, y], -8 - r); });
+      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, a ${p.d / 2 - 5} hacia dentro del lado de la cabeza. Dibuja tornillos: circunferencias de radio ${p.d / 2} con una ranura en cruz: dos segmentos de ${2 * SLOT(p.d / 2)}, uno horizontal y otro vertical, centrados en el punto.`; } },
   { id: 'antenitas', n: 'Antenas laterales', ps: [num('a', 'Altura varilla', 8, 30, 16), num('w', 'Saliente', 6, 14, 10)],
-    draw(st, p, c) { earPair(st, c, (F, hx, y) => { const xr = hx + p.w / 2; st.rect(F, hx, y - 5, hx + p.w, y + 5); st.line(F, xr, y + 5, xr, y + 5 + p.a); st.circ(F, xr, y + 10 + p.a, 5);
+    draw(st, p, c) { earPair(st, c, (F, hx, y) => { const xr = hx + p.w / 2; st.rect(F, hx, y - 5, hx + p.w, y + 5); st.line(F, xr, y + 5, xr, y + 5 + p.a); st.axis(F, xr, y - 8, xr, y + 5 + p.a + 13); st.circ(F, xr, y + 10 + p.a, 5);
         st.pt(F, hx + p.w, y - 5); st.dv(F, [hx + p.w, y - 5], [hx + p.w, y + 5], 8); st.dv(F, [xr, y + 5], [xr, y + 5 + p.a], 8); st.dh(F, [hx, y - 5], [hx + p.w, y - 5], -8); st.rad(F, [xr, y + 10 + p.a], 5, 45, 'Ø'); });
       st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}. Dibuja a cada lado un rectángulo de ${p.w} × 10 y, desde el centro de su lado superior, una varilla vertical de ${p.a} rematada con una bola de radio 5.`; } },
   { id: 'auriculares', n: 'Auriculares', ps: [num('w', 'Saliente', 6, 16, 8), num('h', 'Altura', 16, 40, 24)],
     draw(st, p, c) { earPair(st, c, (F, hx, y) => { const w = Math.max(p.w, 6); st.rr(F, hx, y - p.h / 2, hx + w, y + p.h / 2, w / 2); st.pt(F, hx, y);
-        st.dv(F, [hx + w, y - p.h / 2], [hx + w, y + p.h / 2], 8); st.rad(F, [hx + w / 2, y + p.h / 2 - w / 2], w / 2, 45, 'R'); });
+        st.dv(F, [hx + w, y - p.h / 2], [hx + w, y + p.h / 2], 8); st.dh(F, [hx, y - p.h / 2], [hx + w, y - p.h / 2], -8); st.axis(F, hx - 3, y, hx + w + 3, y); st.rad(F, [hx + w / 2, y + p.h / 2 - w / 2], w / 2, 45, 'R'); });
       st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]} en los lados de la cabeza. Dibuja los auriculares: cápsulas verticales de ${p.h} de alto y ${Math.max(p.w, 6)} de ancho, con los extremos en semicircunferencia.`; } },
 ] });
 
@@ -2618,11 +2691,11 @@ def({ id: 'antena', n: 'Antena', grp: 'Cabeza', z: 1, def: 'varilla', common: []
       st.txt = P => `Encuentra el punto ${P[0]}. Dibuja la base (${c.bw} × ${c.bh}) y tres varillas separadas ${p.sep}: la central de ${p.h + 10} y las laterales de ${p.h}, con bolas de radio ${p.b / 2}.`; } },
   { id: 'muelle', n: 'Muelle', ps: [num('n', 'Nº zigzags', 3, 8, 5, 1), num('st', 'Paso', 2, 8, 4), num('zw', 'Anchura', 2, 8, 4), DIAM('b', 'Diámetro bola', 7, 14, 8)],
     draw(st, p, c) { const F = FC, y = c.base(st, 10); const Q = [[0, y]]; for (let i = 1; i <= p.n; i++) Q.push([(i % 2 ? 1 : -1) * p.zw, y + i * p.st]); const yt = y + (p.n + 1) * p.st; Q.push([0, yt]); st.pline(F, Q); st.circ(F, 0, yt + p.b / 2, p.b / 2);
-      st.dv(F, [p.zw, y], [p.zw, y + p.st], 8); st.dv(F, [p.zw, y], [p.zw, yt], 8); st.dh(F, [-p.zw, y + 2 * p.st], [p.zw, y + p.st], -8); st.rad(F, [0, yt + p.b / 2], p.b / 2, 45, 'Ø');
+      for (let i = 0; i <= p.n; i++) st.dv(F, [p.zw, y + i * p.st], [p.zw, y + (i + 1) * p.st], 8); st.dv(F, [p.zw, y], [p.zw, yt], 14); st.dh(F, [-p.zw, y + 2 * p.st], [p.zw, y + p.st], -8); st.rad(F, [0, yt + p.b / 2], p.b / 2, 45, 'Ø');
       st.txt = P => `Encuentra el punto ${P[0]}. Dibuja la base (${c.bw} × ${c.bh}) y un muelle en zigzag de ${p.n} picos: cada pico sube ${p.st} y se separa ${p.zw} del eje, alternando los lados. Remátalo con una bola de radio ${p.b / 2}.`; } },
   { id: 'helice', n: 'Hélice', ps: [num('h', 'Altura eje', 4, 30, 12), num('bl', 'Media hélice', 8, 40, 24), num('bh', 'Grosor pala', 7, 12, 7)],
     draw(st, p, c) { const F = FC, y = c.base(st, 10); st.line(F, 0, y, 0, y + p.h); st.rr(F, -p.bl, y + p.h, p.bl, y + p.h + p.bh, p.bh / 2); st.circ(F, 0, y + p.h + p.bh / 2, 5);
-      st.dh(F, [-p.bl, y + p.h + p.bh], [p.bl, y + p.h + p.bh], 8); st.dv(F, [p.bl, y], [p.bl, y + p.h], 8); st.rad(F, [p.bl - p.bh / 2, y + p.h + p.bh / 2], p.bh / 2, -30, 'R'); st.rad(F, [0, y + p.h + p.bh / 2], 5, 45, 'Ø');
+      st.dh(F, [-p.bl, y + p.h + p.bh], [p.bl, y + p.h + p.bh], 8); st.dv(F, [p.bl, y], [p.bl, y + p.h], 8); st.dv(F, [p.bl, y + p.h], [p.bl, y + p.h + p.bh], 8); st.rad(F, [p.bl - p.bh / 2, y + p.h + p.bh / 2], p.bh / 2, -30, 'R'); st.rad(F, [0, y + p.h + p.bh / 2], 5, 45, 'Ø');
       st.txt = P => `Encuentra el punto ${P[0]}. Dibuja la base (${c.bw} × ${c.bh}), un eje de ${p.h} y la hélice: rectángulo de ${2 * p.bl} × ${p.bh} con los extremos redondeados (radio ${p.bh / 2}) y un buje de radio 5.`; } },
   { id: 'radar', n: 'Parabólica', ps: [num('h', 'Altura mástil', 4, 24, 10), DIAM('d', 'Diámetro plato', 16, 44, 28)],
     draw(st, p, c) { const F = FC, y = c.base(st, 10), R = p.d / 2, cy = y + p.h + R, VR = ROUND ? 5 : 6, BR = ROUND ? 5 : 4;
@@ -2631,9 +2704,9 @@ def({ id: 'antena', n: 'Antena', grp: 'Cabeza', z: 1, def: 'varilla', common: []
       st.dv(F, [0, y], [0, y + p.h], -8); st.dv(F, [0, cy], [0, cy + VR], 8); st.rad(F, [0, cy], R, -45, 'R'); st.rad(F, [0, cy + VR + BR], BR, 45, 'Ø');
       st.txt = P => `Encuentra los puntos ${P[0]}, en lo alto de la cabeza, y ${P[1]}, centro del plato. Dibuja la base (${c.bw} × ${c.bh}), un mástil de ${p.h} y el plato de la parabólica: un semicírculo de radio ${R} con el diámetro horizontal. Del centro sale una varilla de ${VR} con una bola de radio ${BR}.`; } },
   { id: 'bombilla', n: 'Baliza', ps: [DIAM('d', 'Diámetro', 10, 30, 14), num('sh', 'Alto soporte', 2, 12, 6), num('sw', 'Ancho soporte', 4, 20, 10)],
-    draw(st, p, c) { const F = FC, y = c.top, yb = c.low(p.sw / 2), cy = y + p.sh + p.d / 2 - 5; st.rect(F, -p.sw / 2, yb, p.sw / 2, y + p.sh); st.circ(F, 0, cy, p.d / 2); st.pt(F, 0, cy);
-      st.dh(F, [-p.sw / 2, y], [p.sw / 2, y], -8); st.dv(F, [p.sw / 2, y], [p.sw / 2, y + p.sh], 8); st.rad(F, [0, cy], p.d / 2, 45, 'Ø');
-      st.txt = P => `Encuentra el punto ${P[0]}, centro de la baliza, y traza una circunferencia de radio ${p.d / 2}. Debajo, el soporte: un rectángulo de ${p.sw} × ${p.sh} apoyado en la cabeza.`; } },
+    draw(st, p, c) { const F = FC, y = c.top, yb = c.low(p.sw / 2), cy = y + p.sh + p.d / 2 - 5, hS = y + p.sh - yb; st.rect(F, -p.sw / 2, yb, p.sw / 2, y + p.sh); st.circ(F, 0, cy, p.d / 2); st.pt(F, 0, cy);
+      st.dh(F, [-p.sw / 2, yb], [p.sw / 2, yb], -8); st.dv(F, [p.sw / 2, yb], [p.sw / 2, y + p.sh], 8); st.dv(F, [p.sw / 2, y + p.sh], [0, cy], 8); st.rad(F, [0, cy], p.d / 2, 45, 'Ø'); c.hS = hS; c.dC = p.d / 2 - 5;
+      st.txt = P => `Encuentra el punto ${P[0]}, centro de la baliza, y traza una circunferencia de radio ${p.d / 2}. Debajo, el soporte: un rectángulo de ${p.sw} × ${c.hS} centrado en el eje, cuyo lado de arriba queda ${c.dC} por debajo del centro (la circunferencia tapa esa parte: línea de trazos).`; } },
 ] });
 
 /* ---- BRAZOS ---- */
@@ -2649,12 +2722,16 @@ function armFrame(s, pose, hx, yS, w, ang) {
 }
 const poseOf = (pose, s) => pose === 'saludo' ? (s < 0 ? 'arriba' : 'abajo') : pose;
 const POSE_TXT = { abajo: 'hacia abajo', arriba: 'hacia arriba', abiertos: 'en horizontal hacia fuera', diagabajo: 'hacia abajo, inclinado {A}° respecto a la vertical (usa el transportador)', diagarriba: 'hacia arriba, inclinado {A}° respecto a la vertical (usa el transportador)' };
-function armLoop(st, p, c, drawArm) {
-  st.showAll = p.pose === 'saludo'; st.cotOnce = st.showAll; const res = {};
+function armLoop(st, p, c, drawArm, o = {}) {
+  const res = {};
+  // punto de referencia: la esquina izquierda del arranque (la misma en los dos brazos); en brazos de extremo redondo, el extremo del eje
+  c.ptTxt = o.axisPt ? (p.pose === 'abiertos' ? 'el extremo del eje de cada brazo que toca el torso' : p.pose === 'arriba' ? 'el extremo de abajo del eje de cada brazo' : 'el extremo de arriba del eje de cada brazo')
+    : (p.pose === 'arriba' ? 'la esquina inferior izquierda de cada brazo' : 'la esquina superior izquierda de cada brazo');
   for (const s of [-1, 1]) {
     st.side = s; const pose = poseOf(p.pose, s); const A = +p.ang; const F = armFrame(s, pose, c.hx, c.yS, p.w, A);
     const L = drawArm(F, s);
-    st.ptW(CX + s * c.hx, c.yS); st.axis(F, -3, 0, L + 3, 0);
+    if (o.axisPt) { st.pt(F, 0, 0); st.pts[st.pts.length - 1].x0 = CX + s * c.hx; } else st.ptW(CX + s * c.hx, c.yS);
+    st.axis(F, -3, 0, L + 3, 0);
     if (pose === 'diagabajo' || pose === 'diagarriba') { const F0 = Fr(0, 0, 1, 0, 0, 1), O = F.w(0, 0); st.ang(F0, O, Math.max(8, Math.min(L * 0.3, 12)), pose === 'diagabajo' ? -90 : 90, Math.atan2(F.dy, F.dx) / D2R, A + '°'); }
     res[s] = { F, L, pose };
   }
@@ -2664,34 +2741,34 @@ const armCot = (st, F, w, L) => { st.dh(F, [0, w / 2], [L, w / 2], 8); st.dv(F, 
 def({ id: 'brazos', n: 'Brazos', grp: 'Extremidades', z: 5, def: 'recto', common: [sel('pose', 'Posición', POSES, 'abajo'), sel('ang', 'Ángulo (inclinados)', ANGS, '45'), num('hs', 'Hombro: bajada desde arriba', 0, 40, 10), num('w', 'Grosor', 7, 24, 12)], opts: [
   { id: 'recto', n: 'Recto', ps: [num('L', 'Largo', 16, 90, 48)],
     draw(st, p, c) { armLoop(st, p, c, (F) => { st.rect(F, 0, -p.w / 2, p.L, p.w / 2); armCot(st, F, p.w, p.L); return p.L; });
-      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, en el arranque de cada brazo (el dibujo indica qué esquina), y traza el eje de cada brazo. Dibuja cada brazo ${c.poseTxt}: un rectángulo de ${p.w} × ${p.L} centrado en su eje.`; } },
+      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, ${c.ptTxt}, y traza el eje de cada brazo. Dibuja cada brazo ${c.poseTxt}: un rectángulo de ${p.w} × ${p.L} centrado en su eje.`; } },
   { id: 'redondeado', n: 'Tubo', ps: [num('L', 'Largo', 16, 90, 48)],
-    draw(st, p, c) { armLoop(st, p, c, (F) => { st.rr(F, 0, -p.w / 2, p.L, p.w / 2, p.w / 2); armCot(st, F, p.w, p.L); st.rad(F, [p.L - p.w / 2, 0], p.w / 2, 30, 'R'); return p.L; });
-      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, en el arranque de cada brazo (el dibujo indica qué esquina), y traza el eje de cada brazo. Dibuja cada brazo ${c.poseTxt}: un rectángulo de ${p.w} × ${p.L} con los dos extremos redondeados (semicircunferencias de radio ${p.w / 2}).`; } },
+    draw(st, p, c) { armLoop(st, p, c, (F) => { st.rr(F, 0, -p.w / 2, p.L, p.w / 2, p.w / 2); armCot(st, F, p.w, p.L); st.rad(F, [p.L - p.w / 2, 0], p.w / 2, 30, 'R'); return p.L; }, { axisPt: true });
+      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, ${c.ptTxt}, y traza el eje de cada brazo. Dibuja cada brazo ${c.poseTxt}: un rectángulo de ${p.w} × ${p.L} con los dos extremos redondeados (semicircunferencias de radio ${p.w / 2}).`; } },
   { id: 'acordeon', n: 'Acordeón', ps: [num('n', 'Nº segmentos', 3, 9, 5, 1), num('s', 'Largo segmento', 4, 12, 8)],
     draw(st, p, c) { armLoop(st, p, c, (F) => { const L = p.n * p.s; for (let i = 0; i < p.n; i++) { const wi = i % 2 ? p.w + 10 : p.w; st.rect(F, i * p.s, -wi / 2, (i + 1) * p.s, wi / 2); }
-        st.dh(F, [0, p.w / 2], [p.s, p.w / 2], 8); st.dh(F, [0, p.w / 2], [L, (p.n % 2 ? p.w : p.w + 10) / 2], 8); st.dv(F, [0, -p.w / 2], [0, p.w / 2], -8); st.dv(F, [p.s, -p.w / 2 - 5], [p.s, p.w / 2 + 5], -8); return L; });
-      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, en el arranque de cada brazo (el dibujo indica qué esquina), y traza el eje de cada brazo. Dibuja cada brazo ${c.poseTxt} con ${p.n} segmentos de ${p.s} alternando grosores de ${p.w} y ${p.w + 10}.`; } },
+        for (let i = 0; i < p.n; i++) st.dh(F, [i * p.s, (p.w + 10) / 2], [(i + 1) * p.s, (p.w + 10) / 2], 8); st.dh(F, [0, (p.w + 10) / 2], [L, (p.w + 10) / 2], 14); st.dv(F, [0, -p.w / 2], [0, p.w / 2], -8); st.dv(F, [p.s, -p.w / 2 - 5], [p.s, p.w / 2 + 5], -8); return L; });
+      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, ${c.ptTxt}, y traza el eje de cada brazo. Dibuja cada brazo ${c.poseTxt} con ${p.n} segmentos de ${p.s} alternando grosores de ${p.w} y ${p.w + 10}.`; } },
   { id: 'codo', n: 'Con codo', ps: [num('L', 'Largo', 20, 90, 52), DIAM('k', 'Diámetro codo', 10, 30, 16)],
     draw(st, p, c) { armLoop(st, p, c, (F) => { st.rect(F, 0, -p.w / 2, p.L / 2, p.w / 2); st.rect(F, p.L / 2, -p.w / 2, p.L, p.w / 2); st.circ(F, p.L / 2, 0, p.k / 2);
         st.dh(F, [0, p.w / 2], [p.L / 2, p.w / 2], 8); st.dh(F, [p.L / 2, p.w / 2], [p.L, p.w / 2], 8); st.dv(F, [p.L, -p.w / 2], [p.L, p.w / 2], 8); st.rad(F, [p.L / 2, 0], p.k / 2, -120, 'Ø'); return p.L; });
-      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, en el arranque de cada brazo (el dibujo indica qué esquina), y traza el eje de cada brazo. Dibuja cada brazo ${c.poseTxt}: dos rectángulos de ${p.w} × ${p.L / 2} unidos por un codo, una circunferencia de radio ${p.k / 2} con el centro en el eje.`; } },
+      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, ${c.ptTxt}, y traza el eje de cada brazo. Dibuja cada brazo ${c.poseTxt}: dos rectángulos de ${p.w} × ${p.L / 2} unidos por un codo, una circunferencia de radio ${p.k / 2} con el centro en el eje.`; } },
   { id: 'anillas', n: 'Con anillas', ps: [num('L', 'Largo', 20, 90, 50), num('n', 'Nº anillas', 1, 5, 3, 1), num('sp', 'Distancia anillas', 6, 20, 10)],
     draw(st, p, c) { let n = p.n; while (n > 0 && n * p.sp + 5 > p.L - 5) n--; armLoop(st, p, c, (F) => { st.rect(F, 0, -p.w / 2, p.L, p.w / 2); for (let i = 1; i <= n; i++) st.rect(F, i * p.sp, -p.w / 2 - 5, i * p.sp + 5, p.w / 2 + 5);
-        armCot(st, F, p.w, p.L); if (n) { st.dh(F, [0, -p.w / 2], [p.sp, -p.w / 2 - 5], -8); st.dh(F, [p.sp, -p.w / 2 - 5], [p.sp + 5, -p.w / 2 - 5], -8); st.dv(F, [p.sp + 5, -p.w / 2 - 5], [p.sp + 5, p.w / 2 + 5], 8); } return p.L; });
-      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, en el arranque de cada brazo (el dibujo indica qué esquina), y traza el eje de cada brazo. Dibuja cada brazo ${c.poseTxt}: rectángulo de ${p.w} × ${p.L} con ${n} anillas de 5 × ${p.w + 10}, la primera a ${p.sp} del hombro y las demás cada ${p.sp}.`; } },
+        armCot(st, F, p.w, p.L); if (n) { for (let i = 1; i <= n; i++) st.dh(F, [(i - 1) * p.sp, -p.w / 2 - 5], [i * p.sp, -p.w / 2 - 5], -8); st.dh(F, [n * p.sp, -p.w / 2 - 5], [n * p.sp + 5, -p.w / 2 - 5], -8); st.dv(F, [p.sp + 5, -p.w / 2 - 5], [p.sp + 5, p.w / 2 + 5], 8); } return p.L; });
+      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, ${c.ptTxt}, y traza el eje de cada brazo. Dibuja cada brazo ${c.poseTxt}: rectángulo de ${p.w} × ${p.L} con ${n} anillas de 5 × ${p.w + 10}, la primera empieza a ${p.sp} del arranque del brazo y cada una de las demás empieza ${p.sp} después de donde empieza la anterior.`; } },
   { id: 'conico', n: 'Cónico', ps: [num('L', 'Largo', 20, 90, 48), num('k', 'Estrechamiento', 2, 10, 4)],
-    draw(st, p, c) { const w2 = ROUND ? Q5(p.w - p.k) : Math.max(6, p.w - p.k); armLoop(st, p, c, (F) => { st.poly(F, [[0, -p.w / 2], [p.L, -w2 / 2], [p.L, w2 / 2], [0, p.w / 2]]);
+    draw(st, p, c) { const w2 = ROUND ? Q5(p.w - p.k) : Math.max(6, p.w - p.k); c.wEnd = w2; armLoop(st, p, c, (F) => { st.poly(F, [[0, -p.w / 2], [p.L, -w2 / 2], [p.L, w2 / 2], [0, p.w / 2]]);
         st.dh(F, [0, p.w / 2], [p.L, w2 / 2], 8); st.dv(F, [0, -p.w / 2], [0, p.w / 2], -8); st.dv(F, [p.L, -w2 / 2], [p.L, w2 / 2], 8); return p.L; });
-      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, en el arranque de cada brazo (el dibujo indica qué esquina), y traza el eje de cada brazo. Dibuja cada brazo ${c.poseTxt}: un trapecio isósceles de ${p.L} de largo que pasa de ${p.w} en el hombro a ${w2} en la muñeca.`; } },
+      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, ${c.ptTxt}, y traza el eje de cada brazo. Dibuja cada brazo ${c.poseTxt}: un trapecio isósceles de ${p.L} de largo que pasa de ${p.w} en el hombro a ${w2} en la muñeca.`; } },
   { id: 'telescopico', n: 'Telescópico', ps: [num('L', 'Largo', 24, 90, 52), num('a', 'Largo tramo grueso', 10, 50, 26)],
-    draw(st, p, c) { const a = Math.min(p.a, p.L - 8), w2 = ROUND ? Q5(p.w - 5) : Math.max(6, p.w - 4); armLoop(st, p, c, (F) => { st.rect(F, 0, -p.w / 2, a, p.w / 2); st.rect(F, a, -w2 / 2, p.L, w2 / 2);
+    draw(st, p, c) { const a = Math.min(p.a, p.L - (ROUND ? 10 : 8)), w2 = ROUND ? Q5(p.w - 5) : Math.max(6, p.w - 4); c.wEnd = w2; armLoop(st, p, c, (F) => { st.rect(F, 0, -p.w / 2, a, p.w / 2); st.rect(F, a, -w2 / 2, p.L, w2 / 2);
         st.dh(F, [0, p.w / 2], [a, p.w / 2], 8); st.dh(F, [0, -p.w / 2], [p.L, -w2 / 2], -8); st.dv(F, [0, -p.w / 2], [0, p.w / 2], -8); st.dv(F, [p.L, -w2 / 2], [p.L, w2 / 2], 8); return p.L; });
-      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, en el arranque de cada brazo (el dibujo indica qué esquina), y traza el eje de cada brazo. Dibuja cada brazo ${c.poseTxt} en dos tramos: uno de ${p.w} × ${a} junto al hombro y otro más fino, de ${w2} de grosor, hasta completar ${p.L}.`; } },
+      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, ${c.ptTxt}, y traza el eje de cada brazo. Dibuja cada brazo ${c.poseTxt} en dos tramos: uno de ${p.w} × ${a} junto al hombro y otro más fino, de ${w2} de grosor, hasta completar ${p.L}.`; } },
   { id: 'bolas', n: 'Cadena de bolas', ps: [num('n', 'Nº bolas', 3, 7, 4, 1)],
     draw(st, p, c) { const w = Math.max(10, p.w), R = w / 2, L = p.n * w; armLoop(st, p, c, (F) => { for (let i = 0; i < p.n; i++) st.circ(F, R + i * w, 0, R);
-        st.rad(F, [R, 0], R, 135, 'Ø'); st.dh(F, [0, 0], [L, 0], 8); return L; });
-      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, en el arranque de cada brazo (el dibujo indica qué esquina), y traza el eje de cada brazo. Dibuja cada brazo ${c.poseTxt} con ${p.n} circunferencias de radio ${R} tangentes entre sí, con los centros sobre el eje (en total ${L} de largo).`; } },
+        st.rad(F, [R, 0], R, 135, 'Ø'); st.dh(F, [0, R], [L, R], 8); if (p.n > 1) st.dh(F, [R, -R], [R + w, -R], -8); return L; }, { axisPt: true });
+      st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}, ${c.ptTxt}, y traza el eje de cada brazo. Dibuja cada brazo ${c.poseTxt} con ${p.n} circunferencias de radio ${R} tangentes entre sí, con los centros sobre el eje separados ${w} (en total ${L} de largo); la primera pasa por el punto.`; } },
 ] });
 
 /* ---- MANOS ---- */
@@ -2720,8 +2797,8 @@ def({ id: 'manos', n: 'Manos', grp: 'Extremidades', z: 6, def: 'pinzaC', common:
         st.dv(F, [L, -p.bw / 2], [L, p.bw / 2], -8); st.dh(F, [L, p.bw / 2], [L + 5, p.bw / 2], 8); st.dh(F, [L + 5, p.bw / 2], [L + 5 + p.pl, p.bw / 2], 8); st.dv(F, [L + 5 + p.pl, -p.bw / 2], [L + 5 + p.pl, -p.bw / 2 + 5], 8); });
       st.txt = P => `En el extremo de cada brazo (puntos ${P[0]} y ${P[1]}) dibuja una base de 5 × ${p.bw} y dos pinzas paralelas de 5 de grosor y ${p.pl} de largo.`; } },
   { id: 'ventosa', n: 'Ventosa', ps: [num('d', 'Boca ventosa', 10, 36, 22), num('vh', 'Altura', 4, 16, 8)],
-    draw(st, p, c) { handLoop(st, c, (F, L) => { const w = c.w; st.poly(F, [[L, -w / 2], [L + p.vh, -p.d / 2], [L + p.vh, p.d / 2], [L, w / 2]]); st.dv(F, [L + p.vh, -p.d / 2], [L + p.vh, p.d / 2], 8); st.dh(F, [L, w / 2], [L + p.vh, p.d / 2], 8); });
-      st.txt = P => `En el extremo de cada brazo (puntos ${P[0]} y ${P[1]}) dibuja la ventosa: trapecio que pasa del grosor del brazo a ${p.d} en una altura de ${p.vh}.`; } },
+    draw(st, p, c) { const w = c.wEnd || c.w; handLoop(st, c, (F, L) => { st.poly(F, [[L, -w / 2], [L + p.vh, -p.d / 2], [L + p.vh, p.d / 2], [L, w / 2]]); st.dv(F, [L + p.vh, -p.d / 2], [L + p.vh, p.d / 2], 8); st.dv(F, [L, -w / 2], [L, w / 2], -8); st.dh(F, [L, w / 2], [L + p.vh, p.d / 2], 8); });
+      st.txt = P => `En el extremo de cada brazo (puntos ${P[0]} y ${P[1]}) dibuja la ventosa: trapecio isósceles centrado en el eje del brazo, de bases ${c.wEnd || c.w} (junto al brazo) y ${p.d}, y altura ${p.vh}.`; } },
   { id: 'martillo', n: 'Martillo', ps: [num('hl', 'Largo cabeza', 10, 40, 24), num('hw', 'Grosor cabeza', 6, 20, 10)],
     draw(st, p, c) { handLoop(st, c, (F, L) => { st.rect(F, L, -p.hl / 2, L + p.hw, p.hl / 2); st.dv(F, [L + p.hw, -p.hl / 2], [L + p.hw, p.hl / 2], 8); st.dh(F, [L, p.hl / 2], [L + p.hw, p.hl / 2], 8); });
       st.txt = P => `En el extremo de cada brazo (puntos ${P[0]} y ${P[1]}) dibuja un martillo: rectángulo de ${p.hw} × ${p.hl} perpendicular al brazo y centrado en su eje.`; } },
@@ -2735,13 +2812,13 @@ def({ id: 'hombros', n: 'Hombros', grp: 'Extremidades', z: 8, def: 'circulo', co
       st.txt = P => `Con centro en los hombros (puntos ${P[0]} y ${P[1]}) traza las articulaciones: circunferencias de radio ${p.d / 2}.`; } },
   { id: 'semicirculo', n: 'Hombrera curva', ps: [DIAM('d', 'Diámetro', 10, 40, 22)],
     draw(st, p, c) { for (const s of [-1, 1]) { st.side = s; const F = c.arms[s].F; st.add(st.path(F).M(0, p.d / 2).A(0, 0, p.d / 2, 90, 270).Z()); st.pt(F, 0, 0); st.rad(F, [0, 0], p.d / 2, 180, 'R'); }
-      st.txt = P => `Con centro en ${P[0]} y ${P[1]}, en el arranque del eje de cada brazo (junto al torso), dibuja hombreras: semicírculos de radio ${p.d / 2} con el diámetro perpendicular al brazo.`; } },
+      st.txt = P => `Con centro en ${P[0]} y ${P[1]}, dibuja hombreras: semicírculos de radio ${p.d / 2} con el diámetro perpendicular al brazo.`; } },
   { id: 'rect', n: 'Hombrera recta', ps: [num('w', 'Anchura', 8, 40, 20), num('h', 'Altura', 4, 20, 8)],
-    draw(st, p, c) { for (const s of [-1, 1]) { st.side = s; const F = c.arms[s].F; st.rect(F, -p.h / 2, -p.w / 2, p.h / 2, p.w / 2); st.pt(F, 0, 0); st.dv(F, [-p.h / 2, -p.w / 2], [-p.h / 2, p.w / 2], -8); st.dh(F, [-p.h / 2, p.w / 2], [p.h / 2, p.w / 2], 8); }
-      st.txt = P => `Con centro en ${P[0]} y ${P[1]}, en el arranque del eje de cada brazo (junto al torso), dibuja hombreras: rectángulos de ${p.w} × ${p.h} centrados en el punto.`; } },
+    draw(st, p, c) { for (const s of [-1, 1]) { st.side = s; const F = c.arms[s].F; st.rect(F, -p.h / 2, -p.w / 2, p.h / 2, p.w / 2); st.pt(F, 0, 0); st.axis(F, -p.h / 2 - 3, 0, p.h / 2 + 3, 0); st.axis(F, 0, -p.w / 2 - 3, 0, p.w / 2 + 3); st.dv(F, [-p.h / 2, -p.w / 2], [-p.h / 2, p.w / 2], -8); st.dh(F, [-p.h / 2, p.w / 2], [p.h / 2, p.w / 2], 8); }
+      st.txt = P => `Con centro en ${P[0]} y ${P[1]}, dibuja hombreras: rectángulos de ${p.w} × ${p.h} centrados en el punto.`; } },
   { id: 'tornillo', n: 'Tornillo', ps: [DIAM('d', 'Diámetro', 10, 24, 14)],
-    draw(st, p, c) { for (const s of [-1, 1]) { st.side = s; const F = FS(s), r = p.d / 2; st.circ(F, c.hx, c.yS, r); st.line(F, c.hx - r + 2, c.yS, c.hx + r - 2, c.yS); st.line(F, c.hx, c.yS - r + 2, c.hx, c.yS + r - 2); st.pt(F, c.hx, c.yS); st.rad(F, [c.hx, c.yS], r, 45, 'Ø'); }
-      st.txt = P => `Con centro en los hombros (puntos ${P[0]} y ${P[1]}) dibuja tornillos: circunferencias de radio ${p.d / 2} con una ranura en cruz.`; } },
+    draw(st, p, c) { for (const s of [-1, 1]) { st.side = s; const F = FS(s), r = p.d / 2, q = SLOT(r); st.circ(F, c.hx, c.yS, r); st.line(F, c.hx - q, c.yS, c.hx + q, c.yS); st.line(F, c.hx, c.yS - q, c.hx, c.yS + q); st.pt(F, c.hx, c.yS); st.rad(F, [c.hx, c.yS], r, 45, 'Ø'); st.dh(F, [c.hx - q, c.yS], [c.hx + q, c.yS], -8 - r); }
+      st.txt = P => `Con centro en los hombros (puntos ${P[0]} y ${P[1]}) dibuja tornillos: circunferencias de radio ${p.d / 2} con una ranura en cruz: dos segmentos de ${2 * SLOT(p.d / 2)}, uno horizontal y otro vertical, centrados en el punto.`; } },
   { id: 'tuerca', n: 'Tuerca', ps: [DIAM('d', 'Diámetro circunscrito', 14, 32, 18)],
     draw(st, p, c) { const R = p.d / 2, ri = ROUND ? Q5(R - 5) : Math.max(3.5, R - 4); for (const s of [-1, 1]) { st.side = s; const F = FS(s), P = []; for (let k = 0; k < 6; k++) P.push([c.hx + R * Math.cos(k * Math.PI / 3), c.yS + R * Math.sin(k * Math.PI / 3)]);
         st.poly(F, P); st.cc(F, c.hx, c.yS, R); st.circ(F, c.hx, c.yS, ri); st.pt(F, c.hx, c.yS); st.dh(F, [c.hx - R, c.yS], [c.hx + R, c.yS], -8); st.rad(F, [c.hx, c.yS], ri, 45, 'Ø'); }
@@ -2750,9 +2827,9 @@ def({ id: 'hombros', n: 'Hombros', grp: 'Extremidades', z: 8, def: 'circulo', co
     draw(st, p, c) { const R = p.d / 2, ri = R - 5; for (const s of [-1, 1]) { st.side = s; const F = FS(s); st.circ(F, c.hx, c.yS, R); if (ri >= 5) st.circ(F, c.hx, c.yS, ri); st.pt(F, c.hx, c.yS); st.rad(F, [c.hx, c.yS], R, 45, 'Ø'); if (ri >= 5) st.rad(F, [c.hx, c.yS], ri, -45, 'Ø'); }
       st.txt = P => `Con centro en los hombros (puntos ${P[0]} y ${P[1]}) dibuja rodamientos: circunferencias de radio ${R}${R - 5 >= 5 ? ' y ' + (R - 5) : ''}.`; } },
   { id: 'trapecio', n: 'Hombrera trapecial', ps: [num('w', 'Anchura', 12, 40, 24), num('h', 'Altura', 4, 20, 10)],
-    draw(st, p, c) { const wt = ROUND ? Q5(p.w - 10) : Math.max(6, p.w - 8); for (const s of [-1, 1]) { st.side = s; const F = c.arms[s].F; st.poly(F, [[-p.h / 2, -p.w / 2], [p.h / 2, -wt / 2], [p.h / 2, wt / 2], [-p.h / 2, p.w / 2]]); st.pt(F, 0, 0);
+    draw(st, p, c) { const wt = ROUND ? Q5(p.w - 10) : Math.max(6, p.w - 8); for (const s of [-1, 1]) { st.side = s; const F = c.arms[s].F; st.poly(F, [[-p.h / 2, -p.w / 2], [p.h / 2, -wt / 2], [p.h / 2, wt / 2], [-p.h / 2, p.w / 2]]); st.pt(F, 0, 0); st.axis(F, -p.h / 2 - 3, 0, p.h / 2 + 3, 0); st.axis(F, 0, -p.w / 2 - 3, 0, p.w / 2 + 3);
         st.dv(F, [-p.h / 2, -p.w / 2], [-p.h / 2, p.w / 2], -8); st.dv(F, [p.h / 2, -wt / 2], [p.h / 2, wt / 2], 8); st.dh(F, [-p.h / 2, p.w / 2], [p.h / 2, wt / 2], 8); }
-      st.txt = P => `Con centro en ${P[0]} y ${P[1]}, en el arranque del eje de cada brazo (junto al torso), dibuja hombreras: trapecios isósceles de bases ${p.w} y ${wt} y altura ${p.h}.`; } },
+      st.txt = P => `Con centro en ${P[0]} y ${P[1]}, dibuja hombreras: trapecios isósceles de bases ${p.w} y ${wt} y altura ${p.h}, con el punto en el centro (a media altura, sobre el eje).`; } },
   { id: 'octogono', n: 'Octógono', ps: [DIAM('d', 'Diámetro circunscrito', 12, 36, 20)],
     draw(st, p, c) { const R = p.d / 2; for (const s of [-1, 1]) { st.side = s; const F = FS(s), P = []; for (let k = 0; k < 8; k++) { const a = k * Math.PI / 4; P.push([c.hx + R * Math.cos(a), c.yS + R * Math.sin(a)]); } st.poly(F, P); st.cc(F, c.hx, c.yS, R); st.pt(F, c.hx, c.yS); st.axis(F, c.hx - R - 3, c.yS, c.hx + R + 3, c.yS); st.dh(F, [c.hx - R, c.yS], [c.hx + R, c.yS], -8 - R); }
       st.txt = P => `Con centro en los hombros (puntos ${P[0]} y ${P[1]}) dibuja octógonos regulares inscritos en circunferencias de radio ${R}: los ejes y sus bisectrices a 45° marcan los ocho vértices.`; } },
@@ -2797,7 +2874,7 @@ def({ id: 'alas', n: 'Alas', grp: 'Extremidades', z: 0, def: 'ninguna', common: 
   { id: 'biplano', n: 'Biplano', ps: [num('span', 'Envergadura', 16, 70, 40), num('ch', 'Cuerda (anchura)', 6, 20, 10), num('g', 'Separación', 4, 20, 8)],
     draw(st, p, c) { wingLoop(st, c, (F, hx, y) => { const y1 = y - p.ch, y2 = y1 - p.g, y3 = y2 - p.ch, MW = ROUND ? 5 : 4, xs = hx + p.span - 2 * MW;
         st.rect(F, hx, y1, hx + p.span, y); st.rect(F, hx, y3, hx + p.span, y2); st.rect(F, xs, y2, xs + MW, y1); st.tab(F, hx - 8, y3, hx + 0.5, y);
-        st.dh(F, [hx, y], [hx + p.span, y], 8); st.dv(F, [hx + p.span, y1], [hx + p.span, y], 8); st.dv(F, [hx + p.span, y2], [hx + p.span, y1], 8); st.dh(F, [xs, y3], [hx + p.span, y3], -8); });
+        st.dh(F, [hx, y], [hx + p.span, y], 8); st.dv(F, [hx + p.span, y1], [hx + p.span, y], 8); st.dv(F, [hx + p.span, y2], [hx + p.span, y1], 8); st.dv(F, [hx + p.span, y3], [hx + p.span, y2], 8); st.dh(F, [xs, y3], [xs + MW, y3], -8); st.dh(F, [xs + MW, y3], [hx + p.span, y3], -8); });
       st.txt = P => `Encuentra los puntos ${P[0]} y ${P[1]}. Dibuja cada ala de biplano: dos rectángulos de ${p.span} × ${p.ch} separados ${p.g}, unidos por un montante de ${ROUND ? 5 : 4} de ancho a ${ROUND ? 5 : 4} de la punta.`; } },
 ] });
 
@@ -2828,6 +2905,8 @@ def({ id: 'rodillas', n: 'Rodillas', grp: 'Base', z: 3.5, def: 'auto', common: [
       st.txt = P => `Con centro en ${P[0]} y ${P[1]} dibuja las rodillas como tuercas: hexágonos regulares inscritos en circunferencias de radio ${R}, con un vértice arriba (lleva el radio ${R} seis veces desde el eje vertical), y dentro un agujero de radio ${ri}.`; } },
 ] });
 const PART = Object.fromEntries(PARTS.map(p => [p.id, p]));
+const POSE_OFF = ['diagabajo', 'diagarriba', 'saludo'];
+{ const c = PART.brazos.common; c.find(p => p.k === 'pose').hide = POSE_OFF; c.find(p => p.k === 'ang').hidden = true; }
 const STEP_ORDER = ['loco', 'rodillas', 'cuerpo', 'alas', 'panel', 'brazos', 'manos', 'hombros', 'cuello', 'cabeza', 'orejas', 'ojos', 'boca', 'antena'];
 const TITLES = { alas: 'Alas', rodillas: 'Rodillas', loco: 'Locomoción', cuerpo: 'Torso', panel: 'Panel del pecho', brazos: 'Brazos', manos: 'Manos', hombros: 'Hombros', cuello: 'Cuello', cabeza: 'Cabeza', orejas: 'Orejas', ojos: 'Ojos', boca: 'Boca', antena: 'Antena' };
 
@@ -2844,6 +2923,7 @@ function optOf(id, o) { return PART[id].opts.find(x => x.id === o) || PART[id].o
 function valsOf(S, id) {
   const P = PART[id], st = S.parts[id], o = optOf(id, st.o);
   const v = Object.assign({}, defaults(P.common), st.v._c || {}, defaults(o.ps), st.v[o.id] || {});
+  if (id === 'brazos' && POSE_OFF.includes(v.pose)) v.pose = 'abajo';
   for (const p of P.common.concat(o.ps)) if (p.type !== 'sel') { let x = +v[p.k]; if (!isFinite(x)) x = p.d; x = Math.max(p.min, Math.min(p.max, x)); v[p.k] = snapParam(p, x); }
   if (id === 'ojos') { const wEye = v.d || v.w || v.l || 0; if (wEye && ['circulos', 'semicirculos', 'cuadrados', 'rombos', 'rectangulos', 'hexagonos', 'capsulas', 'pantallas', 'enfadados', 'cejas'].includes(o.id)) { // los dos ojos nunca se solapan: hueco mínimo de 10 entre ellos
       const pS = P.common.find(q => q.k === 'sep'); const need = wEye + 10; if (v.sep < need) v.sep = Math.min(pS.max, snapParam(pS, Math.ceil(need / (stepOf(pS) || 1)) * (stepOf(pS) || 1))); } }
@@ -2898,7 +2978,8 @@ function build(S, m) {
   // cuello + cabeza
   const np = V('cuello'), no = O('cuello'); const nh = no.h(np); const neckTop = body.top0 + nh;
   const hst = mk('cabeza'); const hp = V('cabeza'); const head = O('cabeza').draw(hst, hp, { yb: neckTop });
-  hst.txt = P => `Encuentra el punto ${P[0]}. Dibuja la cabeza: ${head.desc}.`;
+  const hdesc = head.desc.replace('un torso de dos trapecios encajados: la cadera mide', 'dos trapecios encajados: el de abajo mide').replace('en la cintura', 'arriba').replace('el pecho pasa', 'el de arriba pasa').replace('en los hombros', 'en las esquinas de arriba');
+  hst.txt = P => `Encuentra el punto ${P[0]}. Dibuja la cabeza: ${hdesc}.`;
   const nst = mk('cuello');
   no.draw(nst, np, { y0: body.top0, y1: neckTop,
     down: u => { const t = [body.g.topAt(u), body.g.topAt(-u)].filter(v => v != null); return t.length ? Math.max(0, CEL(body.top0 - Math.min(...t) - 1e-6)) : 0; },
@@ -2913,27 +2994,43 @@ function build(S, m) {
   // antena
   const ant = mk('antena'); const top = ROUND ? Math.round(head.top0 / 5) * 5 : head.top0;
   const low = hw2 => { const t = [head.g.topAt(hw2), head.g.topAt(-hw2), head.g.topAt(0)].filter(v => v != null); return Math.min(top, FLR(Math.min(...t) - 1)); };
-  O('antena').draw(ant, V('antena'), { top, low, base(st, bw) { const yb = low(bw / 2); st.rect(FC, -bw / 2, yb, bw / 2, top + 5); st.pt(FC, 0, top); st.dh(FC, [-bw / 2, top + 5], [bw / 2, top + 5], 8); st.dv(FC, [bw / 2, yb], [bw / 2, top + 5], 8); this.bh = top + 5 - yb; this.bw = bw; return top + 5; } });
+  O('antena').draw(ant, V('antena'), { top, low, base(st, bw) { const yb = low(bw / 2); st.rect(FC, -bw / 2, yb, bw / 2, top + 5); st.pt(FC, 0, top); st.dh(FC, [-bw / 2, top + 5], [bw / 2, top + 5], 8); st.axis(FC, -bw / 2 - 3, top, bw / 2 + 3, top);
+      if (top - yb > 0) st.dv(FC, [bw / 2, yb], [bw / 2, top], 8); st.dv(FC, [bw / 2, top], [bw / 2, top + 5], 8); this.bh = top + 5 - yb; this.bw = bw;
+      const dn = top - yb; st.notes = [P => [dn > 0 ? 'El punto {0} está en el eje, dentro de la base: la base sube 5 por encima de él y baja {1} por debajo.' : 'El punto {0} es el centro del lado de abajo de la base, que sube 5 por encima de él.', P[0].split(' ')[0], dn]]; return top + 5; } });
 
-  // piezas dobles: el punto de referencia es la MISMA esquina en las dos piezas (no su reflejo), y siempre la izquierda.
-  // Solo cuando la pieza es simétrica respecto a su propio eje vertical (rectángulos, cápsulas, pies…): entonces la otra es una copia trasladada.
-  // Si no lo es (semicírculos, triángulos, alas, brazos inclinados), la otra pieza es su reflejo y el punto reflejado ya es el mismo punto.
+  // PIEZAS DOBLES
+  //  · iguales (la derecha es una copia trasladada de la izquierda: piernas, barras, orejas rectangulares…): un solo dibujo acotado;
+  //    el punto de referencia es la MISMA esquina en las dos, la izquierda, y se rotula «A ≡ B».
+  //  · reflejadas (alas, hombreras, manos en horizontal…): son piezas distintas → st.split: cada una lleva su dibujo acotado y su punto.
   for (const st of Object.values(steps)) { if (!st || !st.pts) continue;
     const near = (a, b, t = 0.05) => Math.abs(a - b) < t;
+    const dropRight = () => { for (const k of ['cotas', 'axes', 'aux', 'divs']) if (st[k]) st[k] = st[k].filter(c => !(c.side > 0)); };
+    const closedOf = sd => st.prims.filter(pr => pr.closed && !pr.tab && Math.sign(pr.side) === sd);
+    const PL = closedOf(-1), PR = closedOf(1);
+    if (!PL.length || !PR.length) { dropRight(); continue; }
     const segD = (q, A, B) => { const dx = B[0] - A[0], dy = B[1] - A[1], L2 = dx * dx + dy * dy; const t = L2 ? Math.max(0, Math.min(1, ((q[0] - A[0]) * dx + (q[1] - A[1]) * dy) / L2)) : 0; return Math.hypot(q[0] - A[0] - t * dx, q[1] - A[1] - t * dy); };
-    const grp = sd => { const P = st.prims.filter(pr => pr.closed && !pr.tab && Math.sign(pr.side) === sd); if (!P.length) return null; const all = P.flatMap(pr => pr.pts); const xs = all.map(q => q[0]); const x0 = Math.min(...xs), x1 = Math.max(...xs), m = x0 + x1;
+    const grp = (sd) => { const P = st.prims.filter(pr => !pr.tab && Math.sign(pr.side) === sd); const all = P.flatMap(pr => pr.pts); const xs = all.map(q => q[0]); const x0 = Math.min(...xs), x1 = Math.max(...xs), m = x0 + x1;
       const segs = P.flatMap(pr => pr.pts.map((q, i) => [q, pr.pts[(i + 1) % pr.pts.length]]));
-      const sym = all.every(q => { const r = [m - q[0], q[1]]; return segs.some(([A, B]) => segD(r, A, B) < 0.25); }); return { P, x0, x1, sym }; };
+      const probe = all.concat(segs.map(([A, B]) => [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2]));
+      const sym = probe.every(q => { const r = [m - q[0], q[1]]; return segs.some(([A, B]) => segD(r, A, B) < 0.25); }); return { P: P.filter(pr => pr.closed), x0, x1, sym }; };
     const box = (G, p) => { let best = null; for (const pr of G.P) { const xs = pr.pts.map(q => q[0]), ys = pr.pts.map(q => q[1]); const b = { x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys) };
         if (p.x < b.x0 - 0.05 || p.x > b.x1 + 0.05 || p.y < b.y0 - 0.05 || p.y > b.y1 + 0.05) continue; b.ar = (b.x1 - b.x0) * (b.y1 - b.y0); if (!best || b.ar < best.ar) best = b; } return best; };
-    const GL = grp(-1), GR = grp(1); if (!GL || !GR || !GL.sym || !GR.sym) continue;
-    for (const L of st.pts.filter(p => p.side < 0)) {
-      const R2 = st.pts.find(o => o.side > 0 && !o.twin && near(o.y, L.y) && near(2 * CX - o.x, L.x)); if (!R2) continue;
-      const bL = box(GL, L); if (!bL) continue;
-      if (!(near(L.x, bL.x0) || near(L.x, bL.x1)) || !(near(L.y, bL.y0) || near(L.y, bL.y1))) continue;   // solo puntos en una esquina de la pieza (no centros, ni puntos de contacto a media altura)
-      let xL = L.x; if (near(xL, bL.x1) && !near(bL.x0, bL.x1)) xL = bL.x0;                     // a la esquina izquierda de su pieza
-      const xR = xL + (GR.x0 - GL.x0);                                                           // la misma esquina en la otra pieza (traslación)
-      L.x0 = L.x; R2.x0 = R2.x; L.x = xL; R2.x = xR; L.twin = R2; R2.twin = L; } }
+    const isV = (G, x, y) => G.P.some(pr => (pr.verts || []).some(q => near(q[0], x) && near(q[1], y)));
+    const GL = grp(-1), GR = grp(1), dxG = GR.x0 - GL.x0;
+    const hasCentral = st.prims.some(pr => pr.side === 0 && !pr.tab);
+    const Ls = st.pts.filter(p => p.side < 0), Rs = st.pts.filter(p => p.side > 0);
+    let same = GL.sym && GR.sym && Ls.length === Rs.length;
+    const plan = [];
+    if (same) for (const L of Ls) {
+      const R2 = Rs.find(o => near(o.y, L.y) && near(2 * CX - o.x, L.x)); if (!R2) { same = false; break; }
+      const bL = box(GL, L); let xL = L.x;
+      const corner = bL && (near(L.x, bL.x0) || near(L.x, bL.x1)) && (near(L.y, bL.y0) || near(L.y, bL.y1));
+      if (corner) { if (isV(GL, GL.x0, L.y)) xL = GL.x0; else if (near(L.x, bL.x1) && !near(bL.x0, bL.x1)) xL = bL.x0; }
+      const xR = xL + dxG;
+      if (!corner && !near(R2.x, xR)) { same = false; break; }   // punto que no es esquina ni centro (p. ej. a media altura del lado interior): no es el mismo punto en las dos
+      plan.push([L, R2, xL, xR]); }
+    if (same || hasCentral) { for (const [L, R2, xL, xR] of (same ? plan : [])) { L.x0 = L.x; R2.x0 = R2.x; L.x = xL; R2.x = xR; L.twin = R2; R2.twin = L; } dropRight(); }
+    else st.split = true; }
 
   // todo junto
   const order =STEP_ORDER.map(id => steps[id]).filter(s => s && s.prims.length);
@@ -2941,6 +3038,7 @@ function build(S, m) {
   const seen = {}; for (const st of order) { st.P = st.pts.map(pt => { const key = Math.round(pt.x) + ',' + Math.round(pt.y); let L = seen[key]; if (L) pt.dup = true; else { L = k < LET.length ? LET[k] : LET[k - LET.length] + "'"; k++; seen[key] = L; } pt.L = L; pt.X = Math.round(pt.x); pt.Y = Math.round(pt.y); if (Math.abs(pt.X - pt.x) > 1e-6 || Math.abs(pt.Y - pt.y) > 1e-6) { pt.frac = true; return L; } return `${L} (${pt.X},${pt.Y})`; }); st.text = (st.title ? st.title.toUpperCase() + '. ' : '') + st.txt(st.P);
     { const full = new Set(); for (const pr of st.prims) for (const a of (pr.arcs || [])) if (a.full) full.add(Math.round(a.r * 10) / 10);
       if (full.size) st.text = st.text.replace(/\bradios?\b[^.;:]*/g, seg => seg.replace(/(\d+(?:[.,]\d+)?)(?!\s*\()(?![\d.,])/g, n => { const v = parseFloat(n.replace(',', '.')); return full.has(v) ? `${n} (Ø${fmtNum(2 * v)})` : n; })); }
+    for (const nt of (st.notes || [])) { const [k, ...a] = nt(st.P); st.text += ' ' + k.replace(/\{(\d+)\}/g, (m, i) => a[+i]); (st.noteList = st.noteList || []).push([k, a]); }
     if (st.conn && !/conect|unión/i.test(st.text)) st.text += ` Remátalo por arriba con un rectángulo de unión de ${st.conn} (centrado en el eje) que enlaza con el torso.`; }
   const prims = [];
   const Z = Object.fromEntries(PARTS.map(p => [p.id, p.z]));
@@ -3191,20 +3289,21 @@ function pointMark(x, y, L, coords, col = '#111', lay, sc = 1, opt = {}) {
   const score = (rc, pad) => { if (!lay) return 0; const ht = lay.texts.filter(q => Layout.hit(rc, q, pad)).length, hs = lay.segs.filter(([a, b]) => Layout.segRect(a, b, rc, pad)).length; const ins = lay.inside ? lay.inside([(rc.x0 + rc.x1) / 2, (rc.y0 + rc.y1) / 2]) : false; return ht * 3 + hs + (ins ? 1.5 : 0); };
   // 1) ¿cabe la etiqueta completa (letra + coordenadas) pegada al punto?
   let best = null, bs = Infinity, full = false;
-  if (coords) for (const c of near) { const s = score(rectOf(c, wF), 0.7); if (s === 0) { best = c; bs = 0; full = true; break; } }
+  const near2 = near.concat([[3.2 * sc, 1.3 * sc, 'start'], [-3.2 * sc, 1.3 * sc, 'end'], [-wF / 2, -3.4 * sc, 'start'], [-wF / 2, 6 * sc, 'start'], [4.5 * sc, -3.5 * sc, 'start'], [-4.5 * sc, -3.5 * sc, 'end'], [4.5 * sc, 6.2 * sc, 'start'], [-4.5 * sc, 6.2 * sc, 'end']]);
+  if (coords) for (const c of near2) { const s = score(rectOf(c, wF), 0.7); if (s === 0) { best = c; bs = 0; full = true; break; } }
   // 2) si no, la letra sola junto al punto, en el cuadrante menos conflictivo
-  if (!best) for (const c of near) { const s = score(rectOf(c, wL), 0.6); if (s < bs) { bs = s; best = c; } if (s === 0) break; }
-  const [dx, dy, anchor] = best; const w = full ? wF : wL; const r = rectOf(best, w); if (lay) lay.text(r);
   const pr = 0.9 * sc, ex = 1.9 * sc; // punto tipo AutoCAD: circulito con cruz que sobresale
   let o = `<circle cx="${r3(x)}" cy="${r3(y)}" r="${r3(pr)}" fill="none" stroke="${col}" stroke-width="${r3(0.3 * sc)}"/>` + ln(x - ex, y, x + ex, y, 0.25 * sc, col) + ln(x, y - ex, x, y + ex, 0.25 * sc, col);
   const halo = opt.halo === 'none' ? '' : ` stroke="${opt.halo || '#fff'}" stroke-width="${r3(FS_PT * 0.3)}" stroke-linejoin="round" paint-order="stroke"`; // contorno de seguridad: la línea que pasa por debajo no se confunde con la letra
-  o += `<text x="${r3(x + dx)}" y="${r3(y + dy)}" font-size="${FS_PT}" text-anchor="${anchor}" fill="${col}"${halo}><tspan font-weight="700">${esc(L)}</tspan>${full ? `<tspan font-size="${FS_XY}"> ${twinB(coords)}</tspan>` : ''}</text>`;
-  // 3) coordenadas que no caben: se repiten fuera, con la letra, sin flecha
-  if (coords && !full && !opt.noFar) {
-    const far = []; for (const d of [6, 9, 13, 18, 24, 30]) for (const [sx, sy] of [[1, -1], [-1, -1], [1, 1], [-1, 1], [1, 0], [-1, 0], [0, -1], [0, 1]]) far.push([sx * d + (sx === 0 ? -wF / 2 : 0), sy * d + (sy < 0 ? 1 : sy > 0 ? 2.6 : 1), sx >= 0 ? 'start' : 'end']);
+  if (coords && !full && !opt.noFar) { // no cabe junto al punto: se lleva fuera con una línea de llamada
+    const far = []; for (const d of [6, 9, 13, 18, 24, 30, 38]) for (const [sx, sy] of [[1, -1], [-1, -1], [1, 1], [-1, 1], [1, 0], [-1, 0], [0, -1], [0, 1]]) far.push([sx * d + (sx === 0 ? -wF / 2 : 0), sy * d + (sy < 0 ? 1 : sy > 0 ? 2.6 : 1), sx >= 0 ? 'start' : 'end']);
     let fb = null, fs = Infinity; for (const c of far) { const s = score(rectOf(c, wF), 0.8); if (s < fs) { fs = s; fb = c; } if (s === 0) break; }
-    if (fb) { const rr = rectOf(fb, wF); if (lay) lay.text(rr); o += `<text x="${r3(x + fb[0])}" y="${r3(y + fb[1])}" font-size="${FS_PT}" text-anchor="${fb[2]}" fill="${col}"${halo}><tspan font-weight="700">${esc(L)}</tspan><tspan font-size="${FS_XY}"> ${twinB(coords)}</tspan></text>`; }
-  }
+    if (fb) { const rr = rectOf(fb, wF); if (lay) lay.text(rr); const tx = Math.max(rr.x0, Math.min(rr.x1, x)), ty = Math.max(rr.y0, Math.min(rr.y1, y)), L2 = Math.hypot(tx - x, ty - y) || 1;
+      o += ln(x + (tx - x) / L2 * pr, y + (ty - y) / L2 * pr, tx - (tx - x) / L2 * 0.6, ty - (ty - y) / L2 * 0.6, 0.18 * sc, col);
+      o += `<text x="${r3(x + fb[0])}" y="${r3(y + fb[1])}" font-size="${FS_PT}" text-anchor="${fb[2]}" fill="${col}"${halo}><tspan font-weight="700">${esc(L)}</tspan><tspan font-size="${FS_XY}"> ${twinB(coords)}</tspan></text>`; return o; } }
+  if (!best) for (const c of near) { const s = score(rectOf(c, wL), 0.6); if (s < bs) { bs = s; best = c; } if (s === 0) break; }
+  const [dx, dy, anchor] = best; const w = full ? wF : wL; const r = rectOf(best, w); if (lay) lay.text(r);
+  o += `<text x="${r3(x + dx)}" y="${r3(y + dy)}" font-size="${FS_PT}" text-anchor="${anchor}" fill="${col}"${halo}><tspan font-weight="700">${esc(L)}</tspan>${full ? `<tspan font-size="${FS_XY}"> ${twinB(coords)}</tspan>` : ''}</text>`;
   return o;
 }
 /* ejes de las circunferencias completas */
@@ -3222,7 +3321,7 @@ function arcMarks(prims, toP, s, axOut) {
   for (const p of prims) for (const a of (p.arcs || [])) { if (a.full) continue;
     const C = toP(a.c), r = a.r * s, k = r3(C[0]) + ',' + r3(C[1]) + ',' + r3(r);
     if (!seen.has(k)) { seen.add(k);
-      if (a.sweep >= 170 && a.sweep <= 190) { const bx = Math.cos(a.amw), by = -Math.sin(a.amw), e = r + 4; o += axisLn(C[0] - bx * e, C[1] - by * e, C[0] + bx * e, C[1] + by * e) + axisLn(C[0] + by * e, C[1] - bx * e, C[0] - by * e, C[1] + bx * e); if (axOut) axOut.push([[C[0] - bx * e, C[1] - by * e], [C[0] + bx * e, C[1] + by * e]], [[C[0] + by * e, C[1] - bx * e], [C[0] - by * e, C[1] + bx * e]]); }
+      if (a.sweep >= 170 && a.sweep <= 190) { const bx = Math.cos(a.amw), by = -Math.sin(a.amw), e = r + 4; o += axisLn(C[0] - bx * 3, C[1] - by * 3, C[0] + bx * e, C[1] + by * e) + axisLn(C[0] + by * e, C[1] - bx * e, C[0] - by * e, C[1] + bx * e); if (axOut) axOut.push([[C[0] - bx * 3, C[1] - by * 3], [C[0] + bx * e, C[1] + by * e]], [[C[0] + by * e, C[1] - bx * e], [C[0] - by * e, C[1] + bx * e]]); }
       o += centerCross(C[0], C[1]); }
     for (const [pt, tg] of [[a.p0, a.t0], [a.p1, a.t1]]) if (tg) { const P = toP(pt); const rx = (P[0] - C[0]) / (r || 1), ry = (P[1] - C[1]) / (r || 1); o += ln(P[0] - rx * 1.9, P[1] - ry * 1.9, P[0] + rx * 1.9, P[1] + ry * 1.9, LW.thin); } }
   return o;
@@ -3246,24 +3345,36 @@ function inArc(a, ang) { if (a.full) return true; const n = x => { while (x <= -
 
 /* ========== motor de acotación de un paso (coordenadas de papel, origen arriba-izquierda) ========== */
 function detailSVG(step, cx, opt = {}) { // opt (fichas 3D): s = escala impuesta · noPts = sin letras ni coordenadas · sw = grosor de la pieza
+  if (step.split && !opt._sub) { // piezas dobles reflejadas (alas, hombreras…): un dibujo acotado para cada una, con su punto
+    const sub = sd => { const o = Object.create(step); o.split = false; o.showAll = true; for (const k of ['prims', 'cotas', 'pts', 'axes', 'aux', 'divs']) o[k] = (step[k] || []).filter(q => q.side === sd); return o; };
+    const L = sub(-1), Rr = sub(1); const gap = 12; let sA = opt.s || detailSVG(L, cx, Object.assign({}, opt, { _sub: true })).s, d1, d2;
+    for (let k = 0; k < 8; k++) { d1 = detailSVG(L, cx, Object.assign({}, opt, { _sub: true, s: sA })); d2 = detailSVG(Rr, cx, Object.assign({}, opt, { _sub: true, s: sA })); if (opt.s || d1.w + gap + d2.w <= 172) break; const nx = SCALES.find(q => q[0] < sA - 1e-6); if (!nx) break; sA = nx[0]; } // las dos piezas, una al lado de la otra, tienen que caber en el ancho de la página
+    const h = Math.max(d1.h, d2.h); step._twins = 0;
+    return { svg: `<g transform="translate(${r3(-d1.x0)},${r3(h - d1.h - d1.y0)})">${d1.svg}</g><g transform="translate(${r3(d1.w + gap - d2.x0)},${r3(h - d2.h - d2.y0)})">${d2.svg}</g>`, x0: 0, y0: 0, w: d1.w + gap + d2.w, h, s: d1.s, wb: d1.wb }; }
   const mixed = step.prims.some(p => p.side === 0 && !p.tab) && step.prims.some(p => p.side > 0); // pieza central con piezas dobles dentro (visor y ojos…): se dibujan las dos
   const vis = p => p.side <= 0 || step.showAll || mixed;
   const prims = step.prims.filter(p => vis(p) && !p.tab), pts = step.pts.filter(vis);
   const wb = bboxOf(prims.flatMap(p => p.pts));
   const bw = wb.x1 - wb.x0, bh = wb.y1 - wb.y0;
-  const s = opt.s || ((bw <= 44 && bh <= 34) ? 2 : (bw <= 150 && bh <= 175 ? 1 : 0.5));
+  // escala natural siempre que quepa; si la pieza es pequeña, al doble; si no cabe, la reducción mínima normalizada que llena el hueco
+  const s = opt.s || ((bw <= 44 && bh <= 34) ? 2 : (SCALES.find(q => q[0] <= 1 && bw * q[0] <= (step.split ? 72 : 150) && bh * q[0] <= 175) || [1 / 3])[0]);
   const toP = p => [s * (p[0] - wb.x0), s * (wb.y1 - p[1])];
   const lay = new Layout(); const B = [[0, 0], [bw * s, bh * s]];
-  let g = `<g transform="matrix(${s},0,0,${-s},${r3(-s * wb.x0)},${r3(s * wb.y1)})">${pathsSVG(prims, { sw: (opt.sw || LW.piece) / s })}</g>`;
+  const M0 = `matrix(${s},0,0,${-s},${r3(-s * wb.x0)},${r3(s * wb.y1)})`;
+  let g = `<g transform="${M0}">${pathsSVG(prims, { sw: (opt.sw || LW.piece) / s, swOf: p => p.div ? 0.4 : 1 })}</g>`;
+  if (!opt.noHidden) { // aristas ocultas: lo que queda tapado por otra forma de la misma pieza se ve con línea fina de trazos
+    const hid = prims.slice(0, -1).filter((p, i) => p.closed && prims.slice(i + 1).some(q => q.closed)).map(p => `<path d="${p.d}" fill="none" stroke="#111" stroke-width="${r3(0.3 / s)}" stroke-dasharray="${r3(2 / s)} ${r3(1.2 / s)}"/>`).join('');
+    if (hid) g += `<g transform="${M0}">${hid}</g>`; }
+  for (const d of (step.divs || [])) { if (!vis(d)) continue; const A = toP(d.a), Bp = toP(d.b); g += ln(A[0], A[1], Bp[0], Bp[1], 0.3, '#111'); lay.seg(A, Bp); } // límites entre las formas de una misma pieza, con línea fina
   for (const p of prims) { const P = p.pts.map(toP); lay.segs2(P, p.closed); if (p.closed) lay.poly(P); }
   for (const a of (step.aux || [])) { g += `<circle cx="${r3(toP(a.c)[0])}" cy="${r3(toP(a.c)[1])}" r="${r3(a.r * s)}" fill="none" stroke="#111" stroke-width="${LW.thin}"/>`; const C = []; for (let k = 0; k < 48; k++) { const t = k / 48 * 2 * Math.PI; C.push(toP([a.c[0] + a.r * Math.cos(t), a.c[1] + a.r * Math.sin(t)])); } lay.segs2(C, true); } // circunferencias auxiliares de construcción
   const PBx = [0, bw * s], PBy = [0, bh * s];
   // ejes y marcas
   const axSegs = []; const ca = circleAxes(prims, toP, s); g += ca.svg; ca.segs.forEach(([a, b]) => { lay.seg(a, b); axSegs.push([a, b]); });
-  g += arcMarks(prims, toP, s, axSegs);
+  { const n0 = axSegs.length; g += arcMarks(prims, toP, s, axSegs); for (let i = n0; i < axSegs.length; i++) lay.seg(axSegs[i][0], axSegs[i][1]); }
   for (const a of step.axes) { const A = toP(a.a), Bp = toP(a.b); const vx = Bp[0] - A[0], vy = Bp[1] - A[1], Lg = Math.hypot(vx, vy) || 1;
     const ex = Math.min(1, 3 / Lg); const A2 = [A[0] - vx * ex, A[1] - vy * ex], B2 = [Bp[0] + vx * ex, Bp[1] + vy * ex];
-    const cl = q => [Math.max(-4, Math.min(PBx[1] + 4, q[0])), Math.max(-4, Math.min(PBy[1] + 4, q[1]))];
+    const cl = q => [Math.max(-3, Math.min(PBx[1] + 3, q[0])), Math.max(-3, Math.min(PBy[1] + 3, q[1]))];
     const a2 = cl(A2), b2 = cl(B2); g += axisLn(a2[0], a2[1], b2[0], b2[1]); lay.seg(a2, b2); axSegs.push([a2, b2]); }
   if (step.symC) { const x = s * (cx - wb.x0); if (x > -1 && x < PBx[1] + 1 && !axSegs.some(([a, b]) => Math.abs(a[0] - x) < 0.3 && Math.abs(b[0] - x) < 0.3 && Math.abs(a[1] - b[1]) > PBy[1] * 0.6)) { g += axisLn(x, -3, x, PBy[1] + 3); lay.seg([x, -3], [x, PBy[1] + 3]); axSegs.push([[x, -3], [x, PBy[1] + 3]]); B.push([x, -3], [x, PBy[1] + 3]); } }
   // ---- cotas lineales
@@ -3284,29 +3395,35 @@ function detailSVG(step, cx, opt = {}) { // opt (fichas 3D): s = escala impuesta
     else { const fx = (A[0] + Bp[0]) / 2, dL = fx - PBx[0], dR = PBx[1] - fx; if (Math.abs(dL - dR) > 1) side = dL < dR ? 'left' : 'right'; }
     const lo = c.dir === 'h' ? Math.min(A[0], Bp[0]) : Math.min(A[1], Bp[1]), hi = c.dir === 'h' ? Math.max(A[0], Bp[0]) : Math.max(A[1], Bp[1]);
     const tw = TW(txt), out = tw + 2.5 > hi - lo; const iv = out ? [lo - 5, hi + tw + 8] : [lo + 0.3, hi - 0.3];
-    return { A, Bp, dir: c.dir, side, iv, txt, span: hi - lo, out, lo, hi }; });
+    return { A, Bp, dir: c.dir, side, iv, core: [lo + 0.3, hi - 0.3], txt, span: hi - lo, out, lo, hi }; });
   { // sin cotas repetidas: la misma medida entre las mismas referencias solo una vez
-    const seen = new Set(); for (let i = lins.length - 1; i >= 0; i--) { const c = lins[i]; const k = c.dir + '|' + r3(c.iv[0]) + '|' + r3(c.iv[1]) + '|' + c.txt; if (seen.has(k)) lins.splice(i, 1); else seen.add(k); } }
+    const seen = new Set(); for (let i = lins.length - 1; i >= 0; i--) { const c = lins[i]; const k = c.dir + '|' + r3(c.iv[0]) + '|' + r3(c.iv[1]) + '|' + c.txt + '|' + (c.dir === 'h' ? r3(Math.min(c.A[1], c.Bp[1])) + '|' + r3(Math.max(c.A[1], c.Bp[1])) : r3(Math.min(c.A[0], c.Bp[0])) + '|' + r3(Math.max(c.A[0], c.Bp[0]))); if (seen.has(k)) lins.splice(i, 1); else seen.add(k); } }
   const OPP = { top: 'bottom', bottom: 'top', left: 'right', right: 'left' };
   const levels = { top: [], bottom: [], left: [], right: [] };
-  const ivFree = (side, lv, iv) => !(levels[side][lv] || []).some(q => iv[0] < q[1] && q[0] < iv[1]);
+  const ivFree = (side, lv, c) => !(levels[side][lv] || []).some(q => (c.iv[0] < q.iv[1] && q.iv[0] < c.iv[1]) && !(q.chainOf(c) && !(c.core[0] < q.core[1] && q.core[0] < c.core[1])));
+  for (const c of lins) c.chainOf = q => q.dir === c.dir && (Math.abs(q.hi - c.lo) < 0.3 || Math.abs(q.lo - c.hi) < 0.3);
   const posOf = (sd, lv) => { const dist = D_FIRST + D_NEXT * lv; return sd === 'top' ? PBy[0] - dist : sd === 'bottom' ? PBy[1] + dist : sd === 'left' ? PBx[0] - dist : PBx[1] + dist; };
   lins.sort((a, b) => a.span - b.span);
   for (const c of lins) {
+    { // lado natural de la cota: aquel en que sus líneas de referencia no atraviesan la pieza; a igualdad, el más cercano
+      const xs = sd => { const pos = posOf(sd, 0); const e = q => c.dir === 'h' ? [q[0], pos] : [pos, q[1]]; return lay.countCross(c.A, e(c.A)) + lay.countCross(c.Bp, e(c.Bp)); };
+      const a = xs(c.side), b = xs(OPP[c.side]); if (b < a) c.side = OPP[c.side]; }
     let done = null;
     const tries = []; for (let lv = 0; lv < 4; lv++) tries.push([c.side, lv]); for (let lv = 0; lv < 4; lv++) tries.push([OPP[c.side], lv]); for (let lv = 4; lv < 8; lv++) { tries.push([c.side, lv]); tries.push([OPP[c.side], lv]); }
     let bestSc = Infinity;
     // cotas encadenadas: si una vecina (que comparte extremo) ya está colocada, se prefiere su mismo lado y nivel
     const chain = lins.find(q => q !== c && q.done && q.dir === c.dir && (Math.abs(q.iv[1] - c.iv[0]) < 0.6 || Math.abs(q.iv[0] - c.iv[1]) < 0.6 || Math.abs(q.hi - c.lo) < 0.3 || Math.abs(q.lo - c.hi) < 0.3));
     for (const shift of [false, true]) { if (done) break; for (const [sd, lv] of tries) {
-      if (!ivFree(sd, lv, c.iv)) continue; const pos = posOf(sd, lv); const r = linSVG(c.A, c.Bp, c.dir, pos, c.txt, lay, '#111', { shift });
-      if (!lay.freeText(r.tr, 0.5)) continue; if (!r.segs.every(([a, b]) => lay.freeLine(a, b))) continue;
+      const DB = (typeof window !== 'undefined' && window.__dbg) ? (m => window.__dbg.push(c.txt + ' ' + sd + lv + (shift ? 's' : '') + ' ' + m)) : (() => {});
+      if (!ivFree(sd, lv, c)) { DB('iv'); continue; } const pos = posOf(sd, lv); const r = linSVG(c.A, c.Bp, c.dir, pos, c.txt, lay, '#111', { shift });
+      if (!lay.freeText(r.tr, 0.5)) { DB('txt'); continue; } if (!r.segs.every(([a, b]) => lay.freeLine(a, b))) { DB('line'); continue; }
       // norma: las líneas de cota y auxiliares no deben cruzar otras líneas del dibujo
       const cross = r.segs.reduce((n, [a, b]) => n + lay.countCross(a, b), 0);
-      const sc = cross * 1.5 + lv * 2 + (sd === c.side ? 0 : 1.5) - (chain && chain.done.sd === sd && chain.done.lv === lv ? 6 : 0);
+      const far = c.dir === 'h' ? Math.max(Math.abs(c.A[1] - pos), Math.abs(c.Bp[1] - pos)) : Math.max(Math.abs(c.A[0] - pos), Math.abs(c.Bp[0] - pos)); // largo de la línea de referencia más larga
+      const sc = cross * 1.5 + lv * 2 + (sd === c.side ? 0 : 7) + far * 0.06 - (chain && chain.done.sd === sd && chain.done.lv === lv && sd === c.side ? 9 : 0);
       if (sc < bestSc) { bestSc = sc; done = { sd, lv, r }; } } }
     if (!done) { const sd = c.side, lv = 8; done = { sd, lv, r: linSVG(c.A, c.Bp, c.dir, posOf(sd, lv), c.txt, lay) }; }
-    (levels[done.sd][done.lv] = levels[done.sd][done.lv] || []).push(c.iv);
+    (levels[done.sd][done.lv] = levels[done.sd][done.lv] || []).push(c);
     c.done = done; lay.text(done.r.tr); done.r.segs.forEach(([a, b]) => lay.seg(a, b)); B.push(...bbRect(done.r.tr), ...done.r.segs.flat());
   }
   // render final: en cotas cortas encadenadas, el extremo compartido lleva punto en vez de dos flechas enfrentadas
@@ -3346,7 +3463,8 @@ function detailSVG(step, cx, opt = {}) { // opt (fichas 3D): s = escala impuesta
     const key = r3(c.r) + '|' + (c.kind || 'R'); if (seenR.has(key) && !step.showAll) continue; seenR.add(key);
     const C = toP(c.c), pr = c.r * s;
     const arc = allArcs.find(a => Math.hypot(a.c[0] - c.c[0], a.c[1] - c.c[1]) < 0.05 && Math.abs(a.r - c.r) < 0.05);
-    const full = arc ? arc.full : false; const isD = c.kind === 'Ø' || full;
+    const full = arc ? arc.full : false; const nConc = new Set(allArcs.filter(a => a.full && Math.hypot(a.c[0] - c.c[0], a.c[1] - c.c[1]) < 0.05).map(a => r3(a.r))).size;
+    const isD = (c.kind === 'Ø' || full) && nConc < 3; // tres o más circunferencias concéntricas: se acotan con radios, que no se amontonan en el centro
     const txt = isD ? 'Ø' + fmt(Math.round(c.r * 2 * 10) / 10) : 'R' + fmt(Math.round(c.r * 10) / 10);
     const conc = allArcs.some(a => Math.abs(a.r - c.r) > 0.05 && Math.hypot(a.c[0] - c.c[0], a.c[1] - c.c[1]) < 0.05);
     const mode = isD ? 'Ø' : 'R';
@@ -3364,7 +3482,7 @@ function detailSVG(step, cx, opt = {}) { // opt (fichas 3D): s = escala impuesta
     let best = -Infinity; const clr = rc => { const cx0 = (rc.x0 + rc.x1) / 2, cy0 = (rc.y0 + rc.y1) / 2; let m = 60; for (const q of lay.texts) m = Math.min(m, Math.hypot((q.x0 + q.x1) / 2 - cx0, (q.y0 + q.y1) / 2 - cy0)); return m; };
     const nearTan = (arc_, a) => { if (!arc_ || arc_.full) return false; const dd = q => Math.abs(Math.atan2(Math.sin(a - q), Math.cos(a - q))); const ang = p => Math.atan2(p[1] - arc_.c[1], p[0] - arc_.c[0]); return (arc_.t0 && dd(ang(arc_.p0)) < 10 * D2R) || (arc_.t1 && dd(ang(arc_.p1)) < 10 * D2R); };
     const twd = TW(txt), canIn = mode === 'Ø' && 2 * pr >= twd + 2 * ARW() + 5 && (pr - twd / 2 - ARW() - 1.5) >= twd / 2 + 3; // el texto cabe dentro y queda lejos del centro
-    for (const alt of alts) for (const a of alt.cands) for (const ins of (canIn ? [true, false] : [false])) { if (nearTan(alt.arc, a)) continue; const C = alt.C; const hits = rayHits(C, a, polys); const far = hits.length ? hits[hits.length - 1] : 0; const first = hits.find(t => t > pr + 0.6); const r = radSVG(C, pr, a, txt, mode, far, { inside: ins, first }); const okT = lay.freeText(r.tr, 0.6); const okL = r.segs.every(([p, q]) => lay.freeLine(p, q)) && !r.segs.some(([p, q]) => lay.nearCollinear(p, q));
+    for (const alt of alts) for (const a of alt.cands) for (const ins of (canIn ? [true, false] : [false])) { if (nearTan(alt.arc, a)) continue; { const m9 = Math.abs(((a / D2R) % 90 + 90) % 90); if (Math.min(m9, 90 - m9) < 14) continue; } /* nunca sobre los ejes */ const C = alt.C; const hits = rayHits(C, a, polys); const far = hits.length ? hits[hits.length - 1] : 0; const first = hits.find(t => t > pr + 0.6); const r = radSVG(C, pr, a, txt, mode, far, { inside: ins, first }); const okT = lay.freeText(r.tr, 0.6); const okL = r.segs.every(([p, q]) => lay.freeLine(p, q)) && !r.segs.some(([p, q]) => lay.nearCollinear(p, q));
       if (okT && okL) { const cross = r.segs.reduce((n, [p, q]) => { const d = [q[0] - p[0], q[1] - p[1]], L = Math.hypot(...d) || 1, p2 = [p[0] + d[0] / L * (pr + 0.6), p[1] + d[1] / L * (pr + 0.6)]; return n + lay.countCross(mode === 'R' ? p2 : [C[0] + Math.cos(a) * (pr + 0.6), C[1] - Math.sin(a) * (pr + 0.6)], q); }, 0); const m90 = Math.abs(((a / D2R) % 90 + 90) % 90), dax = Math.min(m90, 90 - m90), obl = dax >= 22; const mid = alt.arc && !alt.arc.full ? alt.arc.amw : base; const sc = Math.min(clr(r.tr), 25) - (alt.arc && !alt.arc.full ? 8 : 1.5) * Math.abs(Math.atan2(Math.sin(a - mid), Math.cos(a - mid))) - 25 * cross - (dax < 22 ? 40 : dax < 30 ? 6 : 0) + (r.inside ? 30 : 0) - 0.4 * Math.max(0, Math.hypot(r.segs[0][1][0] - r.segs[0][0][0], r.segs[0][1][1] - r.segs[0][0][1]) - 2 * pr); if (sc > best) { best = sc; pick = r; } } else if (okT && !fallback) fallback = r; }
     const r = pick || fallback || radSVG(C, pr, cands[0], txt, mode, rayFar(C, cands[0], polys));
     g += r.svg; lay.text(r.tr); r.segs.forEach(([a, b]) => lay.seg(a, b)); B.push(...bbRect(r.tr), ...r.segs.flat());
@@ -3402,6 +3520,8 @@ const CAJ = { w: 180, h: 40, cols: [22, 40, 25, 33, 60], rows: [7, 7, 6, 20], bc
 const cajMeta = meta => ({ alumno: meta.alumno || T('Tu nombre'), fecha: meta.fecha || T('dd-mm-aaaa'), profesor: meta.profesor || '', ies: meta.ies || 'IES', titulo: meta.titulo || T('Nombre del robot'), curso: meta.curso || '2º ESO', lam: meta.lam || '1' });
 /* rótulo de escala («E 1:2») en el idioma activo */
 const scaleLbl = sc => T('E {0}', sc);
+const SCALES = [[2, '2:1'], [1, '1:1'], [0.8, '4:5'], [0.75, '3:4'], [2 / 3, '2:3'], [0.5, '1:2'], [0.4, '2:5'], [1 / 3, '1:3']];
+const scaleName = s => (SCALES.find(q => Math.abs(q[0] - s) < 1e-6) || [0, fmt(Math.round(s * 100) / 100) + ':1'])[1];
 function cajetinSVG(X, Y, meta, k = 1, lw = 0.5) {
   const L2 = (x1, y1, x2, y2, w) => ln(X + x1 * k, Y + y1 * k, X + x2 * k, Y + y2 * k, w);
   const t = (tx, ty, str, fs = 2.6) => `<text x="${r3(X + tx * k)}" y="${r3(Y + ty * k)}" font-size="${r3(fs * k)}" text-anchor="middle" dominant-baseline="central" fill="#111">${esc(str)}</text>`;
@@ -3526,7 +3646,7 @@ function bookPages(R, meta, code) {
     cur.body += `<g transform="translate(0,297) rotate(-90) translate(20,0)">${g}</g><text x="105" y="20" font-size="2.8" text-anchor="middle" fill="#666">${esc(T('Gira la hoja para leer esta página'))}</text>`; }
   newPage(); textLines([T('ESTRUCTURA')], { bold: true }); y += 2;
   // bloques de pasos: las piezas estrechas van de dos en dos
-  const blocks = R.steps.map((st, i) => { const d = detailSVG(st, cx); const note = d.s === 2 ? ' ' + T('(Dibujo ampliado al doble: trázalo a tamaño real con las medidas indicadas.)') : d.s < 1 ? ' ' + T('(Dibujo reducido: trázalo a tamaño real con las medidas indicadas.)') : ''; const tw = st._twins ? ' ' + T('(≡: la pieza es doble; la otra es igual y simétrica respecto al eje. Los dos puntos ocupan la misma posición en su pieza: misma esquina o mismo centro.)') : ''; return { n: i + 1, text: `${i + 1}.– ${trStep(st)}${tw}${note}`, d }; });
+  const blocks = R.steps.map((st, i) => { const d = detailSVG(st, cx); const note = d.s > 1 ? ' ' + T('(Dibujo ampliado al doble: trázalo a tamaño real con las medidas indicadas.)') : d.s < 1 ? ' ' + T('(Dibujo reducido: trázalo a tamaño real con las medidas indicadas.)') : ''; const tw = st._twins ? ' ' + T('(≡: la pieza es doble; la otra es igual y simétrica respecto al eje. Los dos puntos ocupan la misma posición en su pieza: misma esquina o mismo centro.)') : ''; return { n: i + 1, text: `${i + 1}.– ${trStep(st)}${tw}${note}`, d }; });
   const srows = []; const HALF = WC / 2 - 3;
   for (let i = 0; i < blocks.length; i++) {
     const A = blocks[i], Bk = blocks[i + 1];
@@ -3545,12 +3665,12 @@ function bookPages(R, meta, code) {
       const y0 = y + extra / 3;
       if (rw.single) { const [A, L] = rw.single; y = y0; textLines(L); const top = y + 3 + extra / 3, tx = X0 + (WC - A.d.w) / 2 - A.d.x0;
         cur.body += `<g transform="translate(${r3(tx)},${r3(top - A.d.y0)})">${A.d.svg}</g>`;
-        if (A.d.s !== 1) cur.body += `<text x="${X0 + WC}" y="${r3(top + 3)}" font-size="2.8" text-anchor="end" fill="#555">${scaleLbl(A.d.s === 2 ? '2:1' : '1:2')}</text>`;
+        cur.body += `<text x="${X0 + WC}" y="${r3(top + 3)}" font-size="3" font-weight="700" text-anchor="end" fill="#111">${scaleLbl(scaleName(A.d.s))}</text>`;
         y = top + A.d.h + 8 + extra / 3; }
       else { const top = y0 + rw.th + 3 + extra / 3; rw.pair.forEach(([A, L], j) => { const cx0 = X0 + j * (WC / 2 + 3);
           L.forEach((l, m) => cur.body += `<text x="${cx0}" y="${r3(y0 + m * 4.2)}" font-size="3.1" fill="#111">${esc(l)}</text>`);
           const tx = cx0 + (WC / 2 - 3 - A.d.w) / 2 - A.d.x0; cur.body += `<g transform="translate(${r3(tx)},${r3(top - A.d.y0)})">${A.d.svg}</g>`;
-          if (A.d.s !== 1) cur.body += `<text x="${cx0 + WC / 2 - 4}" y="${r3(top + 3)}" font-size="2.8" text-anchor="end" fill="#555">${scaleLbl(A.d.s === 2 ? '2:1' : '1:2')}</text>`; });
+          cur.body += `<text x="${cx0 + WC / 2 - 4}" y="${r3(top + 3)}" font-size="3" font-weight="700" text-anchor="end" fill="#111">${scaleLbl(scaleName(A.d.s))}</text>`; });
         y = top + Math.max(...rw.pair.map(q => q[0].d.h)) + 8 + extra / 3; }
     }
   });
@@ -6728,7 +6848,7 @@ function mutatePart(S, id, R0, pForm = 0.6) {
     o = none.length && (!some.length || Math.random() < pNone) ? pickOf(none) : pickOf(some);
   }
   const c = {}, v = {};
-  for (const p of P.common) c[p.k] = p.type === 'sel' ? (Math.random() < 0.4 ? pickOf(p.opts)[0] : v0[p.k]) : jitter(p, v0[p.k]);
+  for (const p of P.common) c[p.k] = p.type === 'sel' ? (Math.random() < 0.4 ? pickOf(p.opts.filter(([v]) => !(p.hide || []).includes(v)))[0] : v0[p.k]) : jitter(p, v0[p.k]);
   if (o === o0) { for (const p of o.ps) v[p.k] = jitter(p, v0[p.k]); }
   else {
     const sc = scaleFor(S, id, o, R0); const w0 = v0.w; // forma nueva: sus valores por defecto escalados al tamaño que tenía la pieza
@@ -6922,7 +7042,8 @@ function thumbSVG(id, oid) {
 }
 function paramRow(id, p, val, scope) {
   const name = `${id}.${scope}.${p.k}`;
-  if (p.type === 'sel') return `<div class="prm"><label>${esc(T(p.l))}</label><div class="seg" role="radiogroup">${p.opts.map(([v, l]) => `<button type="button" data-p="${name}" data-v="${v}" class="${val === v ? 'on' : ''}" aria-pressed="${val === v}">${esc(T(l))}</button>`).join('')}</div></div>`;
+  if (p.hidden) return '';
+  if (p.type === 'sel') return `<div class="prm"><label>${esc(T(p.l))}</label><div class="seg" role="radiogroup">${p.opts.filter(([v]) => !(p.hide || []).includes(v)).map(([v, l]) => `<button type="button" data-p="${name}" data-v="${v}" class="${val === v ? 'on' : ''}" aria-pressed="${val === v}">${esc(T(l))}</button>`).join('')}</div></div>`;
   ROUND = S.medidas !== 'reales'; let st = stepOf(p) || p.st, lo = Math.ceil(p.min / st) * st, hi = Math.floor(p.max / st) * st;
   if (lo > hi) { st = st === 10 ? 5 : st === 5 ? 1 : 2; lo = Math.ceil(p.min / st) * st; hi = Math.floor(p.max / st) * st; }
   const sv = snapParam(p, val);
