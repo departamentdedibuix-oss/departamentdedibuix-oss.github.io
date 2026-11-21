@@ -1,0 +1,14 @@
+{
+  "name": "Contrapunto",
+  "short_name": "Contrapunto",
+  "description": "Composición musical por semillas",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#05080f",
+  "theme_color": "#0b1222",
+  "icons": [
+    {"src": "icono_192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable"},
+    {"src": "icono_512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ]
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contrapunto</title>
+<meta name="theme-color" content="#0b1222">
+<link rel="manifest" href="app.webmanifest">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="icono_180.png">
+<style>
+ html,body{margin:0;height:100%;background:radial-gradient(circle at 35% 30%,#16213a,#05080f);color:#e9eef8;font-family:system-ui,sans-serif}
+ main{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center}
+ img{width:120px;height:120px;border-radius:26px;box-shadow:0 10px 40px rgba(242,140,40,.25)}
+ h1{margin:0;font:italic 700 34px Georgia,serif;color:#f6a55a;letter-spacing:.5px}
+ p{margin:0;color:#8fa0bf;font-size:14px}
+ a{display:inline-block;margin-top:6px;padding:12px 22px;border-radius:12px;background:#f6a55a;color:#1b2333;font-weight:700;text-decoration:none}
+</style>
+</head>
+<body>
+<main>
+ <img src="icono_512.png" alt="">
+ <h1>Contrapunto</h1>
+ <p id="msg">Abriendo Contrapunto…</p>
+ <a id="inst" href="#" style="display:none" title="Instalar Contrapunto en la pantalla de inicio con su logo">⬇ Instalar en el móvil</a>
+ <a id="go" href="https://claude.ai/artifact/3KSmxQDFzouLPKppTjmj3B" title="Abrir Contrapunto en Claude">Abrir Contrapunto</a>
+</main>
+<script>
+// Lanzador: la app vive en Claude (allí se sincronizan «Mis creaciones» entre el PC y el móvil).
+if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
+const URL_APP="https://claude.ai/artifact/3KSmxQDFzouLPKppTjmj3B";
+const instalada=matchMedia("(display-mode: standalone)").matches||navigator.standalone;
+if(instalada){setTimeout(()=>location.replace(URL_APP),300);}
+else{document.getElementById("msg").innerHTML="Para tenerla con su logo: pulsa <b>Instalar</b> (o menú ⋮ → <b>Añadir a pantalla de inicio → Instalar</b>).";
+ let ev=null;const b=document.getElementById("inst");
+ addEventListener("beforeinstallprompt",e=>{e.preventDefault();ev=e;b.style.display="inline-block";});
+ b.onclick=async e=>{e.preventDefault();if(!ev)return;ev.prompt();await ev.userChoice;ev=null;b.style.display="none";};}
+</script>
+</body>
+</html>
